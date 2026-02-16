@@ -73,5 +73,5 @@ export function getBscProvider() {
 }
 
 export function getOpbnbProvider() {
-  return new ethers.JsonRpcProvider(OPBNB_RPC, undefined, { staticNetwork: true });
+  return new ethers.JsonRpcProvider(OPBNB_RPC, OPBNB_CHAIN_ID, { staticNetwork: true });
 }

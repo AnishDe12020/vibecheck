@@ -6,7 +6,7 @@ const CONTRACT = process.env.VIBECHECK_CONTRACT_ADDRESS || '0x427F80AE3ebF7C275B
 const OPBNB_RPC = 'https://opbnb-mainnet-rpc.bnbchain.org';
 
 function getProvider() {
-  return new ethers.JsonRpcProvider(OPBNB_RPC, undefined, { staticNetwork: true });
+  return new ethers.JsonRpcProvider(OPBNB_RPC, 204, { staticNetwork: true });
 }
 
 export async function GET() {
@@ -15,19 +15,21 @@ export async function GET() {
     const addr = ethers.getAddress(CONTRACT.trim());
     const contract = new ethers.Contract(addr, VIBECHECK_ABI, provider);
 
-    const tokens: string[] = await contract.getRecentTokens(50);
+    const tokens: any[] = await contract.getRecentTokens(50);
 
     const results = await Promise.all(
-      tokens.filter(t => t !== ethers.ZeroAddress).map(async (token) => {
+      tokens.filter(t => t && t !== ethers.ZeroAddress).map(async (token) => {
         try {
-          const [score, riskLevel, timestamp] = await contract.getLatestScore(token);
+          const tokenAddr = ethers.getAddress(token.toString());
+          const [score, riskLevel, timestamp] = await contract.getLatestScore(tokenAddr);
           return {
-            address: token,
+            address: tokenAddr,
             score: Number(score),
             riskLevel: riskLevel,
             timestamp: Number(timestamp),
           };
-        } catch {
+        } catch (err: any) {
+          console.warn('History item fetch failed:', err.message);
           return null;
         }
       })
