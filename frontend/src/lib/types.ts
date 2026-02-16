@@ -8,6 +8,8 @@ export interface TokenInfo {
   sourceCode?: string;
   compiler?: string;
   owner?: string;
+  creator?: string;
+  creationTimestamp?: number;
 }
 
 export interface HolderInfo {

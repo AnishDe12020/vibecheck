@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import type { VibeCheckReport, ScanStatus, RiskCategory } from '../lib/types';
 import { TokenLogo } from '../components/TokenLogo';
 import { HolderChart } from '../components/HolderChart';
@@ -110,13 +111,23 @@ function ScoreGauge({ score, riskLevel, animate, size = 160 }: {
       style={{ '--glow-color': `${color}40` } as React.CSSProperties}
     >
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-        <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="rgba(39,39,42,0.5)" strokeWidth="10" />
+        <defs>
+          <linearGradient id="grad-score" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor={color} />
+            <stop offset="100%" stopColor={`${color}99`} />
+          </linearGradient>
+          <filter id="shadow">
+            <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor={color} />
+          </filter>
+        </defs>
+        <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="rgba(39,39,42,0.3)" strokeWidth="12" />
         <circle
           cx={size/2} cy={size/2} r={r} fill="none"
-          stroke={color} strokeWidth="10" strokeLinecap="round"
+          stroke="url(#grad-score)" strokeWidth="12" strokeLinecap="round"
           strokeDasharray={circumference} strokeDashoffset={animate ? circumference : offset}
           transform={`rotate(-90 ${size/2} ${size/2})`}
-          style={{ transition: 'stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1)' }}
+          filter="url(#shadow)"
+          style={{ transition: 'stroke-dashoffset 1.5s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
         />
       </svg>
       <div className="absolute flex flex-col items-center">
@@ -349,15 +360,18 @@ function HomeInner() {
           </a>
           <div className="flex items-center gap-5">
             {totalScans !== null && (
-              <div className="hidden sm:flex items-center gap-1.5 text-xs text-zinc-500">
+              <div className="hidden md:flex items-center gap-1.5 text-xs text-zinc-500">
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 <span className="font-mono">{totalScans.toLocaleString()}</span>
-                <span>on-chain</span>
+                <span>scans</span>
               </div>
             )}
-            <a href="/history" className="text-xs text-zinc-400 hover:text-emerald-400 transition-colors font-medium px-3 py-1.5 rounded-lg hover:bg-zinc-800/50">
-              History →
-            </a>
+            <Link href="/compare" className="text-xs text-zinc-400 hover:text-emerald-400 transition-colors font-medium px-3 py-1.5 rounded-lg hover:bg-zinc-800/50">
+              Compare
+            </Link>
+            <Link href="/history" className="text-xs text-zinc-400 hover:text-emerald-400 transition-colors font-medium px-3 py-1.5 rounded-lg hover:bg-zinc-800/50">
+              History
+            </Link>
           </div>
         </div>
       </header>
@@ -499,6 +513,44 @@ function HomeInner() {
               {(Object.entries(report.categories) as [string, RiskCategory][]).map(([key, cat], i) => (
                 <CategoryCard key={key} category={cat} icon={CATEGORY_ICONS[key] || '📋'} delay={i * 100} />
               ))}
+            </div>
+
+            {/* Quick Stats Card */}
+            <div className="glass rounded-3xl p-6 border-emerald-500/10 bg-emerald-500/[0.02] animate-fade-in-up" style={{ animationDelay: '500ms' }}>
+              <h3 className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-4 flex items-center gap-2">
+                <span className="w-1 h-1 rounded-full bg-emerald-500" /> Project Intel
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div>
+                  <div className="text-[10px] text-zinc-600 uppercase font-bold mb-1">Status</div>
+                  <div className={`text-sm font-bold flex items-center gap-1.5 ${report.token.isVerified ? 'text-emerald-400' : 'text-red-400'}`}>
+                    {report.token.isVerified ? '✅ Verified' : '⚠️ Unverified'}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-[10px] text-zinc-600 uppercase font-bold mb-1">Owner</div>
+                  <div className="text-sm font-bold text-zinc-300 truncate font-mono">
+                    {report.token.owner ? (
+                      <a href={`https://bscscan.com/address/${report.token.owner}`} target="_blank" className="hover:text-emerald-400 transition-colors">
+                        {report.token.owner.slice(0, 6)}...{report.token.owner.slice(-4)}
+                      </a>
+                    ) : 'Renounced'}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-[10px] text-zinc-600 uppercase font-bold mb-1">Supply</div>
+                  <div className="text-sm font-bold text-zinc-300">
+                    {Math.floor(Number(report.token.totalSupply) / Math.pow(10, report.token.decimals)).toLocaleString()}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-[10px] text-zinc-600 uppercase font-bold mb-1">Chain</div>
+                  <div className="text-sm font-bold text-zinc-300 flex items-center gap-1.5">
+                    <img src="https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png" className="w-3.5 h-3.5" alt="BSC" />
+                    BSC
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Data Panels */}

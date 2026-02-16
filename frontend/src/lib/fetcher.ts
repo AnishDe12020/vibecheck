@@ -51,6 +51,20 @@ export async function fetchTokenInfo(address: string): Promise<TokenInfo> {
   // Check if contract is verified on BSCScan
   const { isVerified, sourceCode, compiler } = await fetchContractSource(address);
 
+  // Try to get creation info
+  let creationBlock: number | undefined;
+  let creator: string | undefined;
+  try {
+    const creationUrl = `${BSCSCAN_API}module=contract&action=getcontractcreation&contractaddresses=${address}&apikey=${BSCSCAN_KEY}`;
+    const creationRes = await fetch(creationUrl);
+    const creationData = await creationRes.json();
+    if (creationData.status === '1' && creationData.result?.[0]) {
+      creator = creationData.result[0].contractCreator;
+    }
+  } catch (e) {
+    console.error('Creation info fetch error:', e);
+  }
+
   return {
     address,
     name,
@@ -61,6 +75,7 @@ export async function fetchTokenInfo(address: string): Promise<TokenInfo> {
     sourceCode,
     compiler,
     owner,
+    creator,
   };
 }
 
