@@ -66,3 +66,12 @@ This project was built using AI-assisted vibe coding with **Claude** (via OpenCl
 - **Frontend:** ~500 lines TypeScript/React
 - **Backend:** ~400 lines TypeScript (fetcher + analyzer + attester)
 - **Total:** ~1,000 lines of meaningful code
+
+## 2026-02-16: Final Polish & Features (The "$1k UI" Grind)
+- Switched to **Gemini 3.0 Flash Preview** for faster and more accurate reasoning.
+- Implemented **Comparison Mode** (`/compare`) allowing users to battle two tokens.
+- Redesigned **History page** to match the premium glass morphism style.
+- Added **Token Logos** powered by Trust Wallet CDN.
+- Built **Holder Distribution charts** and **Liquidity Depth panels**.
+- Added **Animated Mesh Background** and premium SVG effects to the score gauge.
+- Optimized for mobile and added \"Copy Link\" / \"Share on X\" buttons.

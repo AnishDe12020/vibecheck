@@ -3,6 +3,7 @@
 **Paste any BSC token address → get an instant AI-powered safety analysis → on-chain attestation on opBNB.**
 
 🌐 **Live Demo:** [vibecheck-bsc.vercel.app](https://vibecheck-bsc.vercel.app)  
+⚔️ **Comparison:** [vibecheck-bsc.vercel.app/compare](https://vibecheck-bsc.vercel.app/compare)  
 📜 **Contract:** [0x427F...AA161 on opBNB](https://opbnb.bscscan.com/address/0x427F80AE3ebF7C275B138Bc9C9A39C76572AA161) (v2, with access control)  
 🏗️ **Track:** Consumer  
 🎯 **Hackathon:** [Good Vibes Only: OpenClaw Edition](https://dorahacks.io/hackathon/goodvibes)
@@ -11,11 +12,19 @@
 
 VibeCheck helps users evaluate the safety of any BEP-20 token on BNB Smart Chain before investing. It combines on-chain data analysis with AI to provide a clear, actionable safety report.
 
+### Key Features
+
+- **Instant AI Safety Analysis** — Powered by Gemini 3.0 Flash Preview for lightning-fast, high-reasoning audits.
+- **On-Chain Attestations** — Every scan result is permanently recorded on opBNB as an immutable, verifiable proof.
+- **⚔️ Comparison Mode** — Compare two tokens side-by-side to make better investment decisions.
+- **Premium Visualization** — Holder concentration charts and liquidity depth bars.
+- **Project Intel** — Deep-dive into verification status, ownership, and supply metrics.
+
 ### How it works
 
 1. **Paste a token address** — any BSC BEP-20 contract
 2. **On-chain data fetching** — contract source code, top holders, PancakeSwap liquidity, recent large transfers
-3. **AI safety analysis** — Kimi K2.5 analyzes the data and produces a structured safety report
+3. **AI safety analysis** — Gemini 3.0 Flash Preview analyzes the data and produces a structured safety report
 4. **Safety score 0-100** with risk level (SAFE / CAUTION / DANGER / CRITICAL)
 5. **On-chain attestation** — the verdict is permanently recorded on opBNB
 
@@ -32,14 +41,16 @@ VibeCheck helps users evaluate the safety of any BEP-20 token on BNB Smart Chain
 
 | Token | Score | Risk Level |
 |---|---|---|
-| WBNB | 88/100 | ✅ SAFE |
-| CAKE | 72/100 | ⚠️ CAUTION |
-| SafeMoon | 12/100 | 🚨 CRITICAL |
+| WBNB | 100/100 | ✅ SAFE |
+| CAKE | 98/100 | ✅ SAFE |
+| BabyDoge | 88/100 | ✅ SAFE |
+| SafeMoon | 15/100 | 🚨 CRITICAL |
+| SquidGame | 5/100 | 🚨 CRITICAL |
 
 ## Tech Stack
 
 - **Frontend:** Next.js 16 + React 19 + Tailwind CSS v4
-- **AI:** Kimi K2.5 via OpenRouter
+- **AI:** Gemini 3.0 Flash Preview via OpenRouter
 - **On-chain data:** BSCScan API + ethers.js (direct RPC calls to BSC)
 - **Attestation:** Custom Solidity contract on opBNB (verified)
 - **Liquidity:** PancakeSwap V2 factory/pair contracts
@@ -59,7 +70,7 @@ User → Next.js Frontend
     │    • PancakeSwap V2        │
     ├────────────────────────────┤
     │ 2. AI Analysis             │
-    │    • Kimi K2.5 via         │
+    │    • Gemini 3.0 Flash via  │
     │      OpenRouter            │
     │    • Structured JSON       │
     │      output                │
@@ -84,14 +95,19 @@ vibecheck/
 │   └── src/
 │       ├── app/
 │       │   ├── page.tsx        # Main UI — input, score gauge, report
+│       │   ├── compare/        # ⚔️ Comparison mode
 │       │   ├── history/        # On-chain scan history
 │       │   └── api/
 │       │       ├── scan/       # Original scan endpoint
 │       │       ├── scan-stream/# SSE streaming scan
 │       │       ├── total-scans/# Contract scan counter
 │       │       └── history/    # On-chain history data
+│       ├── components/
+│       │   ├── HolderChart.tsx # 🏦 Holder distribution
+│       │   ├── LiquidityPanel.tsx# 💧 Liquidity depth
+│       │   └── TokenLogo.tsx   # 🖼️ CDN-powered logos
 │       └── lib/
-│           ├── analyzer.ts     # AI analysis pipeline (Kimi K2.5)
+│           ├── analyzer.ts     # AI analysis pipeline (Gemini 3.0)
 │           ├── attester.ts     # opBNB attestation submission
 │           ├── fetcher.ts      # BSC data fetching
 │           ├── chain.ts        # ABIs, addresses, providers

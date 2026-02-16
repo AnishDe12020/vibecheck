@@ -70,6 +70,10 @@ function ScoreGauge({ score, riskLevel, animate, size = 160, side }: {
 }
 
 export default function ComparePage() {
+  useEffect(() => {
+    document.title = 'VibeCheck — Compare Tokens';
+  }, []);
+
   const [addr1, setAddr1] = useState('');
   const [addr2, setAddr2] = useState('');
   const [report1, setReport1] = useState<VibeCheckReport | null>(null);
