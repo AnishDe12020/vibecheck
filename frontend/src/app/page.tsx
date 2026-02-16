@@ -36,8 +36,10 @@ const CATEGORY_ICONS: Record<string, string> = {
 };
 
 const EXAMPLE_TOKENS = [
-  { name: 'WBNB', address: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', label: 'Safe token' },
-  { name: 'CAKE', address: '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82', label: 'Major DeFi' },
+  { name: 'WBNB', address: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', label: '✅ Safe token' },
+  { name: 'CAKE', address: '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82', label: '✅ Major DeFi' },
+  { name: 'SafeMoon', address: '0x8076C74C5e3F5852037F31Ff0093Eeb8c8ADd8D3', label: '⚠️ Controversial' },
+  { name: 'Squid Game', address: '0x87230146E138d3F296a9a77e497A2A83012e9Bc5', label: '🚨 Rug pull' },
   { name: '???', address: '0x1234567890abcdef1234567890abcdef12345678', label: 'Unknown token' },
 ];
 
