@@ -13,22 +13,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "VibeCheck — AI Token Safety Scanner",
-  description: "Paste any BSC token address and get an instant AI-powered safety analysis with on-chain attestation on opBNB",
+  title: {
+    default: "VibeCheck — AI Token Safety Scanner",
+    template: "%s | VibeCheck",
+  },
+  description: "Paste any BSC token address and get an instant AI-powered safety analysis with on-chain attestation on opBNB.",
+  metadataBase: new URL("https://vibecheck-bsc.vercel.app"),
   openGraph: {
     title: "VibeCheck — AI Token Safety Scanner",
-    description: "AI-powered token safety analysis for BNB Smart Chain with on-chain attestations",
+    description: "Paste any BSC token address and get an instant AI-powered safety analysis with on-chain attestation on opBNB.",
     siteName: "VibeCheck",
     type: "website",
-    url: "https://vibecheck-bsc.vercel.app",
   },
   twitter: {
     card: "summary_large_image",
     title: "VibeCheck — AI Token Safety Scanner",
-    description: "AI-powered token safety analysis for BNB Smart Chain",
-  },
-  icons: {
-    icon: "/favicon.ico",
+    description: "AI-powered token safety for BNB Smart Chain",
   },
 };
 
@@ -40,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#0a0a0f] text-zinc-200`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>

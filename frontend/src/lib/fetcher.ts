@@ -16,12 +16,21 @@ import {
 
 const BSCSCAN_KEY = process.env.BSCSCAN_API_KEY || '';
 
+const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
+
 // ──────────────────────────────────────────
 // Token Info
 // ──────────────────────────────────────────
 
 export async function fetchTokenInfo(address: string): Promise<TokenInfo> {
   const provider = getBscProvider();
+  
+  // Check if address has code (is a contract)
+  const code = await provider.getCode(address);
+  if (code === '0x') {
+    throw new Error(`Address ${address.slice(0, 10)}... is not a contract (EOA or empty)`);
+  }
+
   const token = new ethers.Contract(address, ERC20_ABI, provider);
 
   const [name, symbol, decimals, totalSupply] = await Promise.all([
@@ -212,10 +221,11 @@ export async function fetchAllTokenData(address: string) {
   
   const totalSupply = BigInt(tokenInfo.totalSupply);
   
+  // Stagger BSCScan calls slightly to avoid 5/sec rate limit
   const [holders, liquidity, transfers] = await Promise.all([
     fetchTopHolders(address, totalSupply, tokenInfo.decimals),
-    fetchLiquidity(address),
-    fetchRecentTransfers(address),
+    sleep(250).then(() => fetchLiquidity(address)),
+    sleep(500).then(() => fetchRecentTransfers(address)),
   ]);
 
   return {
