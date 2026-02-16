@@ -429,19 +429,31 @@ export default function Home() {
               </div>
             )}
 
-            {report.attestationTx && (
-              <div className="text-center text-xs text-zinc-600">
-                Attested on opBNB:{' '}
-                <a
-                  href={`https://opbnb.bscscan.com/tx/${report.attestationTx}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-emerald-600 hover:text-emerald-400 font-mono"
-                >
-                  {report.attestationTx.slice(0, 10)}...{report.attestationTx.slice(-8)}
-                </a>
-              </div>
-            )}
+            {/* Share + Attestation */}
+            <div className="flex flex-col items-center gap-3">
+              <button
+                onClick={() => {
+                  const text = `🔍 VibeCheck: ${report.token.name} (${report.token.symbol}) scored ${report.overallScore}/100 — ${report.riskLevel}\n\n${report.summary.slice(0, 200)}\n\nCheck any BSC token: https://vibecheck-bsc.vercel.app`;
+                  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
+                }}
+                className="text-xs px-4 py-2 rounded-lg bg-zinc-800 border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:border-zinc-600 transition-all cursor-pointer flex items-center gap-2"
+              >
+                𝕏 Share scan result
+              </button>
+              {report.attestationTx && (
+                <div className="text-xs text-zinc-600">
+                  Attested on opBNB:{' '}
+                  <a
+                    href={`https://opbnb.bscscan.com/tx/${report.attestationTx}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-emerald-600 hover:text-emerald-400 font-mono"
+                  >
+                    {report.attestationTx.slice(0, 10)}...{report.attestationTx.slice(-8)}
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
         )}
 
