@@ -101,7 +101,7 @@ export default function HistoryPage() {
             {tokens.map((t) => (
               <Link
                 key={t.address + t.timestamp}
-                href={`/?address=${t.address}`}
+                href={`/scan/${t.address}`}
                 className="grid grid-cols-[1fr_80px_100px_100px] gap-4 items-center bg-zinc-900/60 border border-zinc-800 rounded-xl px-5 py-4 hover:border-zinc-700 transition-all"
               >
                 <span className="font-mono text-zinc-300 text-sm">{shortenAddress(t.address)}</span>

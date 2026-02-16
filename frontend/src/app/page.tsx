@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import type { VibeCheckReport, ScanStatus, RiskCategory } from '../lib/types';
 
 const RISK_COLORS: Record<string, string> = {
@@ -164,7 +165,8 @@ function SkeletonReport({ tokenName, tokenSymbol }: { tokenName?: string; tokenS
   );
 }
 
-export default function Home() {
+function HomeInner() {
+  const searchParams = useSearchParams();
   const [address, setAddress] = useState('');
   const [status, setStatus] = useState<ScanStatus>('idle');
   const [report, setReport] = useState<VibeCheckReport | null>(null);
@@ -274,6 +276,17 @@ export default function Home() {
       if (timerRef.current) clearInterval(timerRef.current);
     }
   }, [address]);
+
+  // Auto-scan from URL param (?address=0x...)
+  const autoScannedRef = useRef(false);
+  useEffect(() => {
+    const urlAddress = searchParams.get('address');
+    if (urlAddress && urlAddress.match(/^0x[a-fA-F0-9]{40}$/) && !autoScannedRef.current) {
+      autoScannedRef.current = true;
+      setAddress(urlAddress);
+      handleScan(urlAddress);
+    }
+  }, [searchParams, handleScan]);
 
   const handleExampleClick = (addr: string) => {
     setAddress(addr);
@@ -532,5 +545,13 @@ export default function Home() {
         </div>
       </footer>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense>
+      <HomeInner />
+    </Suspense>
   );
 }
