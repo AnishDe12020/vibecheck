@@ -7,6 +7,7 @@ import { checkRateLimit, withSecurityHeaders, sanitizeError } from '@/lib/securi
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
+export const maxDuration = 120;
 
 function sseEvent(data: Record<string, unknown>): string {
   return `data: ${JSON.stringify(data)}\n\n`;
