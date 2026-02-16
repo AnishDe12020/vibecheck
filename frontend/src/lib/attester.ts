@@ -2,8 +2,8 @@ import { ethers } from 'ethers';
 import { VIBECHECK_ABI } from './chain';
 import type { VibeCheckReport } from './types';
 
-const OPBNB_TESTNET_RPC = 'https://opbnb-testnet-rpc.bnbchain.org';
-const OPBNB_TESTNET_CHAIN_ID = 5611;
+const OPBNB_RPC = 'https://opbnb-mainnet-rpc.bnbchain.org';
+const OPBNB_CHAIN_ID = 204;
 
 /**
  * Submit an attestation to the VibeCheck contract on opBNB.
@@ -17,7 +17,7 @@ export async function submitAttestation(
   if (!privateKey) throw new Error('DEPLOYER_PRIVATE_KEY not set');
   if (!contractAddress) throw new Error('VIBECHECK_CONTRACT_ADDRESS not set');
 
-  const provider = new ethers.JsonRpcProvider(OPBNB_TESTNET_RPC, OPBNB_TESTNET_CHAIN_ID);
+  const provider = new ethers.JsonRpcProvider(OPBNB_RPC, OPBNB_CHAIN_ID);
   const wallet = new ethers.Wallet(privateKey, provider);
   const contract = new ethers.Contract(contractAddress, VIBECHECK_ABI, wallet);
 
