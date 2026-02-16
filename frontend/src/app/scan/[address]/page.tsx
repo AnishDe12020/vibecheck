@@ -3,6 +3,9 @@
 import { useState, useCallback, useEffect, useRef, use } from 'react';
 import Link from 'next/link';
 import type { VibeCheckReport, ScanStatus, RiskCategory } from '../../../lib/types';
+import { TokenLogo } from '../../../components/TokenLogo';
+import { HolderChart } from '../../../components/HolderChart';
+import { LiquidityPanel } from '../../../components/LiquidityPanel';
 
 const RISK_COLORS: Record<string, string> = {
   safe: '#22c55e', SAFE: '#22c55e',
@@ -267,6 +270,7 @@ export default function ScanPage({ params }: { params: Promise<{ address: string
               <ScoreGauge score={report.overallScore} riskLevel={report.riskLevel} animate={scoreAnimating} />
               <div className="flex-1 text-center md:text-left">
                 <div className="flex items-center gap-3 justify-center md:justify-start mb-3">
+                  <TokenLogo address={report.token.address} size={40} />
                   <h1 className="text-3xl font-black text-zinc-100 tracking-tight">
                     {report.token.name}
                     <span className="text-zinc-500 font-normal ml-2 text-xl">({report.token.symbol})</span>
@@ -321,6 +325,14 @@ export default function ScanPage({ params }: { params: Promise<{ address: string
                 );
               })}
             </div>
+
+            {/* Data Panels */}
+            {(report.topHolders?.length > 0 || report.liquidity?.length > 0) && (
+              <div className="grid md:grid-cols-2 gap-4">
+                {report.topHolders?.length > 0 && <HolderChart holders={report.topHolders} />}
+                {report.liquidity?.length > 0 && <LiquidityPanel pools={report.liquidity} />}
+              </div>
+            )}
 
             {/* Flags */}
             {report.flags.length > 0 && (

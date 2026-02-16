@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 const RISK_BG: Record<string, string> = {
-  SAFE: 'bg-green-500/10 border-green-500/30 text-green-400',
-  CAUTION: 'bg-yellow-500/10 border-yellow-500/30 text-yellow-400',
-  DANGER: 'bg-orange-500/10 border-orange-500/30 text-orange-400',
-  CRITICAL: 'bg-red-500/10 border-red-500/30 text-red-400',
+  SAFE: 'bg-green-500/10 border-green-500/30 text-green-400 badge-safe',
+  CAUTION: 'bg-yellow-500/10 border-yellow-500/30 text-yellow-400 badge-caution',
+  DANGER: 'bg-orange-500/10 border-orange-500/30 text-orange-400 badge-danger',
+  CRITICAL: 'bg-red-500/10 border-red-500/30 text-red-400 badge-critical',
 };
 
 const RISK_COLORS: Record<string, string> = {
@@ -15,6 +15,13 @@ const RISK_COLORS: Record<string, string> = {
   CAUTION: '#eab308',
   DANGER: '#f97316',
   CRITICAL: '#ef4444',
+};
+
+const RISK_BAR_BG: Record<string, string> = {
+  SAFE: 'bg-green-500',
+  CAUTION: 'bg-yellow-500',
+  DANGER: 'bg-orange-500',
+  CRITICAL: 'bg-red-500',
 };
 
 interface TokenScore {
@@ -36,6 +43,23 @@ function shortenAddress(addr: string) {
   return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
 }
 
+function ScoreBar({ score, riskLevel }: { score: number; riskLevel: string }) {
+  const barColor = RISK_BAR_BG[riskLevel] || 'bg-yellow-500';
+  return (
+    <div className="flex items-center gap-2 w-full">
+      <span className="text-sm font-bold tabular-nums w-7 text-right" style={{ color: RISK_COLORS[riskLevel] || '#eab308' }}>
+        {score}
+      </span>
+      <div className="flex-1 h-1.5 rounded-full bg-zinc-800 overflow-hidden">
+        <div
+          className={`h-full rounded-full ${barColor} transition-all duration-500`}
+          style={{ width: `${score}%` }}
+        />
+      </div>
+    </div>
+  );
+}
+
 export default function HistoryPage() {
   const [tokens, setTokens] = useState<TokenScore[]>([]);
   const [loading, setLoading] = useState(true);
@@ -53,75 +77,142 @@ export default function HistoryPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] flex flex-col">
-      <header className="border-b border-zinc-800/50 py-4 px-6">
+    <div className="min-h-screen bg-[#050507] bg-grid flex flex-col">
+      {/* Header */}
+      <header className="border-b border-zinc-800/30 py-4 px-6 bg-[#050507]/80 backdrop-blur-md sticky top-0 z-40">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <span className="text-2xl">🔍</span>
-            <span className="text-xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-emerald-500/20">
+              ✓
+            </div>
+            <span className="text-lg font-bold text-zinc-100 group-hover:text-emerald-400 transition-colors">
               VibeCheck
             </span>
           </Link>
-          <Link href="/" className="text-sm text-zinc-400 hover:text-zinc-200 transition-colors">
-            ← Back to Scanner
+          <Link
+            href="/"
+            className="text-xs text-zinc-400 hover:text-emerald-400 transition-colors font-medium px-3 py-1.5 rounded-lg hover:bg-zinc-800/50"
+          >
+            ← Scanner
           </Link>
         </div>
       </header>
 
-      <main className="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-zinc-100 to-zinc-400 bg-clip-text text-transparent mb-2">
-            On-Chain Scan History
+      {/* Main */}
+      <main className="flex-1 max-w-5xl mx-auto w-full px-6 py-12 sm:py-16">
+        {/* Hero */}
+        <div className="mb-10 hero-glow relative z-10">
+          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-zinc-100 to-zinc-400 bg-clip-text text-transparent mb-2">
+            Scan History
           </h1>
-          <p className="text-zinc-500">Recent tokens scanned and attested on opBNB</p>
+          <p className="text-zinc-500 text-sm sm:text-base">
+            All tokens scanned and attested on-chain via opBNB
+          </p>
         </div>
 
+        {/* Loading */}
         {loading && (
           <div className="space-y-3">
-            {[...Array(8)].map((_, i) => (
-              <div key={i} className="h-16 bg-zinc-900/60 border border-zinc-800 rounded-xl animate-pulse" />
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="glass rounded-xl h-[72px] shimmer" />
             ))}
           </div>
         )}
 
-        {error && <div className="text-red-400 text-sm">{error}</div>}
-
-        {!loading && !error && tokens.length === 0 && (
-          <div className="text-center text-zinc-500 py-12">No scans found yet.</div>
+        {/* Error */}
+        {error && (
+          <div className="glass rounded-xl p-4 border-red-500/30 text-red-400 text-sm">
+            {error}
+          </div>
         )}
 
+        {/* Empty */}
+        {!loading && !error && tokens.length === 0 && (
+          <div className="glass rounded-2xl p-12 text-center">
+            <div className="text-4xl mb-4">🔍</div>
+            <p className="text-zinc-400 mb-6">No scans recorded yet</p>
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white font-semibold px-6 py-2.5 rounded-xl transition-all shadow-lg shadow-emerald-500/20"
+            >
+              Scan Your First Token →
+            </Link>
+          </div>
+        )}
+
+        {/* Results */}
         {!loading && tokens.length > 0 && (
-          <div className="space-y-2">
-            <div className="grid grid-cols-[1fr_80px_100px_100px] gap-4 px-5 py-2 text-xs text-zinc-600 uppercase tracking-wider font-semibold">
+          <div className="space-y-2 stagger-children">
+            {/* Table header — hidden on small screens */}
+            <div className="hidden sm:grid grid-cols-[1fr_140px_100px_80px] gap-4 px-5 py-2 text-[11px] text-zinc-600 uppercase tracking-wider font-semibold">
               <span>Token Address</span>
-              <span className="text-center">Score</span>
+              <span>Score</span>
               <span className="text-center">Risk</span>
-              <span className="text-right">Scanned</span>
+              <span className="text-right">When</span>
             </div>
+
             {tokens.map((t) => (
               <Link
                 key={t.address + t.timestamp}
                 href={`/scan/${t.address}`}
-                className="grid grid-cols-[1fr_80px_100px_100px] gap-4 items-center bg-zinc-900/60 border border-zinc-800 rounded-xl px-5 py-4 hover:border-zinc-700 transition-all"
+                className="glass glass-hover rounded-xl px-5 py-4 transition-all block sm:grid sm:grid-cols-[1fr_140px_100px_80px] sm:gap-4 sm:items-center"
               >
-                <span className="font-mono text-zinc-300 text-sm">{shortenAddress(t.address)}</span>
-                <span className="text-center text-lg font-bold" style={{ color: RISK_COLORS[t.riskLevel] || '#eab308' }}>
-                  {t.score}
+                {/* Address */}
+                <span className="font-mono text-zinc-300 text-sm">
+                  {shortenAddress(t.address)}
                 </span>
-                <span className="text-center">
-                  <span className={`text-xs px-2 py-0.5 rounded-full border font-medium ${RISK_BG[t.riskLevel] || RISK_BG.CAUTION}`}>
+
+                {/* Score bar */}
+                <div className="mt-2 sm:mt-0">
+                  <ScoreBar score={t.score} riskLevel={t.riskLevel} />
+                </div>
+
+                {/* Risk badge */}
+                <div className="mt-2 sm:mt-0 sm:text-center">
+                  <span className={`text-xs px-2.5 py-0.5 rounded-full border font-medium inline-block ${RISK_BG[t.riskLevel] || RISK_BG.CAUTION}`}>
                     {t.riskLevel}
                   </span>
+                </div>
+
+                {/* Time */}
+                <span className="hidden sm:block text-right text-xs text-zinc-500">
+                  {timeAgo(t.timestamp)}
                 </span>
-                <span className="text-right text-xs text-zinc-500">{timeAgo(t.timestamp)}</span>
               </Link>
             ))}
           </div>
         )}
+
+        {/* CTA */}
+        {!loading && tokens.length > 0 && (
+          <div className="mt-10 text-center">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white font-semibold px-6 py-2.5 rounded-xl transition-all shadow-lg shadow-emerald-500/20"
+            >
+              Scan New Token →
+            </Link>
+          </div>
+        )}
       </main>
 
-      <footer className="border-t border-zinc-800/50 py-4 px-6 text-center text-xs text-zinc-600">
-        VibeCheck — AI-powered token safety for BNB Smart Chain
+      {/* Footer */}
+      <footer className="border-t border-zinc-800/30 py-6 px-6">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="flex items-center gap-3 text-xs text-zinc-600">
+            <span className="font-semibold text-zinc-500">VibeCheck</span>
+            <span>•</span>
+            <span>AI-powered token safety for BNB Chain</span>
+          </div>
+          <div className="flex items-center gap-3 text-xs text-zinc-600">
+            <span>Powered by</span>
+            <span className="text-zinc-400 font-medium">Gemini 3</span>
+            <span>+</span>
+            <span className="text-zinc-400 font-medium">opBNB</span>
+            <span>•</span>
+            <span className="text-zinc-600">Not financial advice</span>
+          </div>
+        </div>
       </footer>
     </div>
   );
