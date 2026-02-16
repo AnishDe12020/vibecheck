@@ -13,5 +13,9 @@
     "@anthropic-ai/sdk": "^0.74.0",
     "dotenv": "^17.3.1",
     "ethers": "^6.16.0"
-  }
+  },
+  "devDependencies": {
+    "solc": "^0.8.20"
+  },
+  "type": "module"
 }
