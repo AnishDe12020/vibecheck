@@ -308,7 +308,9 @@ export default function Home() {
             {totalScans !== null && (
               <span className="text-xs text-zinc-500 font-mono">{totalScans.toLocaleString()} scans attested</span>
             )}
-            <span className="text-xs text-zinc-600 font-mono">BSC Token Safety Scanner</span>
+            <a href="/history" className="text-xs text-emerald-500 hover:text-emerald-400 transition-colors font-medium">
+              Scan History →
+            </a>
           </div>
         </div>
       </header>
@@ -490,6 +492,11 @@ export default function Home() {
                   </div>
                 </button>
               ))}
+            </div>
+            <div className="mt-4 text-center">
+              <a href="/history" className="text-sm text-emerald-500 hover:text-emerald-400 transition-colors">
+                View all on-chain scans →
+              </a>
             </div>
           </div>
         )}

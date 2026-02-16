@@ -14,7 +14,22 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "VibeCheck — AI Token Safety Scanner",
-  description: "Paste any BSC token address and get an instant AI-powered safety analysis",
+  description: "Paste any BSC token address and get an instant AI-powered safety analysis with on-chain attestation on opBNB",
+  openGraph: {
+    title: "VibeCheck — AI Token Safety Scanner",
+    description: "AI-powered token safety analysis for BNB Smart Chain with on-chain attestations",
+    siteName: "VibeCheck",
+    type: "website",
+    url: "https://vibecheck-bsc.vercel.app",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "VibeCheck — AI Token Safety Scanner",
+    description: "AI-powered token safety analysis for BNB Smart Chain",
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
