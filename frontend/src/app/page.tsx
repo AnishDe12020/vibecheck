@@ -368,6 +368,23 @@ export default function Home() {
             ))}
           </div>
 
+          {/* How it works */}
+          {status === 'idle' && !report && recentScans.length === 0 && (
+            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
+              {[
+                { icon: '📡', title: 'Fetch On-Chain Data', desc: 'Contract source, top holders, PancakeSwap liquidity, recent transfers' },
+                { icon: '🧠', title: 'AI Safety Analysis', desc: 'Kimi K2.5 evaluates 4 risk categories and generates a safety score' },
+                { icon: '⛓️', title: 'On-Chain Attestation', desc: 'Verdict permanently recorded on opBNB as a verifiable attestation' },
+              ].map((step, i) => (
+                <div key={i} className="bg-zinc-900/40 border border-zinc-800/50 rounded-xl p-5 text-center">
+                  <div className="text-2xl mb-2">{step.icon}</div>
+                  <h3 className="text-sm font-semibold text-zinc-300 mb-1">{step.title}</h3>
+                  <p className="text-xs text-zinc-500 leading-relaxed">{step.desc}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
           {/* Status + Timer */}
           {isScanning && (
             <div className="mt-4 flex items-center justify-center gap-3">
