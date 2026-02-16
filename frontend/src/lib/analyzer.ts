@@ -1,9 +1,4 @@
-import Anthropic from '@anthropic-ai/sdk';
 import type { VibeCheckReport, RiskCategory, TokenInfo, HolderInfo, LiquidityInfo } from './types';
-
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY || '',
-});
 
 interface AnalysisInput {
   tokenInfo: TokenInfo;
@@ -15,29 +10,39 @@ interface AnalysisInput {
 export async function analyzeToken(input: AnalysisInput): Promise<VibeCheckReport> {
   const { tokenInfo, holders, liquidity, transfers } = input;
 
-  // Compute basic stats
   const totalLiquidityUSD = liquidity.reduce((sum, l) => sum + l.liquidityUSD, 0);
   const top10HolderPct = holders.slice(0, 10).reduce((sum, h) => sum + h.percentage, 0);
   const burnedPct = holders
     .filter(h => h.label?.includes('Burn') || h.label?.includes('Dead'))
     .reduce((sum, h) => sum + h.percentage, 0);
 
-  // Build the prompt
   const prompt = buildAnalysisPrompt(tokenInfo, holders, liquidity, transfers, {
     totalLiquidityUSD,
     top10HolderPct,
     burnedPct,
   });
 
-  const response = await anthropic.messages.create({
-    model: 'claude-sonnet-4-20250514',
-    max_tokens: 4096,
-    messages: [{ role: 'user', content: prompt }],
+  const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: 'moonshotai/kimi-k2.5',
+      max_tokens: 4096,
+      messages: [{ role: 'user', content: prompt }],
+    }),
   });
 
-  const text = response.content[0].type === 'text' ? response.content[0].text : '';
-  
-  // Parse the structured response
+  if (!response.ok) {
+    const err = await response.text();
+    throw new Error(`OpenRouter API error: ${response.status} ${err}`);
+  }
+
+  const data = await response.json();
+  const text = data.choices?.[0]?.message?.content ?? '';
+
   return parseAnalysisResponse(text, tokenInfo, holders, liquidity);
 }
 
@@ -56,12 +61,11 @@ function buildAnalysisPrompt(
     `  ${l.dex}: $${l.liquidityUSD.toFixed(0)} USD (Locked: ${l.isLocked ? 'Yes' : 'Unknown'})`
   ).join('\n') || '  No liquidity found on PancakeSwap';
 
-  // Recent large transfers
   const largeTxs = transfers
     .filter(tx => {
       const value = Number(tx.value) / Math.pow(10, Number(tx.tokenDecimal || 18));
       const supply = Number(token.totalSupply) / Math.pow(10, token.decimals);
-      return supply > 0 && (value / supply) > 0.01; // > 1% of supply
+      return supply > 0 && (value / supply) > 0.01;
     })
     .slice(0, 10)
     .map(tx => {
@@ -138,14 +142,11 @@ function parseAnalysisResponse(
   holders: HolderInfo[],
   liquidity: LiquidityInfo[]
 ): VibeCheckReport {
-  // Try to parse JSON from the response
   let parsed: any;
   try {
-    // Remove any markdown code blocks if present
     const cleaned = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
     parsed = JSON.parse(cleaned);
   } catch {
-    // Fallback if parsing fails
     return createFallbackReport(tokenInfo, holders, liquidity);
   }
 
