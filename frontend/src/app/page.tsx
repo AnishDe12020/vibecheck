@@ -538,6 +538,15 @@ function HomeInner() {
                   𝕏 Share
                 </button>
                 <button
+                  onClick={() => {
+                    const url = `${window.location.origin}/scan/${report.token.address}`;
+                    navigator.clipboard.writeText(url);
+                  }}
+                  className="text-xs px-4 py-2.5 rounded-xl glass text-zinc-400 hover:text-zinc-200 transition-all cursor-pointer flex items-center gap-2"
+                >
+                  📋 Copy Link
+                </button>
+                <button
                   onClick={() => { setReport(null); setStatus('idle'); setAddress(''); }}
                   className="text-xs px-4 py-2.5 rounded-xl glass text-zinc-400 hover:text-emerald-400 transition-all cursor-pointer flex items-center gap-2"
                 >

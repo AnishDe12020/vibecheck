@@ -362,6 +362,12 @@ export default function ScanPage({ params }: { params: Promise<{ address: string
                 >
                   𝕏 Share
                 </button>
+                <button
+                  onClick={() => navigator.clipboard.writeText(window.location.href)}
+                  className="text-xs px-4 py-2.5 rounded-xl glass text-zinc-400 hover:text-zinc-200 transition-all cursor-pointer flex items-center gap-2"
+                >
+                  📋 Copy Link
+                </button>
                 <Link
                   href="/"
                   className="text-xs px-4 py-2.5 rounded-xl glass text-zinc-400 hover:text-emerald-400 transition-all flex items-center gap-2"
