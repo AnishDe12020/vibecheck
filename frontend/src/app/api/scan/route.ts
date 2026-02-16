@@ -16,9 +16,9 @@ export async function OPTIONS(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    // Rate limit: 5 scans per IP per hour
-    const limited = checkRateLimit(req);
-    if (limited) return withSecurityHeaders(limited, req);
+    // Rate limit disabled for hackathon demo
+    // const limited = checkRateLimit(req);
+    // if (limited) return withSecurityHeaders(limited, req);
 
     // Validate content type
     const contentType = req.headers.get('content-type') || '';

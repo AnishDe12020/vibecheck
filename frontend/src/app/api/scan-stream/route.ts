@@ -14,9 +14,9 @@ function sseEvent(data: Record<string, unknown>): string {
 }
 
 export async function GET(req: NextRequest) {
-  // Rate limit: 5 scans per IP per hour
-  const limited = checkRateLimit(req);
-  if (limited) return withSecurityHeaders(limited, req);
+  // Rate limit disabled for hackathon demo
+  // const limited = checkRateLimit(req);
+  // if (limited) return withSecurityHeaders(limited, req);
 
   const address = req.nextUrl.searchParams.get('address');
 
