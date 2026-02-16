@@ -11,7 +11,7 @@ export async function GET() {
     const total = await contract.totalScans();
     return NextResponse.json({ totalScans: total.toString() });
   } catch (err: any) {
-    console.warn('Failed to fetch totalScans:', err.message);
-    return NextResponse.json({ totalScans: null });
+    console.warn('Failed to fetch totalScans:', err.message, 'contract:', CONTRACT_ADDRESS);
+    return NextResponse.json({ totalScans: null, debug: err.message });
   }
 }
