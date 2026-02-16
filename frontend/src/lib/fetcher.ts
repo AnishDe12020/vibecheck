@@ -74,7 +74,7 @@ export async function fetchContractSource(address: string): Promise<{
   compiler?: string;
 }> {
   try {
-    const url = `${BSCSCAN_API}?module=contract&action=getsourcecode&address=${address}&apikey=${BSCSCAN_KEY}`;
+    const url = `${BSCSCAN_API}module=contract&action=getsourcecode&address=${address}&apikey=${BSCSCAN_KEY}`;
     const res = await fetch(url);
     const data = await res.json();
 
@@ -106,7 +106,7 @@ export async function fetchTopHolders(
 ): Promise<HolderInfo[]> {
   // Try BSCScan token holder list API
   try {
-    const url = `${BSCSCAN_API}?module=token&action=tokenholderlist&contractaddress=${tokenAddress}&page=1&offset=${count}&apikey=${BSCSCAN_KEY}`;
+    const url = `${BSCSCAN_API}module=token&action=tokenholderlist&contractaddress=${tokenAddress}&page=1&offset=${count}&apikey=${BSCSCAN_KEY}`;
     const res = await fetch(url);
     const data = await res.json();
 
@@ -200,7 +200,7 @@ export async function fetchLiquidity(tokenAddress: string): Promise<LiquidityInf
 
 export async function fetchRecentTransfers(tokenAddress: string): Promise<any[]> {
   try {
-    const url = `${BSCSCAN_API}?module=account&action=tokentx&contractaddress=${tokenAddress}&page=1&offset=50&sort=desc&apikey=${BSCSCAN_KEY}`;
+    const url = `${BSCSCAN_API}module=account&action=tokentx&contractaddress=${tokenAddress}&page=1&offset=50&sort=desc&apikey=${BSCSCAN_KEY}`;
     const res = await fetch(url);
     const data = await res.json();
     if (data.status === '1' && Array.isArray(data.result)) {

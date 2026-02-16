@@ -9,7 +9,8 @@ export const OPBNB_RPC = 'https://opbnb-mainnet-rpc.bnbchain.org';
 export const OPBNB_CHAIN_ID = 204;
 
 // BSCScan API (v2 / BSCTrace)
-export const BSCSCAN_API = 'https://api.bscscan.com/api';
+// BSCScan v2 API (v1 deprecated Jan 2026)
+export const BSCSCAN_API = 'https://api.etherscan.io/v2/api?chainid=56&';
 
 // PancakeSwap V2 Router & Factory
 export const PANCAKE_FACTORY = '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73';
