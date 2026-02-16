@@ -103,6 +103,23 @@ ${liqSummary}
 RECENT LARGE TRANSFERS (>1% supply):
 ${largeTxs}
 
+SCORING CALIBRATION:
+- 90-100: Blue-chip / infrastructure tokens (WBNB, BUSD, USDT, major DEX tokens)
+- 70-89: Established projects with some risks (verified, good liquidity, known team)
+- 50-69: Caution — some red flags but not definitive scam (unverified but has liquidity, concentrated holders)
+- 25-49: Danger — multiple red flags (honeypot patterns, no liquidity lock, extreme concentration)
+- 0-24: Critical — likely scam or rug pull (proxy contracts, disabled selling, known scam patterns)
+
+Risk level mapping: SAFE (70-100), CAUTION (50-69), DANGER (25-49), CRITICAL (0-24)
+
+KEY PATTERNS TO LOOK FOR:
+- Unverified contract = immediate -30 points
+- Proxy/delegatecall patterns = honeypot risk
+- Owner can mint unlimited = concentration risk
+- No liquidity lock = danger of rug pull
+- Top holder >50% (non-burn) = extreme concentration
+- Known legitimate project names with wrong addresses = impersonation
+
 Respond in EXACTLY this JSON format (no markdown, no code blocks, just raw JSON):
 {
   "overallScore": <0-100, 100=safest>,
