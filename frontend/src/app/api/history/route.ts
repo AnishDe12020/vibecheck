@@ -6,8 +6,7 @@ const CONTRACT = process.env.VIBECHECK_CONTRACT_ADDRESS || '0x427F80AE3ebF7C275B
 const OPBNB_RPC = 'https://opbnb-mainnet-rpc.bnbchain.org';
 
 function getProvider() {
-  // Use static provider config to avoid ENS lookups
-  return new ethers.JsonRpcProvider(OPBNB_RPC, { name: 'opbnb', chainId: 204 }, { staticNetwork: true });
+  return new ethers.JsonRpcProvider(OPBNB_RPC, undefined, { staticNetwork: true });
 }
 
 export async function GET() {
