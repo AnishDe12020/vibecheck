@@ -32,7 +32,7 @@ export async function analyzeToken(input: AnalysisInput): Promise<VibeCheckRepor
       'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
     },
     body: JSON.stringify({
-      model: 'google/gemini-2.5-flash',
+      model: 'google/gemini-3-flash-preview',
       max_tokens: 4096,
       messages: [{ role: 'user', content: prompt }],
     }),
