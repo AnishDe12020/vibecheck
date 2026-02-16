@@ -294,11 +294,7 @@ function HomeInner() {
   };
 
   const handleRecentClick = (scan: RecentScan) => {
-    setAddress(scan.address);
-    setReport(scan.report);
-    setStatus('complete');
-    setTokenPreview(null);
-    setError('');
+    window.location.href = `/scan/${scan.address}`;
   };
 
   const clearHistory = () => {
