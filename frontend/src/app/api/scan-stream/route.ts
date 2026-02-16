@@ -3,6 +3,7 @@ import { fetchAllTokenData } from '@/lib/fetcher';
 import { analyzeToken } from '@/lib/analyzer';
 import { submitAttestation } from '@/lib/attester';
 import { ethers } from 'ethers';
+import { checkRateLimit, withSecurityHeaders, sanitizeError } from '@/lib/security';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -12,13 +13,18 @@ function sseEvent(data: Record<string, unknown>): string {
 }
 
 export async function GET(req: NextRequest) {
+  // Rate limit: 5 scans per IP per hour
+  const limited = checkRateLimit(req);
+  if (limited) return withSecurityHeaders(limited, req);
+
   const address = req.nextUrl.searchParams.get('address');
 
   if (!address || !ethers.isAddress(address)) {
-    return new Response(
+    const res = new Response(
       JSON.stringify({ error: 'Invalid token address' }),
       { status: 400, headers: { 'Content-Type': 'application/json' } }
     );
+    return withSecurityHeaders(res, req);
   }
 
   const normalizedAddress = ethers.getAddress(address);
@@ -60,18 +66,19 @@ export async function GET(req: NextRequest) {
         // Phase 4: Complete
         send({ status: 'complete', data: report });
       } catch (err: any) {
-        send({ status: 'error', error: err.message || 'Scan failed' });
+        send({ status: 'error', error: sanitizeError(err) });
       } finally {
         controller.close();
       }
     },
   });
 
-  return new Response(stream, {
+  const res = new Response(stream, {
     headers: {
       'Content-Type': 'text/event-stream',
       'Cache-Control': 'no-cache',
       Connection: 'keep-alive',
     },
   });
+  return withSecurityHeaders(res, req);
 }

@@ -3,7 +3,7 @@
 **Paste any BSC token address → get an instant AI-powered safety analysis → on-chain attestation on opBNB.**
 
 🌐 **Live Demo:** [vibecheck-bsc.vercel.app](https://vibecheck-bsc.vercel.app)  
-📜 **Contract:** [0x851d...f62a0 on opBNB](https://opbnb.bscscan.com/address/0x851d1B08F9166D18eC379B990D7E9D6d45FFA8CA#code) (verified)  
+📜 **Contract:** [0x427F...AA161 on opBNB](https://opbnb.bscscan.com/address/0x427F80AE3ebF7C275B138Bc9C9A39C76572AA161) (v2, with access control)  
 🏗️ **Track:** Consumer  
 🎯 **Hackathon:** [Good Vibes Only: OpenClaw Edition](https://dorahacks.io/hackathon/goodvibes)
 
@@ -133,13 +133,42 @@ Requires opBNB gas in the deployer wallet. Current deployment cost: ~$0.003.
 
 ## On-chain Proof
 
-- **Contract:** [`0x851d1B08F9166D18eC379B990D7E9D6d45FFA8CA`](https://opbnb.bscscan.com/address/0x851d1B08F9166D18eC379B990D7E9D6d45FFA8CA#code)
+- **Contract v2:** [`0x427F80AE3ebF7C275B138Bc9C9A39C76572AA161`](https://opbnb.bscscan.com/address/0x427F80AE3ebF7C275B138Bc9C9A39C76572AA161)
+- **Contract v1 (deprecated):** [`0x851d1B08F9166D18eC379B990D7E9D6d45FFA8CA`](https://opbnb.bscscan.com/address/0x851d1B08F9166D18eC379B990D7E9D6d45FFA8CA#code)
 - **Network:** opBNB Mainnet (Chain ID 204)
-- **Verified:** ✅ Source code verified on opBNB BSCScan
-- **Sample attestations:**
+- **v2 changes:** Added access control (only authorized scanners can submit attestations)
+- **Sample attestations (v1):**
   - [WBNB scan](https://opbnb.bscscan.com/tx/0x647dbce8b461bf83ee6a2773b997c38f9f9a3611453026d1800ec4f6180761a2)
   - [CAKE scan](https://opbnb.bscscan.com/tx/0x61b4772a3295e90931f6dbc3e76b2ed99c4181a5e39a293cc24aa9164752984f)
   - [SafeMoon scan](https://opbnb.bscscan.com/tx/0x8757889b1a88c9d89e809ad311a50a4ffdeb6da8bac8a003f379940b96e49b4c)
+
+## Security
+
+### API Rate Limiting
+- IP-based rate limiting: 5 scans per IP per hour
+- In-memory store (best-effort in serverless; for production, use Upstash Redis)
+- Applied to `/api/scan` and `/api/scan-stream`
+
+### Contract Access Control (v2)
+- `onlyAuthorized` modifier on `submitAttestation` — only whitelisted scanner addresses can write
+- Owner can `addScanner(address)` / `removeScanner(address)`
+- Deployer is auto-authorized in constructor
+
+### Request Validation
+- Content-Type enforcement (must be `application/json`)
+- Max body size (1KB)
+- Input address validation via ethers.js
+
+### CORS
+- Restricted to `vibecheck-bsc.vercel.app` and `localhost` origins
+
+### Error Sanitization
+- Stack traces and file paths are stripped from client-facing errors
+
+### Production Improvements (not yet implemented)
+- **Cloudflare WAF** — custom domain + Cloudflare proxy for DDoS protection and bot filtering
+- **Upstash Redis rate limiter** — persistent, serverless-friendly rate limiting across all instances
+- **Contract verification** — verify v2 contract source on opBNB BSCScan
 
 ## AI Build Log
 

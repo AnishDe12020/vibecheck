@@ -14,6 +14,10 @@ contract VibeCheck {
         address scanner;       // Who initiated the scan
     }
 
+    // Access control
+    address public owner;
+    mapping(address => bool) public authorizedScanners;
+
     // token address => array of attestations
     mapping(address => Attestation[]) public tokenAttestations;
     
@@ -32,18 +36,44 @@ contract VibeCheck {
         address indexed scanner,
         uint256 timestamp
     );
+    event ScannerAdded(address indexed scanner);
+    event ScannerRemoved(address indexed scanner);
 
-    /// @notice Submit a safety attestation for a token
-    /// @param token The BSC token contract address
-    /// @param score Safety score 0-100 (100 = safest)
-    /// @param riskLevel Human-readable risk category
-    /// @param reportCID IPFS CID or hash of the full analysis report
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not owner");
+        _;
+    }
+
+    modifier onlyAuthorized() {
+        require(authorizedScanners[msg.sender], "Not authorized scanner");
+        _;
+    }
+
+    constructor() {
+        owner = msg.sender;
+        authorizedScanners[msg.sender] = true;
+        emit ScannerAdded(msg.sender);
+    }
+
+    /// @notice Add an authorized scanner (owner only)
+    function addScanner(address scanner) external onlyOwner {
+        authorizedScanners[scanner] = true;
+        emit ScannerAdded(scanner);
+    }
+
+    /// @notice Remove an authorized scanner (owner only)
+    function removeScanner(address scanner) external onlyOwner {
+        authorizedScanners[scanner] = false;
+        emit ScannerRemoved(scanner);
+    }
+
+    /// @notice Submit a safety attestation for a token (authorized scanners only)
     function submitAttestation(
         address token,
         uint8 score,
         string calldata riskLevel,
         string calldata reportCID
-    ) external {
+    ) external onlyAuthorized {
         require(score <= 100, "Score must be 0-100");
         
         tokenAttestations[token].push(Attestation({

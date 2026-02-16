@@ -3,19 +3,46 @@ import { fetchAllTokenData } from '@/lib/fetcher';
 import { analyzeToken } from '@/lib/analyzer';
 import { submitAttestation } from '@/lib/attester';
 import { ethers } from 'ethers';
+import { checkRateLimit, withSecurityHeaders, sanitizeError } from '@/lib/security';
 
 // Simple in-memory cache (1 hour TTL)
 const cache = new Map<string, { data: any; timestamp: number }>();
 const CACHE_TTL = 60 * 60 * 1000;
 
+export async function OPTIONS(req: NextRequest) {
+  const res = new NextResponse(null, { status: 204 });
+  return withSecurityHeaders(res, req);
+}
+
 export async function POST(req: NextRequest) {
   try {
-    const { address } = await req.json();
+    // Rate limit: 5 scans per IP per hour
+    const limited = checkRateLimit(req);
+    if (limited) return withSecurityHeaders(limited, req);
+
+    // Validate content type
+    const contentType = req.headers.get('content-type') || '';
+    if (!contentType.includes('application/json')) {
+      return withSecurityHeaders(
+        NextResponse.json({ error: 'Content-Type must be application/json' }, { status: 415 }),
+        req
+      );
+    }
+
+    const body = await req.text();
+    if (body.length > 1024) {
+      return withSecurityHeaders(
+        NextResponse.json({ error: 'Request too large' }, { status: 413 }),
+        req
+      );
+    }
+
+    const { address } = JSON.parse(body);
 
     if (!address || !ethers.isAddress(address)) {
-      return NextResponse.json(
-        { error: 'Invalid token address' },
-        { status: 400 }
+      return withSecurityHeaders(
+        NextResponse.json({ error: 'Invalid token address' }, { status: 400 }),
+        req
       );
     }
 
@@ -24,7 +51,10 @@ export async function POST(req: NextRequest) {
     // Check cache
     const cached = cache.get(normalizedAddress);
     if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
-      return NextResponse.json({ ...cached.data, cached: true });
+      return withSecurityHeaders(
+        NextResponse.json({ ...cached.data, cached: true }),
+        req
+      );
     }
 
     // Fetch all on-chain data
@@ -33,7 +63,7 @@ export async function POST(req: NextRequest) {
     // Run AI analysis
     const report = await analyzeToken(tokenData);
 
-    // Try to submit attestation on opBNB (non-blocking, don't fail scan if this errors)
+    // Try to submit attestation on opBNB (non-blocking)
     const contractAddress = process.env.VIBECHECK_CONTRACT_ADDRESS;
     if (contractAddress && process.env.DEPLOYER_PRIVATE_KEY) {
       try {
@@ -48,12 +78,12 @@ export async function POST(req: NextRequest) {
     // Cache the result
     cache.set(normalizedAddress, { data: report, timestamp: Date.now() });
 
-    return NextResponse.json(report);
+    return withSecurityHeaders(NextResponse.json(report), req);
   } catch (error: any) {
     console.error('Scan error:', error);
-    return NextResponse.json(
-      { error: error.message || 'Scan failed' },
-      { status: 500 }
+    return withSecurityHeaders(
+      NextResponse.json({ error: sanitizeError(error) }, { status: 500 }),
+      req
     );
   }
 }
