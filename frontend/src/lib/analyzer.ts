@@ -22,6 +22,9 @@ export async function analyzeToken(input: AnalysisInput): Promise<VibeCheckRepor
     burnedPct,
   });
 
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 45000); // 45s timeout
+
   const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -29,11 +32,13 @@ export async function analyzeToken(input: AnalysisInput): Promise<VibeCheckRepor
       'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
     },
     body: JSON.stringify({
-      model: 'moonshotai/kimi-k2.5',
+      model: 'google/gemini-2.5-flash',
       max_tokens: 4096,
       messages: [{ role: 'user', content: prompt }],
     }),
+    signal: controller.signal,
   });
+  clearTimeout(timeout);
 
   if (!response.ok) {
     const err = await response.text();
