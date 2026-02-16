@@ -5,13 +5,16 @@ import { VIBECHECK_ABI } from '../../../lib/chain';
 const CONTRACT = process.env.VIBECHECK_CONTRACT_ADDRESS || '0x427F80AE3ebF7C275B138Bc9C9A39C76572AA161';
 const OPBNB_RPC = 'https://opbnb-mainnet-rpc.bnbchain.org';
 
+function getProvider() {
+  const network = new ethers.Network('opbnb', 204);
+  return new ethers.JsonRpcProvider(OPBNB_RPC, network, { staticNetwork: network });
+}
+
 export async function GET() {
   try {
-    const provider = new ethers.JsonRpcProvider(OPBNB_RPC, {
-      name: 'opbnb',
-      chainId: 204,
-    });
-    const contract = new ethers.Contract(CONTRACT, VIBECHECK_ABI, provider);
+    const provider = getProvider();
+    const addr = ethers.getAddress(CONTRACT.trim());
+    const contract = new ethers.Contract(addr, VIBECHECK_ABI, provider);
 
     const tokens: string[] = await contract.getRecentTokens(50);
 
