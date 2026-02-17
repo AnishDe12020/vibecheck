@@ -4,6 +4,7 @@ import { analyzeToken } from '@/lib/analyzer';
 import { submitAttestation } from '@/lib/attester';
 import { ethers } from 'ethers';
 import { checkRateLimit, withSecurityHeaders, sanitizeError } from '@/lib/security';
+import { cacheGet, cacheSet } from '@/lib/cache';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -38,6 +39,19 @@ export async function GET(req: NextRequest) {
       };
 
       try {
+        // Check cache first
+        const cacheKey = `scan:${normalizedAddress}`;
+        const cached = cacheGet<Record<string, unknown>>(cacheKey);
+        if (cached) {
+          send({ status: 'fetching' });
+          send({ status: 'fetching_done', tokenName: (cached as any).token?.name || 'Unknown', tokenSymbol: (cached as any).token?.symbol || '???' });
+          send({ status: 'analyzing' });
+          send({ status: 'analyzing_done' });
+          send({ status: 'complete', data: cached });
+          controller.close();
+          return;
+        }
+
         // Phase 1: Fetching
         send({ status: 'fetching' });
         let tokenData;
@@ -75,7 +89,8 @@ export async function GET(req: NextRequest) {
           }
         }
 
-        // Phase 4: Complete
+        // Phase 4: Complete — cache and send
+        cacheSet(`scan:${normalizedAddress}`, report);
         send({ status: 'complete', data: report });
       } catch (err: any) {
         send({ status: 'error', error: sanitizeError(err) });
