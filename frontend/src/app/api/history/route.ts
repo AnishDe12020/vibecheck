@@ -48,8 +48,18 @@ export async function GET() {
       })
     );
 
+    // Deduplicate: keep only the latest scan per token address
+    const seen = new Map<string, any>();
+    for (const r of results.filter(Boolean)) {
+      const existing = seen.get(r!.address);
+      if (!existing || r!.timestamp > existing.timestamp) {
+        seen.set(r!.address, r);
+      }
+    }
+    const deduplicated = Array.from(seen.values()).sort((a, b) => b.timestamp - a.timestamp);
+
     return NextResponse.json({
-      tokens: results.filter(Boolean),
+      tokens: deduplicated,
     });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Unknown error';
