@@ -447,8 +447,8 @@ function HomeInner() {
           </div>
         )}
 
-        {/* How it works (idle state) */}
-        {status === 'idle' && !report && recentScans.length === 0 && (
+        {/* How it works */}
+        {status === 'idle' && !report && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 max-w-3xl mx-auto mb-16 stagger-children">
             {[
               { icon: '📡', title: 'Fetch On-Chain Data', desc: 'Contract source, top holders, PancakeSwap liquidity, recent transfers — all verified on-chain.' },
@@ -487,6 +487,68 @@ function HomeInner() {
                   </div>
                 </button>
               ))}
+            </div>
+          </div>
+        )}
+
+        {/* Why VibeCheck — differentiator section */}
+        {status === 'idle' && !report && (
+          <div className="max-w-4xl mx-auto mb-12 sm:mb-16">
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 className="text-lg sm:text-xl font-black text-zinc-200">Manual Research vs VibeCheck</h2>
+              <p className="text-xs text-zinc-500 mt-1">What takes you 30 minutes, we do in 15 seconds</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Manual column */}
+              <div className="glass rounded-2xl p-5 sm:p-6 border-red-500/10">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="text-lg">😰</span>
+                  <span className="text-sm font-bold text-red-400">Manual DYOR</span>
+                  <span className="ml-auto text-xs text-zinc-600">~30 min</span>
+                </div>
+                <ul className="space-y-2.5 text-xs text-zinc-500">
+                  {[
+                    'Open BSCScan, find contract source',
+                    'Read Solidity code for hidden functions',
+                    'Check top holders one by one',
+                    'Find liquidity on PancakeSwap',
+                    'Check LP lock on multiple sites',
+                    'Test buy/sell for honeypot',
+                    'Search Twitter/Reddit for scam reports',
+                    'Still not sure if it\'s safe...',
+                  ].map((step, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span className="text-red-500/60 shrink-0 mt-0.5">✗</span>
+                      {step}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {/* VibeCheck column */}
+              <div className="glass rounded-2xl p-5 sm:p-6 border-emerald-500/20 bg-emerald-500/[0.02]">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="text-lg">⚡</span>
+                  <span className="text-sm font-bold text-emerald-400">VibeCheck</span>
+                  <span className="ml-auto text-xs text-emerald-500/60">~15 sec</span>
+                </div>
+                <ul className="space-y-2.5 text-xs text-zinc-400">
+                  {[
+                    'Paste address → get instant safety score',
+                    'AI analyzes contract, holders, liquidity & trading',
+                    '4 risk categories with detailed breakdowns',
+                    'Honeypot detection via multiple APIs',
+                    'LP lock verification built-in',
+                    'On-chain attestation on opBNB (immutable proof)',
+                    'Portfolio scanner: check your entire wallet at once',
+                    'Share results with verifiable on-chain link',
+                  ].map((step, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span className="text-emerald-400 shrink-0 mt-0.5">✓</span>
+                      {step}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         )}
