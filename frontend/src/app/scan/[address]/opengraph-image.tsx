@@ -59,7 +59,7 @@ export default async function Image({ params }: { params: Promise<{ address: str
 
         {/* Footer */}
         <div style={{ position: 'absolute', bottom: '28px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ fontSize: '15px', color: '#52525b' }}>vibecheck-bsc.vercel.app</span>
+          <span style={{ fontSize: '15px', color: '#52525b' }}>opvibecheck.xyz</span>
           <span style={{ fontSize: '15px', color: '#3f3f46' }}>•</span>
           <span style={{ fontSize: '15px', color: '#52525b' }}>AI Token Safety on BNB Chain</span>
           <span style={{ fontSize: '15px', color: '#3f3f46' }}>•</span>

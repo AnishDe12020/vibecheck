@@ -586,7 +586,7 @@ function HomeInner() {
               <div className="flex items-center gap-2 sm:gap-3 flex-wrap justify-center">
                 <button
                   onClick={() => {
-                    const text = `🔍 VibeCheck: ${report.token.name} scored ${report.overallScore}/100 — ${report.riskLevel}\n\n${report.summary.slice(0, 180)}\n\nScan any BSC token → vibecheck-bsc.vercel.app`;
+                    const text = `🔍 VibeCheck: ${report.token.name} scored ${report.overallScore}/100 — ${report.riskLevel}\n\n${report.summary.slice(0, 180)}\n\nScan any BSC token → opvibecheck.xyz`;
                     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
                   }}
                   className="text-xs px-4 py-2.5 rounded-xl glass text-zinc-400 hover:text-zinc-200 transition-all cursor-pointer flex items-center gap-2"

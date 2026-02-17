@@ -303,7 +303,7 @@ export default function ScanPage({ params }: { params: Promise<{ address: string
                     </span>
                   </div>
                   <p className="text-sm text-zinc-400 leading-relaxed line-clamp-2">{report.summary}</p>
-                  <p className="text-[10px] text-zinc-600 mt-2 font-medium tracking-wide">Scanned on VibeCheck · vibecheck-bsc.vercel.app</p>
+                  <p className="text-[10px] text-zinc-600 mt-2 font-medium tracking-wide">Scanned on VibeCheck · opvibecheck.xyz</p>
                 </div>
               </div>
             </div>
@@ -313,7 +313,7 @@ export default function ScanPage({ params }: { params: Promise<{ address: string
               <div className="flex items-center gap-2 sm:gap-3 flex-wrap justify-center">
                 <button
                   onClick={() => {
-                    const text = `🔍 VibeCheck: ${report.token.name} scored ${report.overallScore}/100 — ${report.riskLevel}\n\n${report.summary.slice(0, 180)}\n\nScan any BSC token → vibecheck-bsc.vercel.app/scan/${address}`;
+                    const text = `🔍 VibeCheck: ${report.token.name} scored ${report.overallScore}/100 — ${report.riskLevel}\n\n${report.summary.slice(0, 180)}\n\nScan any BSC token → opvibecheck.xyz/scan/${address}`;
                     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
                   }}
                   className="text-xs px-4 py-2.5 rounded-xl glass text-zinc-400 hover:text-zinc-200 transition-all cursor-pointer flex items-center gap-2"

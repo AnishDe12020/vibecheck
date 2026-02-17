@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { rateLimit } from './rate-limit';
 
 const ALLOWED_ORIGINS = [
+  'https://opvibecheck.xyz',
+  'https://www.opvibecheck.xyz',
   'https://vibecheck-bsc.vercel.app',
   'http://localhost:3000',
   'http://localhost:3001',
