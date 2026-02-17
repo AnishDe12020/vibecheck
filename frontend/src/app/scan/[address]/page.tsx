@@ -59,7 +59,10 @@ export default function ScanPage({ params }: { params: Promise<{ address: string
 
     try {
       const res = await fetch(`/api/scan-stream?address=${encodeURIComponent(address)}`);
-      if (!res.ok) throw new Error(await res.text() || `HTTP ${res.status}`);
+      if (!res.ok) {
+        const body = await res.text();
+        try { throw new Error(JSON.parse(body).error || `HTTP ${res.status}`); } catch { throw new Error(body || `HTTP ${res.status}`); }
+      }
 
       const reader = res.body!.getReader();
       const decoder = new TextDecoder();

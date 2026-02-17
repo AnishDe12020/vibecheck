@@ -39,14 +39,14 @@ export async function POST(req: NextRequest) {
 
     const { address } = JSON.parse(body);
 
-    if (!address || !ethers.isAddress(address)) {
+    if (!address || !ethers.isAddress(address.toLowerCase())) {
       return withSecurityHeaders(
         NextResponse.json({ error: 'Invalid token address' }, { status: 400 }),
         req
       );
     }
 
-    const normalizedAddress = ethers.getAddress(address);
+    const normalizedAddress = ethers.getAddress(address.toLowerCase());
 
     // Check cache
     const cached = cache.get(normalizedAddress);

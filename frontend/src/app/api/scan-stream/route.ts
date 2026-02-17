@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
 
   const address = req.nextUrl.searchParams.get('address');
 
-  if (!address || !ethers.isAddress(address)) {
+  if (!address || !ethers.isAddress(address.toLowerCase())) {
     const res = new Response(
       JSON.stringify({ error: 'Invalid token address' }),
       { status: 400, headers: { 'Content-Type': 'application/json' } }
@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
     return withSecurityHeaders(res, req);
   }
 
-  const normalizedAddress = ethers.getAddress(address);
+  const normalizedAddress = ethers.getAddress(address.toLowerCase());
   const encoder = new TextEncoder();
 
   const stream = new ReadableStream({
