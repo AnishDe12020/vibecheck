@@ -40,7 +40,18 @@ export async function GET(req: NextRequest) {
       try {
         // Phase 1: Fetching
         send({ status: 'fetching' });
-        const tokenData = await fetchAllTokenData(normalizedAddress);
+        let tokenData;
+        try {
+          tokenData = await fetchAllTokenData(normalizedAddress);
+        } catch (fetchErr: any) {
+          console.error('fetchAllTokenData failed:', fetchErr.message);
+          send({
+            status: 'error',
+            error: `Failed to fetch token data for ${normalizedAddress}. The contract may not be a standard ERC20 token, may be self-destructed, or may not exist. (${fetchErr.message?.slice(0, 120) || 'Unknown error'})`,
+          });
+          controller.close();
+          return;
+        }
         send({
           status: 'fetching_done',
           tokenName: tokenData.tokenInfo?.name || 'Unknown',

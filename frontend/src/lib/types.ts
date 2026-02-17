@@ -10,6 +10,33 @@ export interface TokenInfo {
   owner?: string;
   creator?: string;
   creationTimestamp?: number;
+  contractAge?: string; // human readable age
+}
+
+export interface HoneypotResult {
+  isHoneypot: boolean;
+  buyTax: number;   // percentage
+  sellTax: number;  // percentage
+  error?: string;
+}
+
+export interface LPLockInfo {
+  isLocked: boolean;
+  lockedPercent: number;
+  lockExpiry?: number;
+  lockPlatform?: string;
+}
+
+export interface ContractPatterns {
+  hasProxy: boolean;
+  hasMintFunction: boolean;
+  hasBlacklist: boolean;
+  hasPausable: boolean;
+  hasFeeModification: boolean;
+  hasMaxTxLimit: boolean;
+  hasAntiBot: boolean;
+  hasHiddenOwner: boolean;
+  suspiciousPatterns: string[];
 }
 
 export interface HolderInfo {

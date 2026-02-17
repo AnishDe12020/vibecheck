@@ -13,20 +13,20 @@ export function HolderChart({ holders, className = '' }: {
   const maxPct = Math.max(...top.map(h => h.percentage), 1);
 
   return (
-    <div className={`glass rounded-2xl p-6 ${className}`}>
-      <h3 className="font-bold text-zinc-200 mb-4 flex items-center gap-2">
+    <div className={`glass rounded-2xl p-4 sm:p-6 ${className}`}>
+      <h3 className="font-bold text-zinc-200 mb-3 sm:mb-4 flex items-center gap-2 text-sm sm:text-base">
         <span>🏦</span> Top Holders
       </h3>
-      <div className="space-y-2.5">
+      <div className="space-y-2 sm:space-y-2.5">
         {top.map((holder, i) => (
-          <div key={holder.address} className="flex items-center gap-3">
-            <span className="text-xs text-zinc-500 w-5 text-right font-mono">{i + 1}</span>
-            <div className="flex-1">
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs text-zinc-400 font-mono truncate max-w-[200px]">
+          <div key={holder.address} className="flex items-center gap-2 sm:gap-3">
+            <span className="text-xs text-zinc-500 w-4 sm:w-5 text-right font-mono shrink-0">{i + 1}</span>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between mb-1 gap-2">
+                <span className="text-xs text-zinc-400 font-mono truncate min-w-0">
                   {holder.label || `${holder.address.slice(0, 6)}...${holder.address.slice(-4)}`}
                 </span>
-                <span className="text-xs font-semibold text-zinc-300">{holder.percentage.toFixed(2)}%</span>
+                <span className="text-xs font-semibold text-zinc-300 shrink-0">{holder.percentage.toFixed(2)}%</span>
               </div>
               <div className="w-full h-1.5 bg-zinc-800 rounded-full overflow-hidden">
                 <div
@@ -42,7 +42,7 @@ export function HolderChart({ holders, className = '' }: {
         ))}
       </div>
       {top.length > 0 && (
-        <div className="mt-4 pt-3 border-t border-zinc-800/50 flex items-center justify-between">
+        <div className="mt-3 sm:mt-4 pt-3 border-t border-zinc-800/50 flex items-center justify-between">
           <span className="text-xs text-zinc-500">Top {top.length} total</span>
           <span className="text-sm font-semibold text-zinc-300">
             {top.reduce((s, h) => s + h.percentage, 0).toFixed(2)}%

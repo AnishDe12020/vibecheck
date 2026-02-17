@@ -1,0 +1,1644 @@
+[
+  {
+    "token_name": "Wrapped BNB",
+    "symbol": "WBNB",
+    "score": 100,
+    "risk": "SAFE",
+    "categories": {
+      "contract": {
+        "score": 100,
+        "level": "safe"
+      },
+      "concentration": {
+        "score": 100,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 100,
+        "level": "safe"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 Blue-chip infrastructure asset",
+      "\ud83d\udfe2 1:1 parity with native BNB",
+      "\ud83d\udfe2 Immutable contract: No ability to mint or rug-pull",
+      "\ud83d\udfe2 No taxes or trading restrictions"
+    ],
+    "summary": "Wrapped BNB (WBNB) is the core wrapping contract for the BNB Smart Chain, providing a 1:1 backed ERC-20 compatible version of the native gas token. The contract is extremely simple, verified since 202",
+    "input_name": "WBNB",
+    "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    "expected": "70+",
+    "category": "blue_chip"
+  },
+  {
+    "token_name": "PancakeSwap Token",
+    "symbol": "Cake",
+    "score": 95,
+    "risk": "SAFE",
+    "categories": {
+      "contract": {
+        "score": 85,
+        "level": "safe"
+      },
+      "concentration": {
+        "score": 98,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 95,
+        "level": "safe"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 Blue-chip infrastructure asset",
+      "\ud83d\udfe2 0% Buy/Sell Tax",
+      "\ud83d\udfe2 Verified and audited contract source",
+      "\u26a0\ufe0f Owner has minting rights (required for farming rewards)",
+      "\ud83d\udfe2 Extremely high liquidity depth"
+    ],
+    "summary": "PancakeSwap Token (CAKE) is the native utility token for the largest decentralized exchange on BNB Smart Chain. While the contract includes a minting function controlled by the MasterChef contract for",
+    "input_name": "CAKE",
+    "address": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+    "expected": "70+",
+    "category": "blue_chip"
+  },
+  {
+    "token_name": "BUSD Token",
+    "symbol": "BUSD",
+    "score": 98,
+    "risk": "SAFE",
+    "categories": {
+      "contract": {
+        "score": 95,
+        "level": "safe"
+      },
+      "concentration": {
+        "score": 100,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 95,
+        "level": "safe"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 Blue-chip infrastructure: Official Binance stablecoin",
+      "\ud83d\udfe2 Zero trading taxes",
+      "\ud83d\udfe2 Massive liquidity depth across multiple DEXs",
+      "\u26a0\ufe0f Centralized control via the Binance mint/burn wallet",
+      "\u26a0\ufe0f Mint function present (mandatory for peg architecture)"
+    ],
+    "summary": "This is the official Binance-Peg BUSD token, a cornerstone stablecoin for the BSC ecosystem. While the contract includes minting capabilities and a centralized owner (required for the pegging mechanis",
+    "input_name": "BUSD",
+    "address": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+    "expected": "70+",
+    "category": "blue_chip"
+  },
+  {
+    "token_name": "Tether USD",
+    "symbol": "USDT",
+    "score": 98,
+    "risk": "SAFE",
+    "categories": {
+      "contract": {
+        "score": 90,
+        "level": "safe"
+      },
+      "concentration": {
+        "score": 100,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 95,
+        "level": "safe"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 Blue-chip infrastructure token (Tether/Binance-Peg)",
+      "\ud83d\udfe2 Massive liquidity across multiple DEX pools",
+      "\ud83d\udfe2 Zero trading taxes",
+      "\u26a0\ufe0f Centralized minting authority (required for pegged asset)",
+      "\u26a0\ufe0f Ownership not renounced"
+    ],
+    "summary": "This is the official bridged Tether USD (USDT) on BNB Smart Chain, managed by Binance-Peg. While the contract contains minting capabilities and centralized ownership, these are standard operational re",
+    "input_name": "USDT",
+    "address": "0x55d398326f99059fF775485246999027B3197955",
+    "expected": "70+",
+    "category": "blue_chip"
+  },
+  {
+    "token_name": "USD Coin",
+    "symbol": "USDC",
+    "score": 95,
+    "risk": "SAFE",
+    "categories": {
+      "contract": {
+        "score": 90,
+        "level": "safe"
+      },
+      "concentration": {
+        "score": 95,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 98,
+        "level": "safe"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 Blue-chip infrastructure asset",
+      "\ud83d\udfe2 Zero trading taxes",
+      "\ud83d\udfe2 Massive liquidity across DEXs",
+      "\ud83d\udd34 Proxy pattern allows central authority to change contract logic",
+      "\ud83d\udd34 Centralized stablecoin (issuer can blacklist addresses)"
+    ],
+    "summary": "This is the official bridged USD Coin (USDC) on BNB Smart Chain, managed by Binance. While the contract utilizes a proxy pattern which allows for logic upgrades, it is a blue-chip stablecoin infrastru",
+    "input_name": "USDC",
+    "address": "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
+    "expected": "70+",
+    "category": "blue_chip"
+  },
+  {
+    "token_name": "Ethereum Token",
+    "symbol": "ETH",
+    "score": 95,
+    "risk": "SAFE",
+    "categories": {
+      "contract": {
+        "score": 90,
+        "level": "safe"
+      },
+      "concentration": {
+        "score": 98,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 95,
+        "level": "safe"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 Blue-chip infrastructure asset (Binance-Peg)",
+      "\ud83d\udfe2 Zero trading taxes",
+      "\ud83d\udfe2 High liquidity ($3.2M+)",
+      "\ud83d\udfe1 Mint function present (Required for cross-chain pegging)",
+      "\ud83d\udfe2 Verified contract source code"
+    ],
+    "summary": "This is the official Binance-Peg Ethereum (ETH) token on BNB Smart Chain, a top-tier blue-chip asset. While the contract technically allows minting to maintain the 1:1 peg with native ETH, it is manag",
+    "input_name": "ETH_BSC",
+    "address": "0x2170Ed0880ac9A755fd29B2688956BD959F933F8",
+    "expected": "70+",
+    "category": "blue_chip"
+  },
+  {
+    "token_name": "BTCB Token",
+    "symbol": "BTCB",
+    "score": 95,
+    "risk": "SAFE",
+    "categories": {
+      "contract": {
+        "score": 90,
+        "level": "safe"
+      },
+      "concentration": {
+        "score": 100,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 98,
+        "level": "safe"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 Official Binance Ecosystem Token",
+      "\ud83d\udfe2 Zero trading taxes",
+      "\ud83d\udfe2 High liquidity and institutional adoption",
+      "\ud83d\udfe1 Mint function present (standard for pegged assets)"
+    ],
+    "summary": "This is the official Binance-pegged Bitcoin (BTCB) token, a core piece of BNB Chain infrastructure maintained by Binance. While the contract technically allows for minting to maintain the 1:1 peg with",
+    "input_name": "BTCB",
+    "address": "0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c",
+    "expected": "70+",
+    "category": "blue_chip"
+  },
+  {
+    "token_name": "XRP Token",
+    "symbol": "XRP",
+    "score": 5,
+    "risk": "CRITICAL",
+    "categories": {
+      "contract": {
+        "score": 20,
+        "level": "critical"
+      },
+      "concentration": {
+        "score": 100,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 30,
+        "level": "danger"
+      },
+      "trading": {
+        "score": 0,
+        "level": "critical"
+      }
+    },
+    "flags": [
+      "\ud83d\udd34 Honeypot detected: CANNOT SELL",
+      "\ud83d\udd34 Hidden owner functionality identified",
+      "\ud83d\udd34 LP NOT LOCKED - Owner can rug pull liquidity",
+      "\ud83d\udd34 Owner has minting privileges",
+      "\ud83d\udfe2 Contract source code is verified on BSCScan"
+    ],
+    "summary": "This token is a confirmed honeypot; while you can buy the token, the contract prevents selling, effectively trapping all invested capital. Despite appearing to have significant liquidity of $720,231, ",
+    "input_name": "XRP_BSC",
+    "address": "0x1D2F0da169ceB9fC7B3144628dB156f3F6c60dBE",
+    "expected": "70+",
+    "category": "blue_chip"
+  },
+  {
+    "token_name": "Polkadot Token",
+    "symbol": "DOT",
+    "score": 92,
+    "risk": "SAFE",
+    "categories": {
+      "contract": {
+        "score": 50,
+        "level": "caution"
+      },
+      "concentration": {
+        "score": 100,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 60,
+        "level": "caution"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 Blue-chip infrastructure asset (Binance-Peg)",
+      "\ud83d\udfe2 Zero trading taxes",
+      "\ud83d\udd34 Owner can mint new tokens (Binance Bridge Admin)",
+      "\u26a0\ufe0f LP tokens are not burned or locked in a verifiable contract"
+    ],
+    "summary": "This is the official Binance-Peg Polkadot (DOT) token on BNB Smart Chain, acting as a bridge for the native Polkadot asset. While the owner 0xF68...f62d has minting capabilities to manage bridge suppl",
+    "input_name": "DOT_BSC",
+    "address": "0x7083609fCE4d1d8Dc0C979AAb8c869Ea2C873402",
+    "expected": "70+",
+    "category": "blue_chip"
+  },
+  {
+    "token_name": "ChainLink Token",
+    "symbol": "LINK",
+    "score": 5,
+    "risk": "CRITICAL",
+    "categories": {
+      "contract": {
+        "score": 10,
+        "level": "critical"
+      },
+      "concentration": {
+        "score": 90,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 40,
+        "level": "danger"
+      },
+      "trading": {
+        "score": 0,
+        "level": "critical"
+      }
+    },
+    "flags": [
+      "\ud83d\udd34 Honeypot detected: users cannot sell",
+      "\ud83d\udd34 Impersonating ChainLink (LINK) brand",
+      "\ud83d\udd34 Mint function enabled for owner address",
+      "\ud83d\udd34 Liquidity is not locked or burned",
+      "\ud83d\udfe2 Contract is verified on BscScan"
+    ],
+    "summary": "This token is a confirmed honeypot pretending to be the official ChainLink (LINK) token on BNB Smart Chain. While it shows $428,313 in liquidity, the contract contains malicious code that prevents use",
+    "input_name": "LINK_BSC",
+    "address": "0xF8A0BF9cF54Bb92F17374d9e9A321E6a111a51bD",
+    "expected": "70+",
+    "category": "blue_chip"
+  },
+  {
+    "token_name": "Venus",
+    "symbol": "XVS",
+    "score": 88,
+    "risk": "SAFE",
+    "categories": {
+      "contract": {
+        "score": 75,
+        "level": "caution"
+      },
+      "concentration": {
+        "score": 95,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 85,
+        "level": "safe"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 Blue-chip governance token for Venus Protocol",
+      "\ud83d\udfe2 Zero trading taxes (0/0)",
+      "\ud83d\udfe2 Verified source code and fixed total supply",
+      "\ud83d\udd34 Owner can freeze all token transfers via the 'freeze' function",
+      "\u26a0\ufe0f LP tokens are not explicitly locked in a known locker contract"
+    ],
+    "summary": "Venus (XVS) is the governance token for a major decentralized lending protocol on BSC. While the contract includes a manual freeze function controlled by the owner, it is a well-established blue-chip ",
+    "input_name": "XVS",
+    "address": "0xcF6BB5389c92Bdda8a3747Ddb454cB7a64626C63",
+    "expected": "60-85",
+    "category": "defi"
+  },
+  {
+    "token_name": "AlpacaToken",
+    "symbol": "ALPACA",
+    "score": 82,
+    "risk": "SAFE",
+    "categories": {
+      "contract": {
+        "score": 75,
+        "level": "caution"
+      },
+      "concentration": {
+        "score": 95,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 60,
+        "level": "caution"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 Blue-chip DeFi infrastructure project (Alpaca Finance)",
+      "\ud83d\udfe2 0% transaction taxes",
+      "\ud83d\udfe2 Massive holder distribution (Top 10 hold 0.0%)",
+      "\ud83d\udd34 Proxy contract allows logic upgrades by the owner",
+      "\ud83d\udd34 LP Lock status cannot be verified via on-chain lockers"
+    ],
+    "summary": "Alpaca Finance is a major blue-chip DeFi protocol on BNB Chain; the token shows 0% taxes and extremely wide distribution. While the contract uses a proxy pattern for upgrades, it is a well-established",
+    "input_name": "ALPACA",
+    "address": "0x8F0528cE5eF7B51152A59745bEfDD91D97091d2F",
+    "expected": "60-85",
+    "category": "defi"
+  },
+  {
+    "token_name": "BakeryToken",
+    "symbol": "BAKE",
+    "score": 38,
+    "risk": "DANGER",
+    "categories": {
+      "contract": {
+        "score": 45,
+        "level": "danger"
+      },
+      "concentration": {
+        "score": 90,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 15,
+        "level": "critical"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udd34 Extremely low liquidity ($1,553) will cause massive price impact",
+      "\ud83d\udd34 Owner has minting permissions",
+      "\ud83d\udd34 99.9% of LP is effectively unlocked",
+      "\ud83d\udfe2 0% Buy/Sell taxes",
+      "\ud83d\udfe2 Contract source code is verified"
+    ],
+    "summary": "While BakeryToken (BAKE) is a recognized name in the BSC ecosystem, this specific contract instance shows extremely low liquidity ($1,553) and retains minting capabilities. The discrepancy between the",
+    "input_name": "BAKE",
+    "address": "0xE02dF9e3e622DeBdD69fb838bB799E3F168902c5",
+    "expected": "60-85",
+    "category": "defi"
+  },
+  {
+    "token_name": "Trust Wallet",
+    "symbol": "TWT",
+    "score": 5,
+    "risk": "CRITICAL",
+    "categories": {
+      "contract": {
+        "score": 10,
+        "level": "critical"
+      },
+      "concentration": {
+        "score": 85,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 30,
+        "level": "danger"
+      },
+      "trading": {
+        "score": 0,
+        "level": "critical"
+      }
+    },
+    "flags": [
+      "\ud83d\udd34 Honeypot detected: Users cannot sell their holdings",
+      "\ud83d\udd34 Impersonation of official Trust Wallet Token (TWT)",
+      "\ud83d\udd34 No liquidity lock found, owner can remove 'bait' liquidity at any time",
+      "\ud83d\udfe2 0% Buy Tax (used for baiting)",
+      "\ud83d\udfe2 Contract source code is verified on BSCScan"
+    ],
+    "summary": "This token is a confirmed honeypot; while you can buy the token with 0% tax, the contract's sell function is blocked for regular users. Despite using the name 'Trust Wallet (TWT)', the provided addres",
+    "input_name": "TWT",
+    "address": "0x4B0F1812e5Df2A09796481Ff14017e6005508003",
+    "expected": "60-85",
+    "category": "defi"
+  },
+  {
+    "token_name": "BabySwap Token",
+    "symbol": "BABY",
+    "score": 88,
+    "risk": "SAFE",
+    "categories": {
+      "contract": {
+        "score": 85,
+        "level": "safe"
+      },
+      "concentration": {
+        "score": 95,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 90,
+        "level": "safe"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 0% Buy/Sell Tax",
+      "\ud83d\udfe2 100% LP Burned/Locked",
+      "\ud83d\udfe2 Decentralized holder base",
+      "\ud83d\udfe1 Owner 0x5dA2...D6e4 still active",
+      "\ud83d\udfe2 Verified contract source code"
+    ],
+    "summary": "BabySwap (BABY) is the native utility token of a well-established DEX on BSC with high liquidity and zero trading taxes. While the contract includes standard Ownable functionality, the liquidity is ef",
+    "input_name": "BABY",
+    "address": "0x53E562b9B7E5E94b81f10e96Ee70Ad06df3D2657",
+    "expected": "60-85",
+    "category": "defi"
+  },
+  {
+    "token_name": "Dogecoin",
+    "symbol": "DOGE",
+    "score": 5,
+    "risk": "CRITICAL",
+    "categories": {
+      "contract": {
+        "score": 10,
+        "level": "critical"
+      },
+      "concentration": {
+        "score": 100,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 45,
+        "level": "danger"
+      },
+      "trading": {
+        "score": 0,
+        "level": "critical"
+      }
+    },
+    "flags": [
+      "\ud83d\udd34 HONEYPOT DETECTED: Cannot sell tokens",
+      "\ud83d\udd34 Proxy contract: Logic can be swapped or modified",
+      "\ud83d\udd34 No verified LP lock found for $932k liquidity",
+      "\ud83d\udfe2 Buy tax is 0%",
+      "\ud83d\udfe2 Contract is verified on BscScan"
+    ],
+    "summary": "This token is a confirmed honeypot; while users can buy with 0% tax, the contract specifically prevents selling. Although it uses the Dogecoin name, the contract is a deceptive proxy that allows the l",
+    "input_name": "DOGE_BSC",
+    "address": "0xbA2aE424d960c26247Dd6c32edC70B295c744C43",
+    "expected": "30-70",
+    "category": "meme"
+  },
+  {
+    "token_name": "SHIBA INU",
+    "symbol": "SHIB",
+    "score": 52,
+    "risk": "CAUTION",
+    "categories": {
+      "contract": {
+        "score": 40,
+        "level": "danger"
+      },
+      "concentration": {
+        "score": 95,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 55,
+        "level": "caution"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 0% Buy/Sell Tax",
+      "\ud83d\udfe2 Excellent token distribution (Top 10 < 1%)",
+      "\ud83d\udd34 Upgradeable Proxy Contract (Logic can be altered)",
+      "\u26a0\ufe0f LP Lock status is unknown/unverified"
+    ],
+    "summary": "This is the Binance-Pegged version of Shiba Inu (SHIB) on BSC, which operates as an upgradeable proxy contract. While the token has 0% taxes and extremely low holder concentration, the upgradeable nat",
+    "input_name": "SHIB_BSC",
+    "address": "0x2859e4544C4bB03966803b044A93563Bd2D0DD4D",
+    "expected": "30-70",
+    "category": "meme"
+  },
+  {
+    "token_name": "FLOKI",
+    "symbol": "FLOKI",
+    "score": 38,
+    "risk": "DANGER",
+    "categories": {
+      "contract": {
+        "score": 65,
+        "level": "caution"
+      },
+      "concentration": {
+        "score": 95,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 88,
+        "level": "safe"
+      },
+      "trading": {
+        "score": 15,
+        "level": "critical"
+      }
+    },
+    "flags": [
+      "\ud83d\udd34 Extremely high tax (59% round-trip) significantly reduces investment value",
+      "\ud83d\udfe2 Massive $9.45M liquidity provides high stability and low slippage",
+      "\ud83d\udfe2 Contract ownership renounced to Dead address",
+      "\ud83d\udfe2 Liquidity is verified as 84.5% locked via Mudra",
+      "\u26a0\ufe0f Modular tax handler structure detected in source code"
+    ],
+    "summary": "This token is a legitimate implementation of the FLOKI ecosystem on BNB Chain, evidenced by massive liquidity ($9.45M) and a dead owner address. However, it operates with extremely high taxes of nearl",
+    "input_name": "FLOKI",
+    "address": "0xfb5B838b6cfEEdC2873aB27866079AC55363D37E",
+    "expected": "30-70",
+    "category": "meme"
+  },
+  {
+    "token_name": "Baby Doge Coin",
+    "symbol": "BabyDoge",
+    "score": 68,
+    "risk": "CAUTION",
+    "categories": {
+      "contract": {
+        "score": 45,
+        "level": "danger"
+      },
+      "concentration": {
+        "score": 95,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 72,
+        "level": "safe"
+      },
+      "trading": {
+        "score": 90,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 Ownership renounced to 0x000...000 address",
+      "\ud83d\udfe2 High liquidity ($8M+) provides low slippage for most trades",
+      "\ud83d\udd34 Hidden owner pattern suggests potential for administrative backdoors",
+      "\ud83d\udd34 Logic contains minting capabilities which could devalue current holdings",
+      "\u26a0\ufe0f LP is only 45.9% burned/locked; the remainder is under unknown control"
+    ],
+    "summary": "Baby Doge Coin is a high-liquidity meme token with a renounced ownership (0x000...000), significantly reducing the risk of administrative rug pulls. However, the contract contains complex logic includ",
+    "input_name": "BABYDOGE",
+    "address": "0xc748673057861a797275CD8A068AbB95A902e8de",
+    "expected": "30-70",
+    "category": "meme"
+  },
+  {
+    "token_name": "SafeMoon",
+    "symbol": "SFM",
+    "score": 38,
+    "risk": "DANGER",
+    "categories": {
+      "contract": {
+        "score": 35,
+        "level": "danger"
+      },
+      "concentration": {
+        "score": 90,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 30,
+        "level": "critical"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udd34 Upgradeable Proxy: Logic can be swapped by the admin",
+      "\ud83d\udd34 Low Liquidity: Under $10k total depth creates massive slippage risk",
+      "\ud83d\udd34 Unlocked LP: Liquidity can be removed by the provider at any time",
+      "\ud83d\udfe2 Renounced Proxy Owner: Owner is 0x000"
+    ],
+    "summary": "This token is a Proxy contract, meaning the developers can change the logic at any time, potentially introducing malicious features without warning. Furthermore, the liquidity is extremely low at appr",
+    "input_name": "SAFEMOON_V2",
+    "address": "0x42981d0bfbAf196529376EE702F2a9Eb9092fcB5",
+    "expected": "30-70",
+    "category": "meme"
+  },
+  {
+    "error": "no_data_lines",
+    "raw": "{\"error\":\"Invalid token address\"}",
+    "input_name": "SquidGame",
+    "address": "0x87230146E138d3D296a9a77e497A2A83012e9Bc5",
+    "expected": "<30",
+    "category": "scam"
+  },
+  {
+    "token_name": "SafeMoon",
+    "symbol": "SAFEMOON",
+    "score": 12,
+    "risk": "CRITICAL",
+    "categories": {
+      "contract": {
+        "score": 35,
+        "level": "critical"
+      },
+      "concentration": {
+        "score": 90,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 15,
+        "level": "critical"
+      },
+      "trading": {
+        "score": 0,
+        "level": "critical"
+      }
+    },
+    "flags": [
+      "\ud83d\udd34 Buy tax of 9999% is a guaranteed loss of principal",
+      "\ud83d\udd34 Total liquidity is under $10,000 USD",
+      "\ud83d\udd34 Hidden owner and blacklist functions detected in source code",
+      "\ud83d\udd34 LP tokens are not verified as locked or burned",
+      "\ud83d\udfe2 Contract source code is verified on BscScan"
+    ],
+    "summary": "This token exhibits severe red flags including an extreme buy tax of 9999% and incredibly low liquidity of only $1,361 across all pools. The contract contains dangerous functions such as a hidden owne",
+    "input_name": "SafeMoon_OLD",
+    "address": "0x8076C74C5e3F5852037F31Ff0093Eeb8c8ADd8D3",
+    "expected": "<30",
+    "category": "scam"
+  },
+  {
+    "error": "no_data_lines",
+    "raw": "{\"error\":\"Invalid token address\"}",
+    "input_name": "SaveTheKids",
+    "address": "0x4Ee80cC6d7DF55B1b4bDa19e845a6e1a8fAf65ea",
+    "expected": "<30",
+    "category": "scam"
+  },
+  {
+    "error": "no_data_lines",
+    "raw": "{\"error\":\"Invalid token address\"}",
+    "input_name": "MeerkatFinance",
+    "address": "0xcF50e57E86bD4bDe43E2b70a2fCA84f4013B66cf",
+    "expected": "<30",
+    "category": "scam"
+  },
+  {
+    "error": "no_data_lines",
+    "raw": "{\"error\":\"Invalid token address\"}",
+    "input_name": "TurtleDEX",
+    "address": "0xf15Bbd5fEabb9A72782576E98e54A0EE6F1FC4F8",
+    "expected": "<30",
+    "category": "scam"
+  },
+  {
+    "error": "no_data_lines",
+    "raw": "{\"error\":\"Invalid token address\"}",
+    "input_name": "CompounderFin",
+    "address": "0xEf68e7C694F40c8202821eDF525dE3782458639f",
+    "expected": "<30",
+    "category": "scam"
+  },
+  {
+    "error": "no_data_lines",
+    "raw": "{\"error\":\"Invalid token address\"}",
+    "input_name": "StableMagnet",
+    "address": "0x2bA6204c23fBd5698ED90ABC911de263E5f41266",
+    "expected": "<30",
+    "category": "scam"
+  },
+  {
+    "token_name": "CircleCoin",
+    "symbol": "CIRCLE",
+    "score": 8,
+    "risk": "CRITICAL",
+    "categories": {
+      "contract": {
+        "score": 30,
+        "level": "critical"
+      },
+      "concentration": {
+        "score": 100,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 0,
+        "level": "critical"
+      },
+      "trading": {
+        "score": 0,
+        "level": "critical"
+      }
+    },
+    "flags": [
+      "\ud83d\udd34 Contract NOT VERIFIED on BSCScan",
+      "\ud83d\udd34 Zero liquidity found ($0 USD)",
+      "\ud83d\udd34 No LP lock or burn detected",
+      "\ud83d\udd34 Honeypot status unknown due to lack of market"
+    ],
+    "summary": "CircleCoin is a high-risk asset due to an unverified contract and a complete lack of liquidity on PancakeSwap. Without a verified source code, the functions of the contract are hidden, and the zero-do",
+    "input_name": "Honeypot_Ex",
+    "address": "0x11111111a9345bc43eb4C3738EA25f4b401EcE5C",
+    "expected": "<30",
+    "category": "scam"
+  },
+  {
+    "token_name": "Axelar Wrapped USDC",
+    "symbol": "axlUSDC",
+    "score": 5,
+    "risk": "CRITICAL",
+    "categories": {
+      "contract": {
+        "score": 10,
+        "level": "critical"
+      },
+      "concentration": {
+        "score": 100,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 5,
+        "level": "critical"
+      },
+      "trading": {
+        "score": 0,
+        "level": "critical"
+      }
+    },
+    "flags": [
+      "\ud83d\udd34 HONEYPOT DETECTED: Users cannot sell tokens",
+      "\ud83d\udd34 CRITICALLY LOW LIQUIDITY: Only $29 USD in total pools",
+      "\ud83d\udd34 DANGEROUS FUNCTIONS: Selfdestruct and Blacklist enabled",
+      "\ud83d\udd34 IMPERSONATION: Fake version of Axelar Wrapped USDC (axlUSDC)",
+      "\ud83d\udfe2 CONTRACT VERIFIED: Source code is public for auditing"
+    ],
+    "summary": "This token is a confirmed honeypot that prevents users from selling, despite claiming to be a wrapped version of USDC. The total liquidity is extremely low at approximately $29 USD, indicating this is",
+    "input_name": "axlUSDC",
+    "address": "0x4268B8F0B87b6Eae5d897996E6b845ddbD99Adf3",
+    "expected": "50-80",
+    "category": "bridge"
+  },
+  {
+    "token_name": "USDC",
+    "symbol": "anyUSDC",
+    "score": 35,
+    "risk": "DANGER",
+    "categories": {
+      "contract": {
+        "score": 45,
+        "level": "danger"
+      },
+      "concentration": {
+        "score": 90,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 5,
+        "level": "critical"
+      },
+      "trading": {
+        "score": 10,
+        "level": "critical"
+      }
+    },
+    "flags": [
+      "\ud83d\udd34 Defunct protocol: Associated with the exploited and abandoned Multichain (Anyswap) bridge.",
+      "\ud83d\udd34 Zero Liquidity: Token has $0 USD in tradeable liquidity.",
+      "\ud83d\udd34 Minting Risk: The 'Vault' address can mint an unlimited amount of tokens.",
+      "\ud83d\udfe2 Verified Source: Contract code is verified and open for review on BscScan."
+    ],
+    "summary": "This token is anyUSDC, a legacy asset from the deprecated Multichain (formerly Anyswap) bridge protocol which suffered a massive exploit and collapse in mid-2023. While the contract itself is verified",
+    "input_name": "anyUSDC",
+    "address": "0x8965349fb649A33a30cbFDa057D8eC2C48AbE2A2",
+    "expected": "30-60",
+    "category": "bridge"
+  },
+  {
+    "token_name": "Binance Beacon ETH",
+    "symbol": "BETH",
+    "score": 92,
+    "risk": "SAFE",
+    "categories": {
+      "contract": {
+        "score": 85,
+        "level": "safe"
+      },
+      "concentration": {
+        "score": 95,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 98,
+        "level": "safe"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 Blue-chip Binance ecosystem asset",
+      "\ud83d\udfe2 0% Transaction taxes",
+      "\ud83d\udd34 Proxy contract allows logic updates (Centralization risk)",
+      "\ud83d\udfe2 Massive circulating supply and distribution"
+    ],
+    "summary": "This is the official Binance Beacon ETH (BETH) token, a core bridge asset representing staked Ethereum on the BNB Smart Chain. While the contract uses a proxy pattern which allows for logic upgrades, ",
+    "input_name": "BETH",
+    "address": "0x250632378E573c6Be1AC2f97Fcdf00515d0Aa91B",
+    "expected": "60-80",
+    "category": "bridge"
+  },
+  {
+    "token_name": "Radio Caca V2",
+    "symbol": "RACA",
+    "score": 68,
+    "risk": "CAUTION",
+    "categories": {
+      "contract": {
+        "score": 75,
+        "level": "safe"
+      },
+      "concentration": {
+        "score": 95,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 55,
+        "level": "caution"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 0% Buy and Sell tax (Investor friendly)",
+      "\ud83d\udfe2 Verified source code with standard security libraries",
+      "\ud83d\udfe2 High token distribution/Low holder concentration",
+      "\ud83d\udfe1 Ownership not renounced (Admin address 0x33...61D0 still active)",
+      "\ud83d\udd34 No verifiable LP lock found in known lockers (Risk of liquidity removal)"
+    ],
+    "summary": "Radio Caca V2 (RACA) is a well-established project with a verified contract and 0% trading taxes, making it highly liquid for traders. However, the lack of verifiable LP locking and the existence of a",
+    "input_name": "RACA",
+    "address": "0x12BB890508c125661E03b09EC06E404bc9289040",
+    "expected": "40-70",
+    "category": "midcap"
+  },
+  {
+    "error": "no_data_lines",
+    "raw": "{\"error\":\"Invalid token address\"}",
+    "input_name": "HIGH",
+    "address": "0x10Fec93d01e5DFb5162cd9dBCEaEB5E7402A5879",
+    "expected": "40-70",
+    "category": "midcap"
+  },
+  {
+    "error": "no_data_lines",
+    "raw": "{\"error\":\"Invalid token address\"}",
+    "input_name": "SANTOS",
+    "address": "0xA64455a4553C9034236734FadDAddbb64aCE4F7B",
+    "expected": "40-70",
+    "category": "midcap"
+  },
+  {
+    "error": "no_data_lines",
+    "raw": "{\"error\":\"Invalid token address\"}",
+    "input_name": "LAZIO",
+    "address": "0x77d547256A2cD95F32F3bE6AAC1A35c2bF3A6Fd8",
+    "expected": "40-70",
+    "category": "midcap"
+  },
+  {
+    "token_name": "Bunny Token",
+    "symbol": "BUNNY",
+    "score": 42,
+    "risk": "DANGER",
+    "categories": {
+      "contract": {
+        "score": 45,
+        "level": "danger"
+      },
+      "concentration": {
+        "score": 95,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 55,
+        "level": "caution"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udd34 Owner has minting permissions",
+      "\ud83d\udd34 No verifiable LP lock or burn detected",
+      "\ud83d\udfe2 0% Buy and Sell fees",
+      "\ud83d\udfe2 High liquidity amount (> $80k USD)",
+      "\ud83d\udfe2 Verified contract source code"
+    ],
+    "summary": "Bunny Token (BUNNY) is the native utility token of PancakeBunny, a well-known yield aggregator; however, the contract contains minting capabilities and lacks verifiable LP locking. While the 0% tax an",
+    "input_name": "BUNNY",
+    "address": "0xc9849e6fdb743d08faee3e34dd2d1bc69ea11a51",
+    "expected": "<40",
+    "category": "dead"
+  },
+  {
+    "token_name": "Impossible Decentralized Incubator Access Token",
+    "symbol": "IDIA",
+    "score": 65,
+    "risk": "CAUTION",
+    "categories": {
+      "contract": {
+        "score": 45,
+        "level": "danger"
+      },
+      "concentration": {
+        "score": 95,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 55,
+        "level": "caution"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 0% Buy/Sell Tax",
+      "\ud83d\udfe2 Verified Source Code",
+      "\ud83d\udd34 Bridge/Minter Role: Authorized addresses can mint tokens",
+      "\u26a0\ufe0f Liquidity not verified as locked",
+      "\u26a0\ufe0f Complex governance/vault structure inherited from Anyswap"
+    ],
+    "summary": "IDIA is a cross-chain bridged token using the Anyswap/Multichain architecture, which allows for minting by authorized bridge addresses. While the contract is verified and taxes are 0%, the reliance on",
+    "input_name": "IDIA",
+    "address": "0x0b15Ddf19D47E6a86A56148fb4aFFFc6929BcB89",
+    "expected": "40-60",
+    "category": "dead"
+  },
+  {
+    "token_name": "Ellipsis",
+    "symbol": "EPS",
+    "score": 62,
+    "risk": "CAUTION",
+    "categories": {
+      "contract": {
+        "score": 50,
+        "level": "caution"
+      },
+      "concentration": {
+        "score": 95,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 55,
+        "level": "caution"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 0% Buy and Sell Tax",
+      "\ud83d\udfe2 Verified Vyper Source Code",
+      "\ud83d\udd34 Minter can create infinite new tokens via mint() function",
+      "\u26a0\ufe0f Liquidity is not verifiably locked or burned",
+      "\u26a0\ufe0f Total supply is an extremely large non-standard integer"
+    ],
+    "summary": "Ellipsis (EPS) is a well-known legacy protocol on BSC, but the contract allows the minter to create an infinite supply of tokens. While the current tax is 0%, the lack of verifiable LP locking and the",
+    "input_name": "EPS",
+    "address": "0xa7f552078dcc247c2684336020c03648500c6d9f",
+    "expected": "30-50",
+    "category": "dead"
+  },
+  {
+    "token_name": "BELT Token",
+    "symbol": "BELT",
+    "score": 58,
+    "risk": "CAUTION",
+    "categories": {
+      "contract": {
+        "score": 50,
+        "level": "caution"
+      },
+      "concentration": {
+        "score": 95,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 55,
+        "level": "caution"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 Zero trading taxes",
+      "\ud83d\udfe2 Extremely low holder concentration",
+      "\ud83d\udfe1 Owner has minting capability",
+      "\ud83d\udd34 Liquidity is not locked or burned",
+      "\ud83d\udfe1 Uses outdated Solidity version 0.6.12"
+    ],
+    "summary": "BELT is an established project with zero taxes and highly decentralized ownership, but the contract allows the owner to mint new tokens. Furthermore, the main liquidity pool of $286,363 is not officia",
+    "input_name": "BELT",
+    "address": "0xe0e514c71282b6f4e823703a39374cf58dc3ea4f",
+    "expected": "30-50",
+    "category": "dead"
+  },
+  {
+    "token_name": "SafePal Token",
+    "symbol": "SFP",
+    "score": 92,
+    "risk": "SAFE",
+    "categories": {
+      "contract": {
+        "score": 95,
+        "level": "safe"
+      },
+      "concentration": {
+        "score": 90,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 85,
+        "level": "safe"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 0% Buy/Sell Tax",
+      "\ud83d\udfe2 Verified Source Code",
+      "\ud83d\udfe2 Blue-chip utility token status",
+      "\ud83d\udfe1 LP Lock status not explicitly verified as 100% burned",
+      "\ud83d\udfe2 Not a honeypot"
+    ],
+    "summary": "SafePal (SFP) is a well-established utility token for a major hardware wallet ecosystem with verified source code and standard ERC20 implementation. The token features 0% taxes and is widely distribut",
+    "input_name": "SFP",
+    "address": "0xD41FDb03Ba84762dD66a0af1a6C8540FF1ba5dfb",
+    "expected": "50-75",
+    "category": "midcap"
+  },
+  {
+    "token_name": "Coin98",
+    "symbol": "C98",
+    "score": 62,
+    "risk": "CAUTION",
+    "categories": {
+      "contract": {
+        "score": 45,
+        "level": "danger"
+      },
+      "concentration": {
+        "score": 95,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 55,
+        "level": "caution"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 0% Buy/Sell Tax",
+      "\ud83d\udfe2 Verified Contract Source",
+      "\ud83d\udd34 Owner can mint new tokens",
+      "\ud83d\udd34 Owner can pause all transfers",
+      "\u26a0\ufe0f Liquidity lock status is unknown"
+    ],
+    "summary": "Coin98 (C98) is a well-established cross-chain liquidity protocol, but the BSC contract contains several centralized administrative functions. While the taxes are 0%, the presence of minting and pausi",
+    "input_name": "C98",
+    "address": "0xaEC945e04baF28b135Fa7c640f624f8D90F1C3a6",
+    "expected": "50-75",
+    "category": "midcap"
+  },
+  {
+    "token_name": "Mobox",
+    "symbol": "MBOX",
+    "score": 68,
+    "risk": "CAUTION",
+    "categories": {
+      "contract": {
+        "score": 55,
+        "level": "caution"
+      },
+      "concentration": {
+        "score": 95,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 60,
+        "level": "caution"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 0% Buy/Sell Tax",
+      "\ud83d\udfe2 Liquidity exceeds $1.3 Million",
+      "\ud83d\udd34 Hidden owner pattern detected in source code",
+      "\u26a0\ufe0f LP Lock status is unknown/unverified on-chain",
+      "\ud83d\udfe2 Extremely low holder concentration"
+    ],
+    "summary": "Mobox (MBOX) is a well-established GameFi project on BSC with a verified contract and significant liquidity exceeding $1.3M. While the token shows 0% taxes and healthy holder distribution, the presenc",
+    "input_name": "MBOX",
+    "address": "0x3203c9E46cA618C8C1cE5dC67e7e9D75f5da2377",
+    "expected": "40-65",
+    "category": "midcap"
+  },
+  {
+    "token_name": "WINk",
+    "symbol": "WIN",
+    "score": 38,
+    "risk": "DANGER",
+    "categories": {
+      "contract": {
+        "score": 35,
+        "level": "critical"
+      },
+      "concentration": {
+        "score": 95,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 45,
+        "level": "danger"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udd34 Proxy contract detected: Logic can be modified without user consent",
+      "\ud83d\udd34 No LP lock/burn found: Liquidity can be removed by the LP holder at any time",
+      "\ud83d\udfe2 0% taxes: No fees taken on buys or sells",
+      "\ud83d\udfe2 Excellent distribution: No whales detected in top 10 holders"
+    ],
+    "summary": "WINk (WIN) is a proxy-based token, meaning the contract logic can be changed by a hidden controller at any time. While it has zero trading taxes, the liquidity is not officially locked or burned, posi",
+    "input_name": "WIN",
+    "address": "0xaeF0d72a118ce24feE3cD1d43d383897D05B4e99",
+    "expected": "30-60",
+    "category": "midcap"
+  },
+  {
+    "token_name": "TRON",
+    "symbol": "TRX",
+    "score": 5,
+    "risk": "CRITICAL",
+    "categories": {
+      "contract": {
+        "score": 10,
+        "level": "critical"
+      },
+      "concentration": {
+        "score": 95,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 30,
+        "level": "danger"
+      },
+      "trading": {
+        "score": 0,
+        "level": "critical"
+      }
+    },
+    "flags": [
+      "\ud83d\udd34 HONEYPOT: Users cannot sell tokens once purchased",
+      "\ud83d\udd34 Malicious Proxy: Logic can be updated at any time by the owner",
+      "\ud83d\udd34 Fake Token: This is not the official TRON (TRX) BEP20 peg-token",
+      "\ud83d\udd34 LP Unlocked: All liquidity can be removed by the creator at any moment"
+    ],
+    "summary": "This token is a confirmed honeypot and a malicious impersonation of the real TRON (TRX) token on BNB Smart Chain. While it shows $261,061 in liquidity, the contract is a proxy that prevents users from",
+    "input_name": "TRX_BSC",
+    "address": "0xCE7de646e7208a4Ef112cb6ed5038FA6cC6b12e3",
+    "expected": "50-75",
+    "category": "bridge"
+  },
+  {
+    "token_name": "Cardano Token",
+    "symbol": "ADA",
+    "score": 88,
+    "risk": "SAFE",
+    "categories": {
+      "contract": {
+        "score": 50,
+        "level": "caution"
+      },
+      "concentration": {
+        "score": 95,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 60,
+        "level": "caution"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 Blue-chip infrastructure: Binance-Pegged Token",
+      "\ud83d\udfe2 Zero trading taxes",
+      "\ud83d\udd34 Owner can mint new tokens (required for bridge balance)",
+      "\u26a0\ufe0f LP not locked in traditional 3rd party lockers"
+    ],
+    "summary": "This is the official Binance-Peg Cardano (ADA) token on BNB Smart Chain, acting as a bridge for the native ADA asset. Despite technical flags like minting and a controller address, these are standard ",
+    "input_name": "ADA_BSC",
+    "address": "0x3EE2200Efb3400fAbB9AacF31297cBdD1d435D47",
+    "expected": "60-80",
+    "category": "bridge"
+  },
+  {
+    "token_name": "Matic Token",
+    "symbol": "MATIC",
+    "score": 38,
+    "risk": "DANGER",
+    "categories": {
+      "contract": {
+        "score": 40,
+        "level": "danger"
+      },
+      "concentration": {
+        "score": 95,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 35,
+        "level": "critical"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udd34 Upgradeable Proxy contract allows logic changes",
+      "\ud83d\udd34 Critically low liquidity ($2,815 USD)",
+      "\ud83d\udd34 LP tokens are not locked or burned",
+      "\ud83d\udfe2 0% Buy and Sell taxes",
+      "\ud83d\udfe2 No large recent holder transfers detected"
+    ],
+    "summary": "This token is a proxy contract mimicking the MATIC name on BSC with extremely low liquidity of only $2,815. While it currently has 0% taxes, the upgradeable nature of the contract allows the controlle",
+    "input_name": "MATIC_BSC",
+    "address": "0xCC42724C6683B7E57334c4E856f4c9965ED682bD",
+    "expected": "60-80",
+    "category": "bridge"
+  },
+  {
+    "token_name": "Avalanche",
+    "symbol": "AVAX",
+    "score": 92,
+    "risk": "SAFE",
+    "categories": {
+      "contract": {
+        "score": 90,
+        "level": "safe"
+      },
+      "concentration": {
+        "score": 100,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 95,
+        "level": "safe"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 Blue-chip infrastructure asset (Binance-Pegged)",
+      "\ud83d\udfe2 0% Buy/Sell taxes",
+      "\ud83d\udfe2 Extremely high trust score based on issuer (Binance)",
+      "\u26a0\ufe0f Upgradeable Proxy contract allows logic changes by controller"
+    ],
+    "summary": "This is the official Binance-Peg Avalanche (AVAX) token on BNB Smart Chain. It is a blue-chip infrastructure asset managed by Binance to facilitate cross-chain transfers between the Avalanche and BNB ",
+    "input_name": "AVAX_BSC",
+    "address": "0x1CE0c2827e2eF14D5C4f29a091d735A204794041",
+    "expected": "60-80",
+    "category": "bridge"
+  },
+  {
+    "token_name": "Filecoin",
+    "symbol": "FIL",
+    "score": 5,
+    "risk": "CRITICAL",
+    "categories": {
+      "contract": {
+        "score": 10,
+        "level": "critical"
+      },
+      "concentration": {
+        "score": 100,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 45,
+        "level": "danger"
+      },
+      "trading": {
+        "score": 0,
+        "level": "critical"
+      }
+    },
+    "flags": [
+      "\ud83d\udd34 HONEYPOT: Users are unable to sell tokens",
+      "\ud83d\udd34 Upgradeable proxy architecture allows for silent logic manipulation",
+      "\ud83d\udd34 No verifiable Liquidity Pool (LP) lock or burn",
+      "\ud83d\udd34 Massive total supply of 15,009,999,999,926,705,453,635,132 units"
+    ],
+    "summary": "This token is a confirmed honeypot; while users can buy, the contract prevents selling, effectively locking all invested funds. Furthermore, the contract uses a proxy architecture which allows the unk",
+    "input_name": "FIL_BSC",
+    "address": "0x0D8Ce2A99Bb6e3B7Db580eD848240e4a0F9aE153",
+    "expected": "50-75",
+    "category": "bridge"
+  },
+  {
+    "token_name": "Cosmos Token",
+    "symbol": "ATOM",
+    "score": 38,
+    "risk": "DANGER",
+    "categories": {
+      "contract": {
+        "score": 45,
+        "level": "danger"
+      },
+      "concentration": {
+        "score": 85,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 35,
+        "level": "critical"
+      },
+      "trading": {
+        "score": 90,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udd34 Owner can mint new tokens at will",
+      "\ud83d\udd34 Total liquidity is critically low ($7,302)",
+      "\ud83d\udd34 No evidence of Liquidity Pool locking",
+      "\ud83d\udd34 Hidden owner pattern detected in contract source",
+      "\ud83d\udfe2 0% Buy and Sell fees detected"
+    ],
+    "summary": "This Cosmos (ATOM) peg-token on BSC exhibits major red flags including a minting capability and a hidden owner pattern. While taxes are currently 0%, the total liquidity is critically low at approxima",
+    "input_name": "ATOM_BSC",
+    "address": "0x0Eb3a705fc54725037CC9e008bDede697f62F335",
+    "expected": "60-80",
+    "category": "bridge"
+  },
+  {
+    "token_name": "Litecoin Token",
+    "symbol": "LTC",
+    "score": 5,
+    "risk": "CRITICAL",
+    "categories": {
+      "contract": {
+        "score": 15,
+        "level": "critical"
+      },
+      "concentration": {
+        "score": 100,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 45,
+        "level": "danger"
+      },
+      "trading": {
+        "score": 0,
+        "level": "critical"
+      }
+    },
+    "flags": [
+      "\ud83d\udd34 Honeypot detected: Sell transactions are failing",
+      "\ud83d\udd34 Hidden owner can manipulate contract state",
+      "\ud83d\udd34 Mint function allows unlimited token creation",
+      "\ud83d\udd34 Liquidity is not verifiably locked",
+      "\ud83d\udfe2 Contract is verified on BscScan"
+    ],
+    "summary": "This token is a confirmed honeypot where users can buy but are restricted from selling, resulting in a 100% loss of capital. Despite having $74,591 in liquidity and being a verified contract, the unde",
+    "input_name": "LTC_BSC",
+    "address": "0x4338665CBB7B2485A8855A139b75D5e34AB0DB94",
+    "expected": "60-80",
+    "category": "bridge"
+  },
+  {
+    "token_name": "DODO bird",
+    "symbol": "DODO",
+    "score": 55,
+    "risk": "CAUTION",
+    "categories": {
+      "contract": {
+        "score": 50,
+        "level": "danger"
+      },
+      "concentration": {
+        "score": 95,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 55,
+        "level": "caution"
+      },
+      "trading": {
+        "score": 100,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udfe2 0% Buy/Sell Taxes",
+      "\ud83d\udfe2 Verified Contract Source Code",
+      "\ud83d\udd34 Owner can mint new tokens (dilution risk)",
+      "\ud83d\udd34 Owner can burn tokens from user wallets",
+      "\u26a0\ufe0f Liquidity is not explicitly locked or burned"
+    ],
+    "summary": "This is the official DODO bird (DODO) bridge token contract on BSC, maintained by the DODO DEX team. While the contract is verified and has 0% taxes, the presence of active mint/burn functions and the",
+    "input_name": "DODO",
+    "address": "0x67ee3Cb086F8a16f34beE3ca72FAD36F7Db929e2",
+    "expected": "40-65",
+    "category": "defi"
+  },
+  {
+    "token_name": "Linear Token",
+    "symbol": "LINA",
+    "score": 38,
+    "risk": "DANGER",
+    "categories": {
+      "contract": {
+        "score": 35,
+        "level": "critical"
+      },
+      "concentration": {
+        "score": 95,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 30,
+        "level": "critical"
+      },
+      "trading": {
+        "score": 90,
+        "level": "safe"
+      }
+    },
+    "flags": [
+      "\ud83d\udd34 Upgradeable Proxy: Logic can be changed at any time by the admin",
+      "\ud83d\udd34 Extremely low liquidity ($3,138) makes it highly susceptible to price manipulation",
+      "\ud83d\udd34 No LP lock/burn detected: High risk of liquidity pull (Rug Pull)",
+      "\ud83d\udfe2 0% Buy and Sell tax",
+      "\ud83d\udfe2 Contract is verified on BSCScan"
+    ],
+    "summary": "This token is a proxy-based contract allowing the logic to be swapped at any time, coupled with extremely low liquidity of only $3,138. While the taxes are 0%, the ability for an admin to change the c",
+    "input_name": "LINA",
+    "address": "0x762539b45A1dCcE3D36d080F74d1AED37844b878",
+    "expected": "30-55",
+    "category": "defi"
+  },
+  {
+    "token_name": "TRYfinance",
+    "symbol": "TRY",
+    "score": 5,
+    "risk": "CRITICAL",
+    "categories": {
+      "contract": {
+        "score": 45,
+        "level": "danger"
+      },
+      "concentration": {
+        "score": 90,
+        "level": "safe"
+      },
+      "liquidity": {
+        "score": 2,
+        "level": "critical"
+      },
+      "trading": {
+        "score": 0,
+        "level": "critical"
+      }
+    },
+    "flags": [
+      "\ud83d\udd34 CRITICAL: Sell Tax is 189.0% (Higher than 30% threshold)",
+      "\ud83d\udd34 CRITICAL: Total Liquidity is only $6 USD",
+      "\ud83d\udd34 POTENTIAL HONEYPOT: Taxes exceed 100%",
+      "\ud83d\udfe2 Verified Contract Source Code"
+    ],
+    "summary": "This token is a definitive scam with buy and sell taxes exceeding 180%, effectively preventing any realization of gains and trapping investor capital. The total liquidity is a negligible $6 USD, and t",
+    "input_name": "AUCTION",
+    "address": "0xc12eCeE46ed65D970EE5C899FCC7AE133AfF9b03",
+    "expected": "40-65",
+    "category": "midcap"
+  }
+]

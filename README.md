@@ -47,6 +47,13 @@ VibeCheck helps users evaluate the safety of any BEP-20 token on BNB Smart Chain
 | SafeMoon | 15/100 | 🚨 CRITICAL |
 | SquidGame | 5/100 | 🚨 CRITICAL |
 
+## Screenshots
+
+<!-- Add screenshots here -->
+| Home | Scan Result | Comparison |
+|------|-------------|------------|
+| ![Home](screenshots/home.png) | ![Scan](screenshots/scan.png) | ![Compare](screenshots/compare.png) |
+
 ## Tech Stack
 
 - **Frontend:** Next.js 16 + React 19 + Tailwind CSS v4
