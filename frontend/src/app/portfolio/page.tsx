@@ -93,9 +93,13 @@ export default function PortfolioPage() {
       setResults(initial);
       setLoading(false);
 
-      // Scan tokens sequentially to avoid rate limits
-      for (let i = 0; i < initial.length; i++) {
-        await scanToken(data.tokens[i], i);
+      // Scan tokens in parallel batches of 3
+      const CONCURRENCY = 3;
+      for (let i = 0; i < initial.length; i += CONCURRENCY) {
+        const batch = initial.slice(i, i + CONCURRENCY);
+        await Promise.all(
+          batch.map((_, j) => scanToken(data.tokens[i + j], i + j))
+        );
       }
     } catch {
       setError('Failed to fetch portfolio');
@@ -225,7 +229,9 @@ export default function PortfolioPage() {
                 <ScoreGauge score={r.score} riskLevel={r.riskLevel || 'caution'} size={90} id={`port-${i}`} />
               </div>
             ) : (
-              <p className="text-xs text-zinc-600 py-4 text-center">No data</p>
+              <div className="flex items-center justify-center py-4 gap-2">
+                <span className="text-xs text-zinc-600">Tap to scan →</span>
+              </div>
             )}
 
             <p className="text-[10px] text-zinc-700 font-mono mt-3 truncate">{r.address}</p>
