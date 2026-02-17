@@ -222,3 +222,41 @@ This session showcased **parallel AI sub-agents** working on different aspects s
 | Cached scans crashing (500) | Double `controller.close()` | try/catch in finally block |
 | Portfolio example "Invalid address" | Truncated address string | Real Binance hot wallet |
 | `vercel env pull` destroyed API keys | Overwrote entire .env.local | Manual restore |
+
+---
+
+## Sprint 5: Deep Audit & Final Polish (Feb 17, 2026)
+
+**Duration:** ~2 hours  
+**AI model:** Claude Opus 4.5 via OpenClaw  
+**Method:** Autonomous browser-driven testing on local dev server (localhost:3333)
+
+### Bug Fixes
+- **AI:** Fixed address checksum bug — `ethers.isAddress()` in v6 rejects mixed-case addresses; now normalizes to `.toLowerCase()` before validation across all API routes
+- **AI:** Fixed error message display — scan page showed raw JSON `{"error":"Invalid token address"}` instead of clean text
+- **AI:** Fixed domain references — replaced `vibecheck-bsc.vercel.app` with `opvibecheck.xyz` across share cards, OG images, metadata
+
+### New Features
+- **AI:** **Danger/Critical warning banner** — prominent color-coded alert at top of scan results for risky tokens (orange for DANGER, red for CRITICAL)
+- **AI:** **Token names in history** — history API now enriches results with cached token names/symbols; search works by name
+- **AI:** **History deduplication** — shows only latest scan per token, eliminating confusing duplicates
+- **AI:** **Dynamic page titles** — browser tab shows "CAKE 98/100 — SAFE | VibeCheck" during scans
+- **AI:** **Portfolio Scanner CTA** on homepage — expanded stats badge with direct link to portfolio scanner
+- **AI:** **"Manual DYOR vs VibeCheck" comparison section** — side-by-side value prop on homepage
+- **AI:** **Portfolio link on History page** — bridges gap between individual scans and bulk scanning
+- **AI:** **How-it-works always visible** — no longer hidden when recent scans exist
+- **AI:** **PWA manifest + robots.txt** — production-ready metadata
+
+### Testing Methodology
+- **AI:** Automated browser testing via headless Chrome (OpenClaw sandbox browser)
+- **AI:** Tested all pages at desktop (1280px) and mobile (390px) viewports
+- **AI:** Console error monitoring — verified no runtime errors
+- **AI:** Cache warming — pre-warmed popular tokens for snappy demo performance
+
+### Bug Fixes Summary (Sprint 5)
+| Bug | Root Cause | Fix |
+|-----|-----------|-----|
+| Mixed-case addresses fail scan | `ethers.isAddress()` strict checksum | Normalize to `.toLowerCase()` |
+| Raw JSON in error messages | Rendering full response body | Extract `.error` field from JSON |
+| Duplicate history entries | Multiple attestations per token | Deduplicate, keep latest timestamp |
+| "How it works" hidden | Conditional on 0 recent scans | Always show in idle state |
