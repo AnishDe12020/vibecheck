@@ -214,6 +214,9 @@ export default function HistoryPage() {
             >
               <span className="font-mono text-zinc-300 text-sm group-hover:text-emerald-400 transition-colors break-all sm:break-normal">
                 {shortenAddress(t.address)}
+                {(Date.now() / 1000 - t.timestamp) < 3600 && (
+                  <span className="ml-2 inline-flex items-center text-[10px] px-1.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 font-medium">⚡ Cached</span>
+                )}
               </span>
               <div className="mt-2 sm:mt-0">
                 <ScoreBar score={t.score} riskLevel={t.riskLevel} />

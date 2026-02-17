@@ -34,8 +34,28 @@ export default function ScanPage({ params }: { params: Promise<{ address: string
   const handleScan = useCallback(async () => {
     setError(''); setReport(null); setStatus('fetching'); setElapsed(0);
 
+    const scanStartTime = Date.now();
     const startTime = Date.now();
     timerRef.current = setInterval(() => setElapsed((Date.now() - startTime) / 1000), 100);
+    let pendingReport: VibeCheckReport | null = null;
+
+    const finishScan = (rpt: VibeCheckReport) => {
+      const elapsed = Date.now() - scanStartTime;
+      const minDisplay = 500;
+      if (elapsed < minDisplay) {
+        setTimeout(() => {
+          setReport(rpt);
+          setStatus('complete');
+          setScoreAnimating(true);
+          setTimeout(() => setScoreAnimating(false), 1500);
+        }, minDisplay - elapsed);
+      } else {
+        setReport(rpt);
+        setStatus('complete');
+        setScoreAnimating(true);
+        setTimeout(() => setScoreAnimating(false), 1500);
+      }
+    };
 
     try {
       const res = await fetch(`/api/scan-stream?address=${encodeURIComponent(address)}`);
@@ -63,10 +83,8 @@ export default function ScanPage({ params }: { params: Promise<{ address: string
             } else if (event.status === 'analyzing') setStatus('analyzing');
             else if (event.status === 'attesting') setStatus('attesting');
             else if (event.status === 'complete') {
-              setReport(event.data);
-              setStatus('complete');
-              setScoreAnimating(true);
-              setTimeout(() => setScoreAnimating(false), 1500);
+              pendingReport = event.data;
+              finishScan(event.data);
             } else if (event.status === 'error') throw new Error(event.error);
           } catch (e: unknown) {
             const err = e as Error;
@@ -173,6 +191,18 @@ export default function ScanPage({ params }: { params: Promise<{ address: string
                   <span className={`text-xs px-3 py-1.5 rounded-full border font-bold uppercase tracking-wider shrink-0 animate-badge-pop ${RISK_BG[report.riskLevel]}`}>
                     {report.riskLevel}
                   </span>
+                  {report.attestationTx && (
+                    <a
+                      href={`https://opbnb.bscscan.com/tx/${report.attestationTx}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs px-2.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-semibold hover:bg-emerald-500/20 transition-all shrink-0 animate-badge-pop"
+                    >
+                      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                      Verified on opBNB
+                      <svg className="w-3 h-3 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                    </a>
+                  )}
                 </div>
                 <p className="font-mono text-xs text-zinc-600 mb-3 break-all">{address}</p>
                 <p className="text-zinc-400 mb-4 sm:mb-5 leading-relaxed text-sm sm:text-base">{report.summary}</p>
