@@ -173,3 +173,52 @@ This session showcased **parallel AI sub-agents** working on different aspects s
 - **AI:** Scraped and analyzed 39+ competing projects on DoraHacks
 - **AI:** Identified BNBrain (36K LOC, 32 tools) and ShieldBot (Chrome extension, 6 data sources) as top competitors
 - **AI:** Assessed VibeCheck as competitive for top 10 ($10K each) — strong on UX, on-chain attestation, and accessibility
+
+---
+
+## Sprint 4: Production Polish & Portfolio Scanner (Feb 17, 2026 — Late Session)
+
+### Portfolio Scanner Fix & Enhancement
+- **AI:** Fixed RPC rate limiting — BSC public RPC returns `-32005` when 20+ parallel `eth_call` requests hit. Changed to batch 4 at a time.
+- **AI:** Fixed SSE parser bug in portfolio page — was splitting on `\n` instead of `\n\n` (SSE double-newline delimiter), causing all scores to silently fail
+- **AI:** Added parallel scan execution (3 concurrent) — ~3x faster than sequential
+- **AI:** Fixed double `controller.close()` crash — cached responses closed the SSE stream, then `finally` block tried again
+- **AI:** Added loading skeleton (6 pulsing cards) while portfolio fetches
+- **AI:** Added live progress counter ("Scanned 5 of 21 tokens..." → "✅ Scanned 21 tokens")
+- **AI:** Fixed example wallet address (was invalid/truncated)
+
+### UI Polish
+- **AI:** Moved flags section to top of scan results (below score card) with color-coded borders (green/yellow/red)
+- **AI:** Hid "OUT OF 100" label on small gauges (portfolio cards) — too cramped at 90px
+- **AI:** Reduced glow intensity on small score gauges
+
+### Page Consolidation
+- **AI:** Merged History + Proofs into single page — eliminates confusing redundancy
+- **AI:** History page now includes "On-Chain Attested" badge, "View Contract ↗" link, attestation stats
+- **AI:** Each scan row shows "✓ Attested" badge
+- **AI:** Nav simplified from 5 items to 4 (Scan, Compare, Portfolio, History)
+- **AI:** `/attestations` redirects to `/history`
+
+### Caching
+- **AI:** Connected Upstash Redis to dev server (pulled env vars from Vercel production)
+- **AI:** Cached scans now load instantly on both dev and production
+- **AI:** In-memory fallback still works when Redis unavailable
+
+### Browser Testing
+- **AI:** Full automated browser test of all pages (home, scan, compare, portfolio, history, 404)
+- **AI:** Tested both desktop (1280px) and mobile (390px) viewports
+- **AI:** Verified portfolio scanner end-to-end: 21 tokens found, all scored correctly
+
+### Deployment
+- **AI:** Deployed to Vercel production, aliased to vibecheck-bsc.vercel.app
+- **AI:** opvibecheck.xyz domain live with SSL
+- **Human:** Fixed DNS records at registrar
+
+### Key Bug Fixes Summary
+| Bug | Root Cause | Fix |
+|-----|-----------|-----|
+| Portfolio "No data" on all cards | SSE split on `\n` not `\n\n` | Proper SSE double-newline parsing |
+| Portfolio only finding BNB | RPC rate limit (`-32005`) | Batch 4 calls at a time |
+| Cached scans crashing (500) | Double `controller.close()` | try/catch in finally block |
+| Portfolio example "Invalid address" | Truncated address string | Real Binance hot wallet |
+| `vercel env pull` destroyed API keys | Overwrote entire .env.local | Manual restore |

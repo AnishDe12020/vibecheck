@@ -2,8 +2,9 @@
 
 **Paste any BSC token address → get an instant AI-powered safety analysis → on-chain attestation on opBNB.**
 
-🌐 **Live Demo:** [vibecheck-bsc.vercel.app](https://vibecheck-bsc.vercel.app)  
-⚔️ **Comparison:** [vibecheck-bsc.vercel.app/compare](https://vibecheck-bsc.vercel.app/compare)  
+🌐 **Live Demo:** [opvibecheck.xyz](https://opvibecheck.xyz)  
+⚔️ **Comparison:** [opvibecheck.xyz/compare](https://opvibecheck.xyz/compare)  
+👛 **Portfolio Scanner:** [opvibecheck.xyz/portfolio](https://opvibecheck.xyz/portfolio)  
 📜 **Contract:** [0x427F...AA161 on opBNB](https://opbnb.bscscan.com/address/0x427F80AE3ebF7C275B138Bc9C9A39C76572AA161) (v2, with access control)  
 🏗️ **Track:** Consumer  
 🎯 **Hackathon:** [Good Vibes Only: OpenClaw Edition](https://dorahacks.io/hackathon/goodvibes)
@@ -14,11 +15,13 @@ VibeCheck helps users evaluate the safety of any BEP-20 token on BNB Smart Chain
 
 ### Key Features
 
-- **Instant AI Safety Analysis** — Powered by Gemini 3.0 Flash Preview for lightning-fast, high-reasoning audits.
+- **Instant AI Safety Analysis** — Powered by Gemini 3 Flash for lightning-fast, high-reasoning audits.
 - **On-Chain Attestations** — Every scan result is permanently recorded on opBNB as an immutable, verifiable proof.
 - **⚔️ Comparison Mode** — Compare two tokens side-by-side to make better investment decisions.
+- **👛 Portfolio Scanner** — Paste any BSC wallet address, scan all held tokens in parallel.
 - **Premium Visualization** — Holder concentration charts and liquidity depth bars.
 - **Project Intel** — Deep-dive into verification status, ownership, and supply metrics.
+- **Redis Caching** — Repeat scans return instantly via Upstash Redis (1hr TTL).
 
 ### How it works
 
@@ -103,7 +106,8 @@ vibecheck/
 │       ├── app/
 │       │   ├── page.tsx        # Main UI — input, score gauge, report
 │       │   ├── compare/        # ⚔️ Comparison mode
-│       │   ├── history/        # On-chain scan history
+│       │   ├── portfolio/      # 👛 Wallet portfolio scanner
+│       │   ├── history/        # On-chain scan history + attestation proofs
 │       │   └── api/
 │       │       ├── scan/       # Original scan endpoint
 │       │       ├── scan-stream/# SSE streaming scan
@@ -197,7 +201,7 @@ Requires opBNB gas in the deployer wallet. Current deployment cost: ~$0.003.
 
 See [AI_BUILD_LOG.md](./AI_BUILD_LOG.md) for a detailed breakdown of how AI was used throughout development.
 
-**TL;DR:** Built in ~3 hours with Claude (via OpenClaw) handling architecture, coding, deployment, and testing. Kimi K2.5 powers the runtime token analysis. ~1,000 lines of meaningful code.
+**TL;DR:** Built over 2 days with Claude Opus 4 (via OpenClaw) handling architecture, coding, deployment, and testing. Gemini 3 Flash powers the runtime token analysis. Multi-agent parallel development with 5+ sub-agents for concurrent feature building.
 
 ## License
 
