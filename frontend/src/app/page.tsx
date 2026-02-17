@@ -334,6 +334,24 @@ function HomeInner() {
                 <span className="text-zinc-500">Honeypot.is</span>
               </div>
             </div>
+
+            {/* Token Marquee */}
+            <div className="relative overflow-hidden mb-10 sm:mb-12 -mx-3 sm:-mx-6">
+              <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-[#050507] to-transparent z-10" />
+              <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-l from-[#050507] to-transparent z-10" />
+              <div className="flex animate-marquee whitespace-nowrap">
+                {[...POPULAR_TOKENS, ...POPULAR_TOKENS].map((t, i) => (
+                  <button
+                    key={`${t.address}-${i}`}
+                    onClick={() => { setAddress(t.address); handleScan(t.address); }}
+                    className="inline-flex items-center gap-2 mx-2 px-4 py-2.5 rounded-xl bg-zinc-900/50 border border-zinc-800/50 hover:border-emerald-500/30 hover:bg-zinc-800/60 transition-all cursor-pointer group shrink-0"
+                  >
+                    <TokenLogo address={t.address} size={20} />
+                    <span className="text-xs font-semibold text-zinc-400 group-hover:text-emerald-400 transition-colors">{t.symbol}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
           </>
         ) : (
           <div className="text-center mb-10 sm:mb-12 hero-glow relative z-10">
