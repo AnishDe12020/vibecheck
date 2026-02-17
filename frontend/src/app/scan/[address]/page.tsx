@@ -181,6 +181,26 @@ export default function ScanPage({ params }: { params: Promise<{ address: string
         {/* Report */}
         {report && (
           <div className="space-y-4 sm:space-y-6 animate-fade-in-up">
+            {/* Danger warning banner */}
+            {(report.riskLevel === 'DANGER' || report.riskLevel === 'CRITICAL') && (
+              <div className={`rounded-xl p-4 border flex items-center gap-3 ${
+                report.riskLevel === 'CRITICAL'
+                  ? 'bg-red-500/10 border-red-500/30 text-red-400'
+                  : 'bg-orange-500/10 border-orange-500/30 text-orange-400'
+              }`}>
+                <span className="text-2xl shrink-0">{report.riskLevel === 'CRITICAL' ? '🚨' : '⚠️'}</span>
+                <div>
+                  <p className="font-bold text-sm">
+                    {report.riskLevel === 'CRITICAL' ? 'High Risk — Do Not Interact' : 'Elevated Risk Detected'}
+                  </p>
+                  <p className="text-xs opacity-80 mt-0.5">
+                    {report.riskLevel === 'CRITICAL'
+                      ? 'This token shows critical red flags. Interacting with it could result in total loss of funds.'
+                      : 'This token has significant risk factors. Proceed with extreme caution and do your own research.'}
+                  </p>
+                </div>
+              </div>
+            )}
             {/* Score card */}
             <div className="glass rounded-2xl sm:rounded-3xl p-4 sm:p-8 md:p-10 flex flex-col md:flex-row items-center gap-5 sm:gap-10 overflow-hidden">
               <ScoreGauge score={report.overallScore} riskLevel={report.riskLevel} animate={scoreAnimating} size={140} />
