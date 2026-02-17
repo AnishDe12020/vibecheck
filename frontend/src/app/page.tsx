@@ -321,17 +321,32 @@ function HomeInner() {
 
             {/* Powered By Trust Bar */}
             <div className="border-t border-zinc-800/50 py-5 mb-10 sm:mb-12">
-              <div className="flex items-center justify-center gap-4 sm:gap-6 flex-wrap text-xs text-zinc-600 uppercase tracking-widest font-medium">
+              <div className="flex items-center justify-center gap-4 sm:gap-8 flex-wrap text-xs text-zinc-600 uppercase tracking-widest font-medium">
                 <span>Powered by</span>
-                <span className="text-zinc-500">Gemini AI</span>
+                <span className="flex items-center gap-1.5 text-zinc-500">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  Gemini AI
+                </span>
                 <span className="text-zinc-700">·</span>
-                <span className="text-zinc-500">opBNB</span>
+                <span className="flex items-center gap-1.5 text-zinc-500">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  opBNB
+                </span>
                 <span className="text-zinc-700">·</span>
-                <span className="text-zinc-500">PancakeSwap</span>
+                <span className="flex items-center gap-1.5 text-zinc-500">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"/><path d="M8 12a4 4 0 108 0 4 4 0 10-8 0" stroke="currentColor" strokeWidth="1.5"/></svg>
+                  PancakeSwap
+                </span>
                 <span className="text-zinc-700">·</span>
-                <span className="text-zinc-500">BSCScan</span>
+                <span className="flex items-center gap-1.5 text-zinc-500">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+                  BSCScan
+                </span>
                 <span className="text-zinc-700">·</span>
-                <span className="text-zinc-500">Honeypot.is</span>
+                <span className="flex items-center gap-1.5 text-zinc-500">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  Honeypot.is
+                </span>
               </div>
             </div>
 
