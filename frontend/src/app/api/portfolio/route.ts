@@ -48,31 +48,32 @@ export async function GET(req: NextRequest) {
     // Check BNB balance
     const bnbBalance = await provider.getBalance(normalizedAddress);
 
-    // Check balances of popular tokens in parallel
-    const results = await Promise.all(
-      POPULAR_TOKENS.map(async (token) => {
-        try {
-          const contract = new ethers.Contract(token.address, ERC20_ABI, provider);
-          const [balance, decimals] = await Promise.all([
-            contract.balanceOf(normalizedAddress),
-            contract.decimals().catch(() => 18),
-          ]);
-          if (balance > 0n) {
-            return {
-              address: token.address,
-              name: token.name,
-              symbol: token.symbol,
-              balance: ethers.formatUnits(balance, decimals),
-            };
+    // Check balances in batches of 4 to avoid RPC rate limits
+    const tokens: any[] = [];
+    for (let i = 0; i < POPULAR_TOKENS.length; i += 4) {
+      const batch = POPULAR_TOKENS.slice(i, i + 4);
+      const batchResults = await Promise.all(
+        batch.map(async (token) => {
+          try {
+            const contract = new ethers.Contract(token.address, ERC20_ABI, provider);
+            const balance = await contract.balanceOf(normalizedAddress);
+            if (balance > 0n) {
+              const decimals = await contract.decimals().catch(() => 18);
+              return {
+                address: token.address,
+                name: token.name,
+                symbol: token.symbol,
+                balance: ethers.formatUnits(balance, decimals),
+              };
+            }
+            return null;
+          } catch {
+            return null;
           }
-          return null;
-        } catch {
-          return null;
-        }
-      })
-    );
-
-    const tokens = results.filter(Boolean);
+        })
+      );
+      tokens.push(...batchResults.filter(Boolean));
+    }
 
     // Add BNB if they have any
     if (bnbBalance > 0n) {
