@@ -153,10 +153,26 @@ export default function PortfolioPage() {
         {error && <p className="text-red-400 text-xs mt-2">{error}</p>}
       </div>
 
+      {/* Loading skeleton */}
+      {loading && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto mb-6">
+          {[1,2,3,4,5,6].map(i => (
+            <div key={i} className="bg-zinc-900/40 border border-zinc-800/30 rounded-2xl p-5 animate-pulse">
+              <div className="h-4 bg-zinc-800 rounded w-24 mb-2" />
+              <div className="h-3 bg-zinc-800 rounded w-16 mb-4" />
+              <div className="flex justify-center py-4">
+                <div className="w-20 h-20 rounded-full bg-zinc-800" />
+              </div>
+              <div className="h-2 bg-zinc-800 rounded w-full mt-3" />
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* Warning */}
       {results.length > 0 && (
         <div className="max-w-2xl mx-auto mb-6 bg-yellow-500/5 border border-yellow-500/20 rounded-xl px-4 py-3 text-xs text-yellow-400/80 text-center">
-          ⏱️ Portfolio scan may take 1-2 minutes for all tokens
+          ⏱️ Scanning {results.filter(r => !r.scanning).length}/{results.length} tokens...
         </div>
       )}
 
