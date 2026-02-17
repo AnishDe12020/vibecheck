@@ -132,3 +132,44 @@ This session showcased **parallel AI sub-agents** working on different aspects s
 - Agents independently built, tested, and reported back
 - Main agent (Claude Opus 4) coordinated merging and deployment
 - **Human:** Directed priorities, tested on device, provided real-world feedback
+
+---
+
+## Sprint 3: Final Polish (Feb 17, 2026) — Evening Session
+
+### Hero Redesign
+- **AI:** Redesigned home page hero with split layout (text left, preview card right)
+- **AI:** Added floating product preview card with score gauge, liquidity/holder stats
+- **AI:** Added "Live on BNB Chain" badge, bigger typography
+- **AI:** Added "Powered By" trust bar with branded icons (Gemini AI, opBNB, PancakeSwap, BSCScan, Honeypot.is)
+- **AI:** Added token symbol marquee with logos (scrolling ticker, clickable)
+- **AI:** Added subtle emerald gradient background
+
+### Branding
+- **Human:** Designed logo (magnifying glass + shield + checkmark)
+- **AI:** Converted to all formats: favicon (ICO, 16px, 32px PNG), apple-touch-icon (180px), android-chrome (192px, 512px)
+- **AI:** Updated header navbar to use logo image
+- **Human:** Purchased opvibecheck.xyz domain
+
+### Critical Bug Fixes
+- **AI:** Fixed attestation API — contract address env var had trailing newline breaking ethers calls
+- **AI:** Fixed portfolio SSE parsing — was checking wrong event fields (evt.type→evt.status, evt.report→evt.data)
+- **AI:** Switched portfolio API from BSCScan tokentx (blocked on free tier) to direct RPC balance checks for 20 popular tokens
+- **AI:** Fixed ScoreGauge text scaling — font was fixed at text-5xl regardless of component size
+
+### Performance: Redis Caching
+- **AI:** Integrated Upstash Redis for scan result caching (1hr TTL)
+- **AI:** Repeat scans now return instantly from cache
+- **AI:** Graceful fallback to in-memory cache if Redis unavailable
+- **Human:** Configured Upstash Redis on Vercel (256MB)
+
+### DoraHacks Submission
+- **Human:** Filled out BUIDL submission form (Consumer track, Crypto/Web3 category)
+- **AI:** Wrote comprehensive project description covering problem, solution, tech stack, algorithm validation, BNB Chain integration
+- **AI:** Advised on track selection, team info, infrastructure tags
+- **Human + Sandeep:** Community upvote campaign (6 votes initial)
+
+### Competition Analysis
+- **AI:** Scraped and analyzed 39+ competing projects on DoraHacks
+- **AI:** Identified BNBrain (36K LOC, 32 tools) and ShieldBot (Chrome extension, 6 data sources) as top competitors
+- **AI:** Assessed VibeCheck as competitive for top 10 ($10K each) — strong on UX, on-chain attestation, and accessibility
