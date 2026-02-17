@@ -321,32 +321,32 @@ function HomeInner() {
 
             {/* Powered By Trust Bar */}
             <div className="border-t border-zinc-800/50 py-5 mb-10 sm:mb-12">
-              <div className="flex items-center justify-center gap-4 sm:gap-8 flex-wrap text-xs text-zinc-600 uppercase tracking-widest font-medium">
+              <div className="flex items-center justify-center gap-3 sm:gap-8 overflow-x-auto text-[10px] sm:text-xs text-zinc-600 uppercase tracking-widest font-medium whitespace-nowrap pb-1">
                 <span>Powered by</span>
                 <span className="flex items-center gap-2 text-zinc-500">
                   {/* Gemini sparkle */}
                   <svg width="16" height="16" viewBox="0 0 28 28" fill="none"><path d="M14 0C14 7.732 7.732 14 0 14c7.732 0 14 6.268 14 14 0-7.732 6.268-14 14-14C20.268 14 14 7.732 14 0z" fill="#8B8BF5"/></svg>
                   Gemini AI
                 </span>
-                <span className="text-zinc-700">·</span>
+                <span className="hidden sm:inline text-zinc-700">·</span>
                 <span className="flex items-center gap-2 text-zinc-500">
                   {/* BNB diamond */}
                   <svg width="16" height="16" viewBox="0 0 32 32" fill="none"><path d="M16 4l-4 4 4 4 4-4-4-4zm-8 8l-4 4 4 4 4-4-4-4zm16 0l-4 4 4 4 4-4-4-4zm-8 8l-4 4 4 4 4-4-4-4z" fill="#F3BA2F"/></svg>
                   opBNB
                 </span>
-                <span className="text-zinc-700">·</span>
+                <span className="hidden sm:inline text-zinc-700">·</span>
                 <span className="flex items-center gap-2 text-zinc-500">
                   {/* PancakeSwap bunny-ish */}
                   <svg width="16" height="16" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" fill="#633001" fillOpacity="0.3"/><circle cx="16" cy="16" r="10" fill="#D1884F" fillOpacity="0.6"/><circle cx="16" cy="14" r="5" fill="#FEDC90" fillOpacity="0.5"/></svg>
                   PancakeSwap
                 </span>
-                <span className="text-zinc-700">·</span>
+                <span className="hidden sm:inline text-zinc-700">·</span>
                 <span className="flex items-center gap-2 text-zinc-500">
                   {/* BSCScan */}
                   <svg width="16" height="16" viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="5" height="16" rx="2" fill="#8C8C8C"/><rect x="13.5" y="4" width="5" height="24" rx="2" fill="#8C8C8C"/><rect x="23" y="12" width="5" height="12" rx="2" fill="#8C8C8C"/></svg>
                   BSCScan
                 </span>
-                <span className="text-zinc-700">·</span>
+                <span className="hidden sm:inline text-zinc-700">·</span>
                 <span className="flex items-center gap-2 text-zinc-500">
                   {/* Honeypot shield */}
                   <svg width="16" height="16" viewBox="0 0 32 32" fill="none"><path d="M16 3L5 8v7c0 7.18 4.7 13.89 11 16 6.3-2.11 11-8.82 11-16V8L16 3z" fill="#E6A817" fillOpacity="0.5"/><path d="M14 16l-2-2-1.5 1.5L14 19l7-7-1.5-1.5L14 16z" fill="#E6A817"/></svg>
