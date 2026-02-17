@@ -13,7 +13,6 @@ export function Header() {
     { href: '/compare', label: 'Compare', icon: '⚔️' },
     { href: '/portfolio', label: 'Portfolio', icon: '💼' },
     { href: '/history', label: 'History', icon: '📜' },
-    { href: '/attestations', label: 'Proofs', icon: '⛓️' },
   ];
 
   return (

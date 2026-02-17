@@ -4,6 +4,9 @@ import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { RISK_BG, RISK_COLORS, shortenAddress } from '../../lib/constants';
 
+const CONTRACT_ADDRESS = '0x427F80AE3ebF7C275B138Bc9C9A39C76572AA161';
+const OPBNB_EXPLORER = 'https://opbnb.bscscan.com';
+
 const RISK_BAR_BG: Record<string, string> = {
   SAFE: 'bg-green-500',
   CAUTION: 'bg-yellow-500',
@@ -52,7 +55,7 @@ export default function HistoryPage() {
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    document.title = 'VibeCheck — Scan History';
+    document.title = 'VibeCheck — Scan History & On-Chain Proofs';
     fetch('/api/history')
       .then(r => r.json())
       .then(d => {
@@ -80,44 +83,75 @@ export default function HistoryPage() {
     if (tokens.length === 0) return null;
     const avg = Math.round(tokens.reduce((s, t) => s + t.score, 0) / tokens.length);
     const safe = tokens.filter(t => t.riskLevel === 'SAFE').length;
+    const caution = tokens.filter(t => t.riskLevel === 'CAUTION').length;
     const risky = tokens.filter(t => t.riskLevel === 'DANGER' || t.riskLevel === 'CRITICAL').length;
-    return { total: tokens.length, avg, safe, risky };
+    return { total: tokens.length, avg, safe, caution, risky };
   }, [tokens]);
 
   return (
     <div className="flex-1 max-w-5xl mx-auto w-full px-3 sm:px-6 py-8 sm:py-12">
       {/* Hero */}
-      <div className="mb-6 sm:mb-10 hero-glow relative z-10">
+      <div className="mb-6 sm:mb-10 hero-glow relative z-10 text-center sm:text-left">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/5 border border-emerald-500/10 text-emerald-400 text-xs font-medium mb-4">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          On-Chain Attested
+        </div>
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-zinc-100 to-zinc-400 bg-clip-text text-transparent mb-2">
           Scan History
         </h1>
         <p className="text-zinc-500 text-sm sm:text-base">
-          All tokens scanned and attested on-chain via opBNB
+          Every scan is permanently recorded on opBNB as an immutable attestation.
         </p>
+        <div className="mt-3 flex items-center gap-3 flex-wrap justify-center sm:justify-start">
+          <a
+            href={`${OPBNB_EXPLORER}/address/${CONTRACT_ADDRESS}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs px-3 py-1.5 rounded-lg glass text-emerald-400 hover:text-emerald-300 transition-colors inline-flex items-center gap-1"
+          >
+            View Contract ↗
+          </a>
+          {stats && (
+            <span className="text-xs text-zinc-500">
+              <span className="text-emerald-500 font-semibold">{stats.total}</span> scans on-chain
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Stats */}
       {stats && (
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6 sm:mb-8 stagger-children">
-          {[
-            { label: 'Total Scans', value: stats.total, icon: '📊' },
-            { label: 'Avg Score', value: stats.avg, icon: '📈' },
-            { label: 'Safe Tokens', value: stats.safe, icon: '✅', color: 'text-green-400' },
-            { label: 'Risky Tokens', value: stats.risky, icon: '⚠️', color: 'text-red-400' },
-          ].map((s, i) => (
-            <div key={i} className="glass rounded-xl p-3 sm:p-4 text-center">
-              <div className="text-lg sm:text-xl mb-1">{s.icon}</div>
-              <div className={`text-xl sm:text-2xl font-black ${s.color || 'text-zinc-100'}`}>{s.value}</div>
-              <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold">{s.label}</div>
+          <div className="glass rounded-xl p-3 sm:p-4 text-center">
+            <div className="text-lg sm:text-xl mb-1">📊</div>
+            <div className="text-xl sm:text-2xl font-black text-zinc-100">{stats.total}</div>
+            <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold">Total Scans</div>
+          </div>
+          <div className="glass rounded-xl p-3 sm:p-4 text-center">
+            <div className="text-lg sm:text-xl mb-1">📈</div>
+            <div className="text-xl sm:text-2xl font-black" style={{ color: stats.avg >= 70 ? '#34d399' : stats.avg >= 40 ? '#fbbf24' : '#f87171' }}>{stats.avg}</div>
+            <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold">Avg Score</div>
+          </div>
+          <div className="glass rounded-xl p-3 sm:p-4 text-center">
+            <div className="text-lg sm:text-xl mb-1">✅</div>
+            <div className="flex items-center justify-center gap-1">
+              <span className="text-xl sm:text-2xl font-black text-green-400">{stats.safe}</span>
+              <span className="text-zinc-600 text-xs">/</span>
+              <span className="text-xl sm:text-2xl font-black text-yellow-400">{stats.caution}</span>
             </div>
-          ))}
+            <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold">Safe / Caution</div>
+          </div>
+          <div className="glass rounded-xl p-3 sm:p-4 text-center">
+            <div className="text-lg sm:text-xl mb-1">⚠️</div>
+            <div className="text-xl sm:text-2xl font-black text-red-400">{stats.risky}</div>
+            <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold">Risky Tokens</div>
+          </div>
         </div>
       )}
 
       {/* Filters */}
       {!loading && tokens.length > 0 && (
         <div className="flex flex-col sm:flex-row gap-3 mb-5 sm:mb-6">
-          {/* Search */}
           <input
             type="text"
             value={search}
@@ -125,7 +159,6 @@ export default function HistoryPage() {
             placeholder="Search by address..."
             className="flex-1 bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-200 placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500/40 focus:ring-2 focus:ring-emerald-500/10 transition-all"
           />
-          {/* Risk filter */}
           <div className="flex gap-1.5 flex-wrap">
             {(['ALL', 'SAFE', 'CAUTION', 'DANGER', 'CRITICAL'] as const).map(level => (
               <button
@@ -141,7 +174,6 @@ export default function HistoryPage() {
               </button>
             ))}
           </div>
-          {/* Sort */}
           <select
             value={sortBy}
             onChange={e => setSortBy(e.target.value as SortBy)}
@@ -198,7 +230,6 @@ export default function HistoryPage() {
       {/* Results */}
       {!loading && filtered.length > 0 && (
         <div className="space-y-2 stagger-children">
-          {/* Table header — hidden on small screens */}
           <div className="hidden sm:grid grid-cols-[1fr_140px_100px_80px] gap-4 px-5 py-2 text-[11px] text-zinc-600 uppercase tracking-wider font-semibold">
             <span>Token Address</span>
             <span>Score</span>
@@ -212,11 +243,9 @@ export default function HistoryPage() {
               href={`/scan/${t.address}`}
               className="glass glass-hover rounded-xl px-3 sm:px-5 py-3 sm:py-4 transition-all block sm:grid sm:grid-cols-[1fr_140px_100px_80px] sm:gap-4 sm:items-center group"
             >
-              <span className="font-mono text-zinc-300 text-sm group-hover:text-emerald-400 transition-colors break-all sm:break-normal">
+              <span className="font-mono text-zinc-300 text-sm group-hover:text-emerald-400 transition-colors break-all sm:break-normal flex items-center gap-2">
                 {shortenAddress(t.address)}
-                {(Date.now() / 1000 - t.timestamp) < 3600 && (
-                  <span className="ml-2 inline-flex items-center text-[10px] px-1.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 font-medium">⚡ Cached</span>
-                )}
+                <span className="inline-flex items-center text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400/70 font-medium shrink-0">✓ Attested</span>
               </span>
               <div className="mt-2 sm:mt-0">
                 <ScoreBar score={t.score} riskLevel={t.riskLevel} />
