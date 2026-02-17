@@ -215,6 +215,25 @@ export default function ScanPage({ params }: { params: Promise<{ address: string
               </div>
             </div>
 
+            {/* Flags — prominent position */}
+            {report.flags.length > 0 && (
+              <div className="glass rounded-2xl p-4 sm:p-5">
+                <div className="flex flex-wrap gap-2">
+                  {report.flags.map((flag, i) => {
+                    const isGreen = flag.startsWith('🟢');
+                    const isYellow = flag.startsWith('🟡');
+                    const isRed = flag.startsWith('🔴') || flag.startsWith('🚩');
+                    const borderColor = isGreen ? 'border-emerald-500/30 bg-emerald-500/5' : isYellow ? 'border-yellow-500/30 bg-yellow-500/5' : isRed ? 'border-red-500/30 bg-red-500/5' : 'border-zinc-700/50 bg-zinc-800/80';
+                    return (
+                      <span key={i} className={`text-xs sm:text-sm px-3 py-2 rounded-xl border text-zinc-300 ${borderColor}`}>
+                        {flag}
+                      </span>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
             {/* Categories */}
             <div className="grid md:grid-cols-2 gap-3 sm:gap-4 stagger-children">
               {(Object.entries(report.categories) as [string, RiskCategory][]).map(([key, cat]) => (
@@ -265,22 +284,6 @@ export default function ScanPage({ params }: { params: Promise<{ address: string
               <div className="grid md:grid-cols-2 gap-3 sm:gap-4">
                 {report.topHolders?.length > 0 && <HolderChart holders={report.topHolders} />}
                 {report.liquidity?.length > 0 && <LiquidityPanel pools={report.liquidity} />}
-              </div>
-            )}
-
-            {/* Flags */}
-            {report.flags.length > 0 && (
-              <div className="glass rounded-2xl p-4 sm:p-6">
-                <h3 className="font-bold text-zinc-200 mb-3 sm:mb-4 flex items-center gap-2">
-                  <span>🚩</span> Flags
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {report.flags.map((flag, i) => (
-                    <span key={i} className="text-xs sm:text-sm px-3 py-2 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-300">
-                      {flag}
-                    </span>
-                  ))}
-                </div>
               </div>
             )}
 
