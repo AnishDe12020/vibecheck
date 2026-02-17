@@ -21,6 +21,14 @@ export const metadata: Metadata = {
   },
   description: "Paste any BSC token address and get an instant AI-powered safety analysis with on-chain attestation on opBNB.",
   metadataBase: new URL("https://vibecheck-bsc.vercel.app"),
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     title: "VibeCheck — AI Token Safety Scanner",
     description: "Paste any BSC token address and get an instant AI-powered safety analysis with on-chain attestation on opBNB.",

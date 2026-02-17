@@ -216,89 +216,187 @@ function HomeInner() {
       )}
 
       <div className="flex-1 max-w-5xl mx-auto w-full px-3 sm:px-6 py-8 sm:py-16">
-        {/* Hero */}
-        <div className="text-center mb-10 sm:mb-12 hero-glow relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/5 border border-emerald-500/10 text-emerald-400 text-xs font-medium mb-4 sm:mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            AI-Powered Token Safety
-          </div>
+        {/* Hero — Split layout for idle, centered for scanning/results */}
+        {status === 'idle' && !report ? (
+          <>
+            <div className="mb-10 sm:mb-12 hero-glow relative z-10 flex flex-col lg:flex-row items-center lg:items-start gap-10 lg:gap-16">
+              {/* Left side */}
+              <div className="flex-[3] min-w-0 w-full lg:w-auto">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/5 border border-emerald-500/10 text-emerald-400 text-xs font-medium mb-6 sm:mb-8">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  Live on BNB Chain
+                </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-3 sm:mb-4 tracking-tight">
-            <span className="bg-gradient-to-b from-zinc-100 to-zinc-400 bg-clip-text text-transparent">
-              Is this token
-            </span>
-            <br />
-            <span className="bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent">
-              safe?
-            </span>
-          </h1>
-          <p className="text-zinc-500 mb-8 sm:mb-10 text-base sm:text-lg max-w-lg mx-auto leading-relaxed px-2">
-            Paste any BSC token address. Get an instant safety score backed by on-chain attestation.
-          </p>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-4 sm:mb-6 tracking-tight leading-[1.1]">
+                  <span className="bg-gradient-to-b from-zinc-100 to-zinc-400 bg-clip-text text-transparent">
+                    Is this token
+                  </span>
+                  <br />
+                  <span className="bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent">
+                    safe?
+                  </span>
+                </h1>
+                <p className="text-zinc-400 mb-8 sm:mb-10 text-base sm:text-lg max-w-lg leading-relaxed">
+                  Paste any BSC token address. Get an instant AI-powered safety score backed by on-chain attestation.
+                </p>
 
-          {/* Search input */}
-          <div className="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto">
-            <div className="flex-1 min-w-0">
-              <TokenPicker
-                value={address}
-                onChange={setAddress}
-                placeholder="Search token or paste 0x address..."
-                disabled={isScanning}
-              />
-            </div>
-            <button
-              onClick={() => handleScan()}
-              disabled={isScanning || !address}
-              aria-label="Scan token"
-              className="bg-gradient-to-b from-emerald-500 to-emerald-700 hover:from-emerald-400 hover:to-emerald-600 disabled:from-zinc-700 disabled:to-zinc-800 disabled:text-zinc-500 text-white font-bold px-8 py-4 rounded-2xl transition-all text-lg cursor-pointer disabled:cursor-not-allowed shadow-lg shadow-emerald-500/20 disabled:shadow-none"
-            >
-              {isScanning ? (
-                <svg className="animate-spin h-6 w-6 mx-auto" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-                </svg>
-              ) : 'Scan'}
-            </button>
-          </div>
+                {/* Search input */}
+                <div className="flex flex-col sm:flex-row gap-3 max-w-xl">
+                  <div className="flex-1 min-w-0">
+                    <TokenPicker
+                      value={address}
+                      onChange={setAddress}
+                      placeholder="Search token or paste 0x address..."
+                      disabled={isScanning}
+                    />
+                  </div>
+                  <button
+                    onClick={() => handleScan()}
+                    disabled={isScanning || !address}
+                    aria-label="Scan token"
+                    className="bg-gradient-to-b from-emerald-500 to-emerald-700 hover:from-emerald-400 hover:to-emerald-600 disabled:from-zinc-700 disabled:to-zinc-800 disabled:text-zinc-500 text-white font-bold px-8 py-4 rounded-2xl transition-all text-lg cursor-pointer disabled:cursor-not-allowed shadow-lg shadow-emerald-500/20 disabled:shadow-none"
+                  >
+                    Scan
+                  </button>
+                </div>
 
-          {/* Example tokens */}
-          <div className="mt-4 sm:mt-5 flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap px-1">
-            <span className="text-xs text-zinc-600 mr-0.5 sm:mr-1">Try:</span>
-            {EXAMPLE_TOKENS.map(t => (
-              <button
-                key={t.address}
-                onClick={() => { setAddress(t.address); handleScan(t.address); }}
-                disabled={isScanning}
-                className="text-xs px-2.5 sm:px-3 py-1.5 rounded-lg bg-zinc-800/40 border border-zinc-800 text-zinc-400 hover:text-zinc-200 hover:border-zinc-600 hover:bg-zinc-800/60 transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
-              >
-                {t.name} <span className={t.color}>{t.label}</span>
-              </button>
-            ))}
-          </div>
+                {/* Example tokens */}
+                <div className="mt-4 sm:mt-5 flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                  <span className="text-xs text-zinc-600 mr-0.5 sm:mr-1">Try:</span>
+                  {EXAMPLE_TOKENS.map(t => (
+                    <button
+                      key={t.address}
+                      onClick={() => { setAddress(t.address); handleScan(t.address); }}
+                      disabled={isScanning}
+                      className="text-xs px-2.5 sm:px-3 py-1.5 rounded-lg bg-zinc-800/40 border border-zinc-800 text-zinc-400 hover:text-zinc-200 hover:border-zinc-600 hover:bg-zinc-800/60 transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                    >
+                      {t.name} <span className={t.color}>{t.label}</span>
+                    </button>
+                  ))}
+                </div>
 
-          {/* Total scans badge */}
-          {totalScans !== null && totalScans > 0 && status === 'idle' && !report && (
-            <div className="mt-3 text-xs text-zinc-600">
-              <span className="text-emerald-500 font-semibold">{totalScans.toLocaleString()}</span> tokens scanned on-chain
-            </div>
-          )}
-
-          {/* Scan progress */}
-          {isScanning && (
-            <>
-              <ScanProgressBar status={status} />
-              <div className="mt-3 flex items-center justify-center gap-3">
-                <span className="text-sm text-emerald-400/80">{STATUS_MESSAGES[status]}</span>
-                <span className="text-xs text-zinc-600 font-mono tabular-nums">{elapsed.toFixed(1)}s</span>
+                {/* Total scans badge */}
+                {totalScans !== null && totalScans > 0 && (
+                  <div className="mt-3 text-xs text-zinc-600">
+                    <span className="text-emerald-500 font-semibold">{totalScans.toLocaleString()}</span> tokens scanned on-chain
+                  </div>
+                )}
               </div>
-            </>
-          )}
-          {error && (
-            <div className="mt-4 inline-flex items-center gap-2 text-red-400 text-sm bg-red-500/5 border border-red-500/10 px-4 py-2 rounded-xl">
-              <span>⚠</span> {error}
+
+              {/* Right side — Floating preview card (desktop only) */}
+              <div className="hidden lg:block flex-[2] relative">
+                <div
+                  className="glass rounded-2xl p-6 border-emerald-500/10"
+                  style={{
+                    transform: 'perspective(1000px) rotateY(-5deg) rotateX(2deg)',
+                    animation: 'heroFloat 6s ease-in-out infinite',
+                  }}
+                >
+                  <div className="flex items-center justify-between mb-5">
+                    <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Safety Report</span>
+                    <span className="text-[10px] px-2.5 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 font-bold uppercase tracking-wider">
+                      Safe
+                    </span>
+                  </div>
+                  <div className="flex justify-center mb-4">
+                    <ScoreGauge score={95} riskLevel="SAFE" size={120} id="hero-preview" />
+                  </div>
+                  <div className="text-center mb-4">
+                    <span className="text-sm font-bold text-zinc-200">PancakeSwap</span>
+                    <span className="text-zinc-500 ml-1.5 text-xs">(CAKE)</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="bg-zinc-800/50 rounded-xl p-3 text-center">
+                      <div className="text-[10px] text-zinc-600 uppercase font-bold mb-1">Liquidity</div>
+                      <div className="text-sm font-bold text-zinc-200">$42.3M</div>
+                    </div>
+                    <div className="bg-zinc-800/50 rounded-xl p-3 text-center">
+                      <div className="text-[10px] text-zinc-600 uppercase font-bold mb-1">Holders</div>
+                      <div className="text-sm font-bold text-zinc-200">1.2M+</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          )}
-        </div>
+
+            {/* Powered By Trust Bar */}
+            <div className="border-t border-zinc-800/50 py-5 mb-10 sm:mb-12">
+              <div className="flex items-center justify-center gap-4 sm:gap-6 flex-wrap text-xs text-zinc-600 uppercase tracking-widest font-medium">
+                <span>Powered by</span>
+                <span className="text-zinc-500">Gemini AI</span>
+                <span className="text-zinc-700">·</span>
+                <span className="text-zinc-500">opBNB</span>
+                <span className="text-zinc-700">·</span>
+                <span className="text-zinc-500">PancakeSwap</span>
+                <span className="text-zinc-700">·</span>
+                <span className="text-zinc-500">BSCScan</span>
+                <span className="text-zinc-700">·</span>
+                <span className="text-zinc-500">Honeypot.is</span>
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className="text-center mb-10 sm:mb-12 hero-glow relative z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/5 border border-emerald-500/10 text-emerald-400 text-xs font-medium mb-4 sm:mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              AI-Powered Token Safety
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-3 sm:mb-4 tracking-tight">
+              <span className="bg-gradient-to-b from-zinc-100 to-zinc-400 bg-clip-text text-transparent">
+                Is this token
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent">
+                safe?
+              </span>
+            </h1>
+            <p className="text-zinc-500 mb-8 sm:mb-10 text-base sm:text-lg max-w-lg mx-auto leading-relaxed px-2">
+              Paste any BSC token address. Get an instant safety score backed by on-chain attestation.
+            </p>
+
+            {/* Search input */}
+            <div className="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto">
+              <div className="flex-1 min-w-0">
+                <TokenPicker
+                  value={address}
+                  onChange={setAddress}
+                  placeholder="Search token or paste 0x address..."
+                  disabled={isScanning}
+                />
+              </div>
+              <button
+                onClick={() => handleScan()}
+                disabled={isScanning || !address}
+                aria-label="Scan token"
+                className="bg-gradient-to-b from-emerald-500 to-emerald-700 hover:from-emerald-400 hover:to-emerald-600 disabled:from-zinc-700 disabled:to-zinc-800 disabled:text-zinc-500 text-white font-bold px-8 py-4 rounded-2xl transition-all text-lg cursor-pointer disabled:cursor-not-allowed shadow-lg shadow-emerald-500/20 disabled:shadow-none"
+              >
+                {isScanning ? (
+                  <svg className="animate-spin h-6 w-6 mx-auto" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                  </svg>
+                ) : 'Scan'}
+              </button>
+            </div>
+
+            {/* Scan progress */}
+            {isScanning && (
+              <>
+                <ScanProgressBar status={status} />
+                <div className="mt-3 flex items-center justify-center gap-3">
+                  <span className="text-sm text-emerald-400/80">{STATUS_MESSAGES[status]}</span>
+                  <span className="text-xs text-zinc-600 font-mono tabular-nums">{elapsed.toFixed(1)}s</span>
+                </div>
+              </>
+            )}
+            {error && (
+              <div className="mt-4 inline-flex items-center gap-2 text-red-400 text-sm bg-red-500/5 border border-red-500/10 px-4 py-2 rounded-xl">
+                <span>⚠</span> {error}
+              </div>
+            )}
+          </div>
+        )}
 
         {/* How it works (idle state) */}
         {status === 'idle' && !report && recentScans.length === 0 && (

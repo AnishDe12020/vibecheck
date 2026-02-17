@@ -20,9 +20,7 @@ export function Header() {
     <header className="border-b border-zinc-800/30 py-3 sm:py-4 px-3 sm:px-6 bg-[#050507]/80 backdrop-blur-md sticky top-0 z-40">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group" onClick={() => setMenuOpen(false)}>
-          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center text-white text-xs sm:text-sm font-bold shadow-lg shadow-emerald-500/20">
-            ✓
-          </div>
+          <img src="/logo-512.png" alt="VibeCheck" className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg shadow-lg shadow-emerald-500/20" />
           <span className="text-base sm:text-lg font-bold text-zinc-100 group-hover:text-emerald-400 transition-colors">
             VibeCheck
           </span>
