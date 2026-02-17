@@ -76,6 +76,41 @@ export default function AttestationsPage() {
         </div>
       </div>
 
+      {/* Stats Cards */}
+      {data && data.tokens.length > 0 && (() => {
+        const avgScore = Math.round(data.tokens.reduce((s, t) => s + t.score, 0) / data.tokens.length);
+        const dist = { SAFE: 0, CAUTION: 0, DANGER: 0, CRITICAL: 0 } as Record<string, number>;
+        data.tokens.forEach(t => { dist[t.riskLevel] = (dist[t.riskLevel] || 0) + 1; });
+        return (
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+            <div className="glass rounded-xl p-4 text-center">
+              <div className="text-3xl sm:text-4xl font-black text-emerald-400">{data.totalScans.toLocaleString()}</div>
+              <div className="text-[10px] uppercase tracking-widest text-zinc-500 mt-1 font-semibold">Total Scans</div>
+            </div>
+            <div className="glass rounded-xl p-4 text-center">
+              <div className="text-3xl sm:text-4xl font-black" style={{ color: avgScore >= 70 ? '#34d399' : avgScore >= 40 ? '#fbbf24' : '#f87171' }}>{avgScore}</div>
+              <div className="text-[10px] uppercase tracking-widest text-zinc-500 mt-1 font-semibold">Avg Safety Score</div>
+            </div>
+            <div className="glass rounded-xl p-4 text-center">
+              <div className="flex items-center justify-center gap-2">
+                <span className="text-emerald-400 font-black text-xl">{dist.SAFE}</span>
+                <span className="text-[10px] text-zinc-600">/</span>
+                <span className="text-yellow-400 font-black text-xl">{dist.CAUTION}</span>
+              </div>
+              <div className="text-[10px] uppercase tracking-widest text-zinc-500 mt-1 font-semibold">Safe / Caution</div>
+            </div>
+            <div className="glass rounded-xl p-4 text-center">
+              <div className="flex items-center justify-center gap-2">
+                <span className="text-red-400 font-black text-xl">{dist.DANGER}</span>
+                <span className="text-[10px] text-zinc-600">/</span>
+                <span className="text-red-500 font-black text-xl">{dist.CRITICAL}</span>
+              </div>
+              <div className="text-[10px] uppercase tracking-widest text-zinc-500 mt-1 font-semibold">Danger / Critical</div>
+            </div>
+          </div>
+        );
+      })()}
+
       {loading && (
         <div className="space-y-3">
           {Array.from({ length: 6 }).map((_, i) => (
