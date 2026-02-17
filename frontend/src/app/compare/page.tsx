@@ -115,6 +115,31 @@ export default function ComparePage() {
         ))}
       </div>
 
+      {/* Suggested comparisons */}
+      {!addr1 && !addr2 && !report1 && !report2 && (
+        <div className="max-w-2xl mx-auto mb-8 sm:mb-10">
+          <p className="text-[10px] uppercase tracking-widest text-zinc-600 font-bold text-center mb-3">Try a comparison</p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {[
+              { a: '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82', b: '0x8076C74C5e3F5852037F31Ff0093Eeb8c8ADd8D3', labelA: 'CAKE', labelB: 'SafeMoon', tag: 'Safe vs Risky' },
+              { a: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', b: '0xc748673057861a797275CD8A068AbB95A902e8de', labelA: 'WBNB', labelB: 'BabyDoge', tag: 'Blue chip vs Meme' },
+              { a: '0x55d398326f99059fF775485246999027B3197955', b: '0x2859e4544C4bB03966803b044A93563Bd2D0DD4D', labelA: 'USDT', labelB: 'SHIB', tag: 'Stable vs Volatile' },
+            ].map(({ a, b, labelA, labelB, tag }) => (
+              <button
+                key={tag}
+                onClick={() => { setAddr1(a); setAddr2(b); }}
+                className="glass rounded-xl p-4 text-left hover:border-emerald-500/30 hover:bg-emerald-500/[0.03] transition-all cursor-pointer group"
+              >
+                <div className="text-sm font-bold text-zinc-200 group-hover:text-emerald-400 transition-colors">
+                  {labelA} <span className="text-zinc-600">vs</span> {labelB}
+                </div>
+                <div className="text-[10px] text-zinc-600 mt-1">{tag}</div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className="flex justify-center mb-8 sm:mb-12">
         <button
           onClick={handleCompare}

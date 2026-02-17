@@ -29,6 +29,7 @@ export const metadata: Metadata = {
     ],
     apple: "/apple-touch-icon.png",
   },
+  manifest: '/site.webmanifest',
   openGraph: {
     title: "VibeCheck — AI Token Safety Scanner",
     description: "Paste any BSC token address and get an instant AI-powered safety analysis with on-chain attestation on opBNB.",

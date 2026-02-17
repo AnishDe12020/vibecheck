@@ -284,6 +284,24 @@ export default function ScanPage({ params }: { params: Promise<{ address: string
               </div>
             )}
 
+            {/* Share Card */}
+            <div className="glass rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-emerald-500/10 bg-gradient-to-br from-emerald-500/[0.03] to-transparent relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-emerald-500/5 rounded-full blur-3xl -mr-20 -mt-20" />
+              <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 relative">
+                <ScoreGauge score={report.overallScore} riskLevel={report.riskLevel} size={80} id="share-card" />
+                <div className="flex-1 text-center sm:text-left min-w-0">
+                  <div className="flex items-center gap-2 justify-center sm:justify-start flex-wrap mb-1">
+                    <h3 className="text-lg sm:text-xl font-black text-zinc-100">{report.token.name}</h3>
+                    <span className={`text-[10px] px-2 py-0.5 rounded-full border font-bold uppercase tracking-wider ${RISK_BG[report.riskLevel]}`}>
+                      {report.riskLevel}
+                    </span>
+                  </div>
+                  <p className="text-sm text-zinc-400 leading-relaxed line-clamp-2">{report.summary}</p>
+                  <p className="text-[10px] text-zinc-600 mt-2 font-medium tracking-wide">Scanned on VibeCheck · vibecheck-bsc.vercel.app</p>
+                </div>
+              </div>
+            </div>
+
             {/* Actions */}
             <div className="flex flex-col items-center gap-3 pt-2">
               <div className="flex items-center gap-2 sm:gap-3 flex-wrap justify-center">

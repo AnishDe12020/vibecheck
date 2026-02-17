@@ -114,6 +114,23 @@ export default function PortfolioPage() {
         </p>
       </div>
 
+      {/* Empty state */}
+      {results.length === 0 && !loading && !error && (
+        <div className="max-w-xl mx-auto mb-8 glass rounded-2xl p-6 sm:p-8 text-center">
+          <div className="text-5xl mb-4">👛</div>
+          <h2 className="text-lg font-bold text-zinc-200 mb-2">How it works</h2>
+          <p className="text-sm text-zinc-500 mb-4 leading-relaxed">
+            Enter any BSC wallet address and we&apos;ll discover all BEP-20 tokens held, then run a VibeCheck safety scan on each one. You&apos;ll get a full risk overview of the entire portfolio.
+          </p>
+          <button
+            onClick={() => setWallet('0x8894E0a0c962CB723c1ef8a1B1c2Bf3f5e5CDE90')}
+            className="text-xs text-emerald-500 hover:text-emerald-400 transition-colors cursor-pointer font-mono bg-emerald-500/5 border border-emerald-500/10 rounded-lg px-3 py-2"
+          >
+            Try example: 0x8894E...CDE90
+          </button>
+        </div>
+      )}
+
       {/* Input */}
       <div className="max-w-2xl mx-auto mb-6">
         <div className="flex gap-2">
