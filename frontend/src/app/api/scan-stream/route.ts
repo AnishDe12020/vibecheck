@@ -41,7 +41,7 @@ export async function GET(req: NextRequest) {
       try {
         // Check cache first
         const cacheKey = `scan:${normalizedAddress}`;
-        const cached = cacheGet<Record<string, unknown>>(cacheKey);
+        const cached = await cacheGet<Record<string, unknown>>(cacheKey);
         if (cached) {
           send({ status: 'fetching' });
           send({ status: 'fetching_done', tokenName: (cached as any).token?.name || 'Unknown', tokenSymbol: (cached as any).token?.symbol || '???' });
@@ -90,7 +90,7 @@ export async function GET(req: NextRequest) {
         }
 
         // Phase 4: Complete — cache and send
-        cacheSet(`scan:${normalizedAddress}`, report);
+        await cacheSet(`scan:${normalizedAddress}`, report);
         send({ status: 'complete', data: report });
       } catch (err: any) {
         send({ status: 'error', error: sanitizeError(err) });

@@ -1,33 +1,51 @@
-// Simple in-memory cache with TTL
-// On Vercel serverless, this persists within a warm function instance (~5-15 min)
+import { Redis } from '@upstash/redis';
 
-interface CacheEntry<T> {
-  data: T;
-  expiresAt: number;
+// Upstash Redis cache with in-memory fallback
+let redis: Redis | null = null;
+
+if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
+  redis = new Redis({
+    url: process.env.UPSTASH_REDIS_REST_URL,
+    token: process.env.UPSTASH_REDIS_REST_TOKEN,
+  });
 }
 
-const store = new Map<string, CacheEntry<unknown>>();
+// In-memory fallback for local dev
+const memStore = new Map<string, { data: unknown; expiresAt: number }>();
 
-const DEFAULT_TTL = 60 * 60 * 1000; // 1 hour
+const DEFAULT_TTL_S = 3600; // 1 hour
 
-export function cacheGet<T>(key: string): T | null {
-  const entry = store.get(key);
-  if (!entry) return null;
-  if (Date.now() > entry.expiresAt) {
-    store.delete(key);
+export async function cacheGet<T>(key: string): Promise<T | null> {
+  if (redis) {
+    try {
+      const val = await redis.get<T>(key);
+      return val;
+    } catch (e) {
+      console.warn('Redis cacheGet failed:', e);
+    }
+  }
+  // Fallback
+  const entry = memStore.get(key);
+  if (!entry || Date.now() > entry.expiresAt) {
+    if (entry) memStore.delete(key);
     return null;
   }
   return entry.data as T;
 }
 
-export function cacheSet<T>(key: string, data: T, ttlMs: number = DEFAULT_TTL): void {
-  // Limit cache size to ~200 entries to stay within memory
-  if (store.size > 200) {
-    // Evict oldest entries
-    const keys = Array.from(store.keys());
-    for (let i = 0; i < 50; i++) {
-      store.delete(keys[i]);
+export async function cacheSet<T>(key: string, data: T, ttlS: number = DEFAULT_TTL_S): Promise<void> {
+  if (redis) {
+    try {
+      await redis.set(key, data, { ex: ttlS });
+      return;
+    } catch (e) {
+      console.warn('Redis cacheSet failed:', e);
     }
   }
-  store.set(key, { data, expiresAt: Date.now() + ttlMs });
+  // Fallback
+  if (memStore.size > 200) {
+    const keys = Array.from(memStore.keys());
+    for (let i = 0; i < 50; i++) memStore.delete(keys[i]);
+  }
+  memStore.set(key, { data, expiresAt: Date.now() + ttlS * 1000 });
 }
