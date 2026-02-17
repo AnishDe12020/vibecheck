@@ -31,10 +31,10 @@ const POPULAR_TOKENS = [
 ];
 
 const EXAMPLE_TOKENS = [
-  { name: 'WBNB', address: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', label: 'Safe', color: 'text-green-400' },
-  { name: 'CAKE', address: '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82', label: 'Safe', color: 'text-green-400' },
-  { name: 'SafeMoon', address: '0x8076C74C5e3F5852037F31Ff0093Eeb8c8ADd8D3', label: 'Risky', color: 'text-yellow-400' },
-  { name: 'Squid Game', address: '0x87230146E138d3F296a9a77e497A2A83012e9Bc5', label: 'Scam', color: 'text-red-400' },
+  { name: 'WBNB', address: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', label: 'Safe', color: 'text-green-400', border: 'border-green-500/30' },
+  { name: 'CAKE', address: '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82', label: 'Safe', color: 'text-green-400', border: 'border-green-500/30' },
+  { name: 'SafeMoon', address: '0x8076C74C5e3F5852037F31Ff0093Eeb8c8ADd8D3', label: 'Risky', color: 'text-yellow-400', border: 'border-yellow-500/30' },
+  { name: 'Squid Game', address: '0x87230146E138d3F296a9a77e497A2A83012e9Bc5', label: 'Scam', color: 'text-red-400', border: 'border-red-500/30' },
 ];
 
 const STORAGE_KEY = 'vibecheck_recent_scans';
@@ -268,7 +268,7 @@ function HomeInner() {
                       key={t.address}
                       onClick={() => { setAddress(t.address); handleScan(t.address); }}
                       disabled={isScanning}
-                      className="text-xs px-2.5 sm:px-3 py-1.5 rounded-lg bg-zinc-800/40 border border-zinc-800 text-zinc-400 hover:text-zinc-200 hover:border-zinc-600 hover:bg-zinc-800/60 transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                      className={`text-xs px-2.5 sm:px-3 py-1.5 rounded-lg bg-zinc-800/40 border ${t.border} text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/60 transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed`}
                     >
                       {t.name} <span className={t.color}>{t.label}</span>
                     </button>
