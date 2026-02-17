@@ -7,6 +7,7 @@ import type { VibeCheckReport, ScanStatus, RiskCategory } from '../lib/types';
 import { TokenLogo } from '../components/TokenLogo';
 import { HolderChart } from '../components/HolderChart';
 import { LiquidityPanel } from '../components/LiquidityPanel';
+import { TokenPicker } from '../components/TokenPicker';
 
 const RISK_COLORS: Record<string, string> = {
   safe: '#22c55e', SAFE: '#22c55e',
@@ -370,20 +371,17 @@ function HomeInner() {
 
           {/* Search input */}
           <div className="flex gap-3 max-w-2xl mx-auto">
-            <div className="flex-1 relative group">
-              <input
-                type="text"
+            <div className="flex-1">
+              <TokenPicker
                 value={address}
-                onChange={e => setAddress(e.target.value)}
-                onKeyDown={e => e.key === 'Enter' && handleScan()}
-                placeholder="0x... paste token address"
-                className="w-full bg-zinc-900/80 border border-zinc-700/50 rounded-2xl px-6 py-4 text-lg font-mono text-zinc-200 placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500/40 focus:ring-2 focus:ring-emerald-500/10 transition-all"
+                onChange={setAddress}
+                placeholder="Search token or paste 0x address..."
                 disabled={isScanning}
               />
             </div>
             <button
               onClick={() => handleScan()}
-              disabled={isScanning}
+              disabled={isScanning || !address}
               className="bg-gradient-to-b from-emerald-500 to-emerald-700 hover:from-emerald-400 hover:to-emerald-600 disabled:from-zinc-700 disabled:to-zinc-800 disabled:text-zinc-500 text-white font-bold px-8 py-4 rounded-2xl transition-all text-lg cursor-pointer disabled:cursor-not-allowed shadow-lg shadow-emerald-500/20 disabled:shadow-none"
             >
               {isScanning ? (

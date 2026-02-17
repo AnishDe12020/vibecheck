@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { TokenLogo } from '../../components/TokenLogo';
+import { TokenPicker } from '../../components/TokenPicker';
 import { HolderChart } from '../../components/HolderChart';
 import { LiquidityPanel } from '../../components/LiquidityPanel';
 import type { VibeCheckReport, ScanStatus } from '../../lib/types';
@@ -142,12 +143,10 @@ export default function ComparePage() {
         ].map(({ label, addr, setAddr, status: s }) => (
           <div key={label} className="glass rounded-2xl p-5">
             <label className="text-[10px] uppercase tracking-widest text-zinc-500 font-bold mb-2 block">{label}</label>
-            <input
-              type="text"
-              placeholder="0x... paste token address"
+            <TokenPicker
               value={addr}
-              onChange={(e) => setAddr(e.target.value)}
-              className="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-5 py-3.5 text-sm font-mono text-zinc-200 placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500/40 focus:ring-2 focus:ring-emerald-500/10 transition-all"
+              onChange={setAddr}
+              placeholder="Search token or paste 0x..."
             />
             {s !== 'idle' && s !== 'complete' && (
               <div className="mt-2 text-xs text-emerald-400 font-medium flex items-center gap-1.5">
