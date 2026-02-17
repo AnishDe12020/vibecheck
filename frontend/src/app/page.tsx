@@ -219,7 +219,7 @@ function HomeInner() {
         {/* Hero — Split layout for idle, centered for scanning/results */}
         {status === 'idle' && !report ? (
           <>
-            <div className="mb-10 sm:mb-12 hero-glow relative z-10 flex flex-col lg:flex-row items-center lg:items-start gap-10 lg:gap-16">
+            <div className="mb-10 sm:mb-12 hero-glow relative z-10 flex flex-col lg:flex-row items-center lg:items-center gap-10 lg:gap-16">
               {/* Left side */}
               <div className="flex-[3] min-w-0 w-full lg:w-auto">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/5 border border-emerald-500/10 text-emerald-400 text-xs font-medium mb-6 sm:mb-8">
@@ -307,11 +307,11 @@ function HomeInner() {
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div className="bg-zinc-800/50 rounded-xl p-3 text-center">
-                      <div className="text-[10px] text-zinc-600 uppercase font-bold mb-1">Liquidity</div>
+                      <div className="text-[10px] text-zinc-500 uppercase font-bold mb-1">Liquidity</div>
                       <div className="text-sm font-bold text-zinc-200">$42.3M</div>
                     </div>
                     <div className="bg-zinc-800/50 rounded-xl p-3 text-center">
-                      <div className="text-[10px] text-zinc-600 uppercase font-bold mb-1">Holders</div>
+                      <div className="text-[10px] text-zinc-500 uppercase font-bold mb-1">Holders</div>
                       <div className="text-sm font-bold text-zinc-200">1.2M+</div>
                     </div>
                   </div>
@@ -321,8 +321,8 @@ function HomeInner() {
 
             {/* Powered By Trust Bar */}
             <div className="border-t border-zinc-800/50 py-5 mb-10 sm:mb-12">
-              <div className="flex items-center justify-center gap-3 sm:gap-8 overflow-x-auto text-[10px] sm:text-xs text-zinc-600 uppercase tracking-widest font-medium whitespace-nowrap pb-1">
-                <span>Powered by</span>
+              <div className="flex items-center justify-center gap-3 sm:gap-8 overflow-x-auto text-[10px] sm:text-xs text-zinc-500 uppercase tracking-widest font-medium whitespace-nowrap pb-1">
+                <span className="text-zinc-600">Powered by</span>
                 <span className="flex items-center gap-2 text-zinc-500">
                   {/* Gemini sparkle */}
                   <svg width="16" height="16" viewBox="0 0 28 28" fill="none"><path d="M14 0C14 7.732 7.732 14 0 14c7.732 0 14 6.268 14 14 0-7.732 6.268-14 14-14C20.268 14 14 7.732 14 0z" fill="#8B8BF5"/></svg>
