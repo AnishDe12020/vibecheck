@@ -48,7 +48,7 @@ export async function GET(req: NextRequest) {
           send({ status: 'analyzing' });
           send({ status: 'analyzing_done' });
           send({ status: 'complete', data: cached });
-          controller.close();
+          // closed in finally
           return;
         }
 
@@ -63,7 +63,7 @@ export async function GET(req: NextRequest) {
             status: 'error',
             error: `Failed to fetch token data for ${normalizedAddress}. The contract may not be a standard ERC20 token, may be self-destructed, or may not exist. (${fetchErr.message?.slice(0, 120) || 'Unknown error'})`,
           });
-          controller.close();
+          // closed in finally
           return;
         }
         send({
@@ -95,7 +95,7 @@ export async function GET(req: NextRequest) {
       } catch (err: any) {
         send({ status: 'error', error: sanitizeError(err) });
       } finally {
-        controller.close();
+        try { controller.close(); } catch {}
       }
     },
   });
