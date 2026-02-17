@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { ethers } from 'ethers';
 import { VIBECHECK_ABI } from '../../../lib/chain';
+import { cacheGet } from '../../../lib/cache';
 
 const CONTRACT = process.env.VIBECHECK_CONTRACT_ADDRESS || '0x427F80AE3ebF7C275B138Bc9C9A39C76572AA161';
 const OPBNB_RPC = 'https://opbnb-mainnet-rpc.bnbchain.org';
@@ -22,11 +23,23 @@ export async function GET() {
         try {
           const tokenAddr = ethers.getAddress(token.toString());
           const [score, riskLevel, timestamp] = await contract.getLatestScore(tokenAddr);
+          // Try to get name from cache
+          let name = '';
+          let symbol = '';
+          try {
+            const cached = await cacheGet<any>(`scan:${tokenAddr}`);
+            if (cached?.token) {
+              name = cached.token.name || '';
+              symbol = cached.token.symbol || '';
+            }
+          } catch {}
           return {
             address: tokenAddr,
             score: Number(score),
             riskLevel: riskLevel,
             timestamp: Number(timestamp),
+            name,
+            symbol,
           };
         } catch (err: any) {
           console.warn('History item fetch failed:', err.message);

@@ -19,6 +19,8 @@ interface TokenScore {
   score: number;
   riskLevel: string;
   timestamp: number;
+  name?: string;
+  symbol?: string;
 }
 
 function timeAgo(ts: number): string {
@@ -69,7 +71,10 @@ export default function HistoryPage() {
   const filtered = useMemo(() => {
     let result = [...tokens];
     if (filter !== 'ALL') result = result.filter(t => t.riskLevel === filter);
-    if (search) result = result.filter(t => t.address.toLowerCase().includes(search.toLowerCase()));
+    if (search) {
+      const q = search.toLowerCase();
+      result = result.filter(t => t.address.toLowerCase().includes(q) || (t.name && t.name.toLowerCase().includes(q)) || (t.symbol && t.symbol.toLowerCase().includes(q)));
+    }
     switch (sortBy) {
       case 'newest': result.sort((a, b) => b.timestamp - a.timestamp); break;
       case 'oldest': result.sort((a, b) => a.timestamp - b.timestamp); break;
@@ -156,7 +161,7 @@ export default function HistoryPage() {
             type="text"
             value={search}
             onChange={e => setSearch(e.target.value)}
-            placeholder="Search by address..."
+            placeholder="Search by name or address..."
             className="flex-1 bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-200 placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500/40 focus:ring-2 focus:ring-emerald-500/10 transition-all"
           />
           <div className="flex gap-1.5 flex-wrap">
@@ -251,8 +256,16 @@ export default function HistoryPage() {
               href={`/scan/${t.address}`}
               className="glass glass-hover rounded-xl px-3 sm:px-5 py-3 sm:py-4 transition-all block sm:grid sm:grid-cols-[1fr_140px_100px_80px] sm:gap-4 sm:items-center group"
             >
-              <span className="font-mono text-zinc-300 text-sm group-hover:text-emerald-400 transition-colors break-all sm:break-normal flex items-center gap-2">
-                {shortenAddress(t.address)}
+              <span className="text-sm group-hover:text-emerald-400 transition-colors break-all sm:break-normal flex items-center gap-2">
+                {t.name ? (
+                  <span className="flex items-center gap-1.5">
+                    <span className="text-zinc-200 font-semibold">{t.name}</span>
+                    {t.symbol && <span className="text-zinc-500 text-xs">({t.symbol})</span>}
+                    <span className="font-mono text-zinc-600 text-xs hidden sm:inline">{shortenAddress(t.address)}</span>
+                  </span>
+                ) : (
+                  <span className="font-mono text-zinc-300">{shortenAddress(t.address)}</span>
+                )}
                 <span className="inline-flex items-center text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400/70 font-medium shrink-0">✓ Attested</span>
               </span>
               <div className="mt-2 sm:mt-0">

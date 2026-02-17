@@ -111,6 +111,17 @@ export default function ScanPage({ params }: { params: Promise<{ address: string
     }
   }, [address, handleScan]);
 
+  // Dynamic page title
+  useEffect(() => {
+    if (report) {
+      document.title = `${report.token.symbol} ${report.overallScore}/100 — ${report.riskLevel} | VibeCheck`;
+    } else if (status === 'fetching' || status === 'analyzing') {
+      document.title = `Scanning... | VibeCheck`;
+    } else {
+      document.title = `VibeCheck — AI Token Safety Scanner`;
+    }
+  }, [report, status]);
+
   return (
     <>
       {isScanning && (
