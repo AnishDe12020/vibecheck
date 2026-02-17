@@ -133,7 +133,7 @@ export function TokenPicker({
         <div className="flex items-center gap-3 bg-zinc-900/50 border border-zinc-800 rounded-2xl px-5 py-3.5 group">
           <img
             src={logoError.has(selectedToken.address) ? '' : selectedToken.logoURI}
-            alt=""
+            alt="Token"
             className="w-7 h-7 rounded-full bg-zinc-800"
             onError={() => setLogoError(prev => new Set(prev).add(selectedToken.address))}
           />
@@ -176,7 +176,7 @@ export function TokenPicker({
             >
               <img
                 src={logoError.has(token.address) ? '' : token.logoURI}
-                alt=""
+                alt="Token"
                 className="w-8 h-8 rounded-full bg-zinc-800 shrink-0"
                 onError={() => setLogoError(prev => new Set(prev).add(token.address))}
               />
