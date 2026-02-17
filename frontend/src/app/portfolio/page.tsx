@@ -36,15 +36,20 @@ export default function PortfolioPage() {
       const decoder = new TextDecoder();
       let score: number | null = null;
       let riskLevel: string | null = null;
+      let buffer = '';
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        const text = decoder.decode(value, { stream: true });
-        for (const line of text.split('\n')) {
-          if (!line.startsWith('data: ')) continue;
+        buffer += decoder.decode(value, { stream: true });
+        const parts = buffer.split('\n\n');
+        buffer = parts.pop() || '';
+
+        for (const part of parts) {
+          const match = part.match(/^data: (.+)$/m);
+          if (!match) continue;
           try {
-            const evt = JSON.parse(line.slice(6));
+            const evt = JSON.parse(match[1]);
             if (evt.status === 'complete' && evt.data) {
               score = evt.data.overallScore;
               riskLevel = evt.data.riskLevel;
