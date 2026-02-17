@@ -123,10 +123,10 @@ export default function PortfolioPage() {
             Enter any BSC wallet address and we&apos;ll discover all BEP-20 tokens held, then run a VibeCheck safety scan on each one. You&apos;ll get a full risk overview of the entire portfolio.
           </p>
           <button
-            onClick={() => setWallet('0x8894E0a0c962CB723c1ef8a1B1c2Bf3f5e5CDE90')}
+            onClick={() => setWallet('0xF977814e90dA44bFA03b6295A0616a897441aceC')}
             className="text-xs text-emerald-500 hover:text-emerald-400 transition-colors cursor-pointer font-mono bg-emerald-500/5 border border-emerald-500/10 rounded-lg px-3 py-2"
           >
-            Try example: 0x8894E...CDE90
+            Try example: 0xF977...aceC
           </button>
         </div>
       )}
