@@ -123,46 +123,49 @@ export default function ComparePage() {
   };
 
   return (
-    <div className="flex-1 max-w-7xl mx-auto w-full px-6 py-12">
-      <div className="mb-12 text-center">
-        <h1 className="text-4xl font-black text-white mb-4">Compare Tokens</h1>
-        <p className="text-zinc-500">Analyze two BSC tokens side-by-side to find the safer play.</p>
+    <div className="flex-1 max-w-6xl mx-auto w-full px-6 py-12">
+      <div className="mb-10 text-center hero-glow relative z-10">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/5 border border-emerald-500/10 text-emerald-400 text-xs font-medium mb-6">
+          <span>⚔️</span> Side-by-Side Analysis
+        </div>
+        <h1 className="text-4xl md:text-5xl font-black mb-3 tracking-tight">
+          <span className="bg-gradient-to-b from-zinc-100 to-zinc-400 bg-clip-text text-transparent">Compare </span>
+          <span className="bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent">Tokens</span>
+        </h1>
+        <p className="text-zinc-500 max-w-md mx-auto">Analyze two BSC tokens side-by-side to find the safer play.</p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8 mb-12">
-        <div className="glass p-6 rounded-3xl">
-          <input
-            type="text"
-            placeholder="Address 1"
-            value={addr1}
-            onChange={(e) => setAddr1(e.target.value)}
-            className="w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-emerald-500/50 transition-all mb-4"
-          />
-          {status1 !== 'idle' && (
-            <div className="text-xs text-zinc-500 mb-2">Status: <span className="text-emerald-400 font-bold uppercase">{status1}</span></div>
-          )}
-        </div>
-        <div className="glass p-6 rounded-3xl">
-          <input
-            type="text"
-            placeholder="Address 2"
-            value={addr2}
-            onChange={(e) => setAddr2(e.target.value)}
-            className="w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-emerald-500/50 transition-all mb-4"
-          />
-          {status2 !== 'idle' && (
-            <div className="text-xs text-zinc-500 mb-2">Status: <span className="text-emerald-400 font-bold uppercase">{status2}</span></div>
-          )}
-        </div>
+      <div className="grid md:grid-cols-2 gap-6 mb-8">
+        {[
+          { label: 'Token A', addr: addr1, setAddr: setAddr1, status: status1 },
+          { label: 'Token B', addr: addr2, setAddr: setAddr2, status: status2 },
+        ].map(({ label, addr, setAddr, status: s }) => (
+          <div key={label} className="glass rounded-2xl p-5">
+            <label className="text-[10px] uppercase tracking-widest text-zinc-500 font-bold mb-2 block">{label}</label>
+            <input
+              type="text"
+              placeholder="0x... paste token address"
+              value={addr}
+              onChange={(e) => setAddr(e.target.value)}
+              className="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-5 py-3.5 text-sm font-mono text-zinc-200 placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500/40 focus:ring-2 focus:ring-emerald-500/10 transition-all"
+            />
+            {s !== 'idle' && s !== 'complete' && (
+              <div className="mt-2 text-xs text-emerald-400 font-medium flex items-center gap-1.5">
+                <svg className="animate-spin h-3 w-3" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" /></svg>
+                {s === 'fetching' ? 'Fetching data...' : s === 'analyzing' ? 'AI analyzing...' : s === 'attesting' ? 'Attesting...' : s}
+              </div>
+            )}
+          </div>
+        ))}
       </div>
 
-      <div className="flex justify-center mb-16">
+      <div className="flex justify-center mb-12">
         <button
           onClick={handleCompare}
-          disabled={status1 === 'fetching' || status1 === 'analyzing' || status2 === 'fetching' || status2 === 'analyzing'}
-          className="px-10 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-emerald-700 text-white font-black text-lg shadow-lg shadow-emerald-500/20 hover:scale-105 transition-all disabled:opacity-50 disabled:hover:scale-100 cursor-pointer"
+          disabled={!addr1 || !addr2 || status1 === 'fetching' || status1 === 'analyzing' || status2 === 'fetching' || status2 === 'analyzing'}
+          className="bg-gradient-to-b from-emerald-500 to-emerald-700 hover:from-emerald-400 hover:to-emerald-600 disabled:from-zinc-700 disabled:to-zinc-800 disabled:text-zinc-500 text-white font-bold px-10 py-4 rounded-2xl transition-all text-lg cursor-pointer disabled:cursor-not-allowed shadow-lg shadow-emerald-500/20 disabled:shadow-none"
         >
-          {status1 === 'idle' && status2 === 'idle' ? '⚔️ Compare Now' : '🔄 Re-scan Both'}
+          {status1 === 'idle' && status2 === 'idle' ? '⚔️ Compare' : '🔄 Re-scan'}
         </button>
       </div>
 
@@ -176,9 +179,9 @@ export default function ComparePage() {
 
 function TokenColumn({ report, side }: { report: VibeCheckReport | null; side: number }) {
   if (!report) return (
-    <div className="glass rounded-3xl p-12 flex flex-col items-center justify-center text-zinc-700 border-dashed border-2 border-zinc-800/50 h-[600px]">
-      <div className="text-6xl mb-4">🪙</div>
-      <p className="font-bold">Token {side} waiting...</p>
+    <div className="glass rounded-3xl p-12 flex flex-col items-center justify-center text-zinc-700 min-h-[400px]">
+      <div className="text-5xl mb-4 opacity-30">🪙</div>
+      <p className="text-sm text-zinc-600">Paste an address above and hit Compare</p>
     </div>
   );
 

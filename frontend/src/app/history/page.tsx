@@ -77,29 +77,7 @@ export default function HistoryPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#050507] bg-grid flex flex-col">
-      {/* Header */}
-      <header className="border-b border-zinc-800/30 py-4 px-6 bg-[#050507]/80 backdrop-blur-md sticky top-0 z-40">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-emerald-500/20">
-              ✓
-            </div>
-            <span className="text-lg font-bold text-zinc-100 group-hover:text-emerald-400 transition-colors">
-              VibeCheck
-            </span>
-          </Link>
-          <Link
-            href="/"
-            className="text-xs text-zinc-400 hover:text-emerald-400 transition-colors font-medium px-3 py-1.5 rounded-lg hover:bg-zinc-800/50"
-          >
-            ← Scanner
-          </Link>
-        </div>
-      </header>
-
-      {/* Main */}
-      <main className="flex-1 max-w-5xl mx-auto w-full px-6 py-12 sm:py-16">
+    <div className="flex-1 max-w-5xl mx-auto w-full px-6 py-12 sm:py-16">
         {/* Hero */}
         <div className="mb-10 hero-glow relative z-10">
           <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-zinc-100 to-zinc-400 bg-clip-text text-transparent mb-2">
@@ -194,26 +172,6 @@ export default function HistoryPage() {
             </Link>
           </div>
         )}
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t border-zinc-800/30 py-6 px-6">
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex items-center gap-3 text-xs text-zinc-600">
-            <span className="font-semibold text-zinc-500">VibeCheck</span>
-            <span>•</span>
-            <span>AI-powered token safety for BNB Chain</span>
-          </div>
-          <div className="flex items-center gap-3 text-xs text-zinc-600">
-            <span>Powered by</span>
-            <span className="text-zinc-400 font-medium">Gemini 3</span>
-            <span>+</span>
-            <span className="text-zinc-400 font-medium">opBNB</span>
-            <span>•</span>
-            <span className="text-zinc-600">Not financial advice</span>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
