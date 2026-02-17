@@ -45,9 +45,9 @@ export default function PortfolioPage() {
           if (!line.startsWith('data: ')) continue;
           try {
             const evt = JSON.parse(line.slice(6));
-            if (evt.type === 'complete' && evt.report) {
-              score = evt.report.score;
-              riskLevel = evt.report.riskLevel;
+            if (evt.status === 'complete' && evt.data) {
+              score = evt.data.overallScore;
+              riskLevel = evt.data.riskLevel;
             }
           } catch {}
         }

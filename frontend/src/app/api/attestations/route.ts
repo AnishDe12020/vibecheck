@@ -2,12 +2,13 @@ import { NextResponse } from 'next/server';
 import { ethers } from 'ethers';
 import { VIBECHECK_ABI, OPBNB_RPC, OPBNB_CHAIN_ID } from '../../../lib/chain';
 
-const CONTRACT_ADDRESS = process.env.VIBECHECK_CONTRACT_ADDRESS || '0x427F80AE3ebF7C275B138Bc9C9A39C76572AA161';
+const CONTRACT_ADDRESS = (process.env.VIBECHECK_CONTRACT_ADDRESS || '0x427F80AE3ebF7C275B138Bc9C9A39C76572AA161').trim();
 
 export async function GET() {
   try {
     const provider = new ethers.JsonRpcProvider(OPBNB_RPC, OPBNB_CHAIN_ID, { staticNetwork: true });
-    const contract = new ethers.Contract(CONTRACT_ADDRESS, VIBECHECK_ABI, provider);
+    const addr = ethers.getAddress(CONTRACT_ADDRESS);
+    const contract = new ethers.Contract(addr, VIBECHECK_ABI, provider);
 
     const [totalScans, recentTokens] = await Promise.all([
       contract.totalScans().catch(() => 0n),
