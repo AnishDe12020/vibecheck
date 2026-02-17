@@ -65,8 +65,8 @@ export function ScoreGauge({ score, riskLevel, animate, size = 160, id }: {
         />
       </svg>
       <div className="absolute flex flex-col items-center">
-        <span className="text-5xl font-black tracking-tight tabular-nums" style={{ color }}>{displayScore}</span>
-        <span className="text-[10px] text-zinc-500 uppercase tracking-[0.2em] mt-0.5">out of 100</span>
+        <span className="font-black tracking-tight tabular-nums" style={{ color, fontSize: size * 0.3 }}>{displayScore}</span>
+        <span className="text-zinc-500 uppercase tracking-[0.2em]" style={{ fontSize: Math.max(8, size * 0.065), marginTop: size * 0.005 }}>out of 100</span>
       </div>
     </div>
   );
