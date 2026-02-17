@@ -181,7 +181,9 @@ export default function PortfolioPage() {
       {/* Warning */}
       {results.length > 0 && (
         <div className="max-w-2xl mx-auto mb-6 bg-yellow-500/5 border border-yellow-500/20 rounded-xl px-4 py-3 text-xs text-yellow-400/80 text-center">
-          ⏱️ Scanning {results.filter(r => !r.scanning).length}/{results.length} tokens...
+          {results.some(r => r.scanning)
+            ? `⏱️ Scanned ${results.filter(r => !r.scanning).length} of ${results.length} tokens...`
+            : `✅ Scanned ${results.length} tokens`}
         </div>
       )}
 
