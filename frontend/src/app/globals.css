@@ -20,6 +20,10 @@ html, body {
 
 body {
   background: var(--background);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(16,185,129,0.07) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(16,185,129,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(5,150,105,0.03) 0%, transparent 50%);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
