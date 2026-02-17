@@ -277,8 +277,19 @@ function HomeInner() {
 
                 {/* Total scans badge */}
                 {totalScans !== null && totalScans > 0 && (
-                  <div className="mt-3 text-xs text-zinc-600">
-                    <span className="text-emerald-500 font-semibold">{totalScans.toLocaleString()}</span> tokens scanned on-chain
+                  <div className="mt-8 flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-8 justify-center sm:justify-start">
+                    <div className="flex flex-col">
+                      <span className="text-emerald-500 font-bold text-xl">{totalScans.toLocaleString()}</span>
+                      <span className="text-zinc-600 text-[10px] uppercase tracking-widest font-black">Scans On-Chain</span>
+                    </div>
+                    <div className="hidden sm:block w-px h-8 bg-zinc-800" />
+                    <Link href="/portfolio" className="group text-center sm:text-left">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-lg">👛</span>
+                        <span className="text-zinc-300 text-sm font-bold group-hover:text-emerald-400 transition-colors">Portfolio Scanner</span>
+                      </div>
+                      <span className="text-[10px] text-zinc-600 uppercase tracking-widest font-black block">Scan your entire wallet →</span>
+                    </Link>
                   </div>
                 )}
               </div>

@@ -208,12 +208,20 @@ export default function HistoryPage() {
         <div className="glass rounded-2xl p-10 sm:p-12 text-center">
           <div className="text-4xl mb-4">🔍</div>
           <p className="text-zinc-400 mb-6">No scans recorded yet</p>
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white font-semibold px-6 py-2.5 rounded-xl transition-all shadow-lg shadow-emerald-500/20"
-          >
-            Scan Your First Token →
-          </Link>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white font-semibold px-6 py-2.5 rounded-xl transition-all shadow-lg shadow-emerald-500/20"
+            >
+              Scan Your First Token →
+            </Link>
+            <Link
+              href="/portfolio"
+              className="inline-flex items-center gap-2 bg-zinc-900/60 border border-zinc-800 hover:border-emerald-500/30 text-zinc-300 hover:text-emerald-400 font-semibold px-6 py-2.5 rounded-xl transition-all"
+            >
+              Scan Wallet Portfolio →
+            </Link>
+          </div>
         </div>
       )}
 
@@ -269,6 +277,12 @@ export default function HistoryPage() {
             className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white font-semibold px-6 py-2.5 rounded-xl transition-all shadow-lg shadow-emerald-500/20"
           >
             Scan New Token →
+          </Link>
+          <Link
+            href="/portfolio"
+            className="inline-flex items-center gap-2 bg-zinc-900/60 border border-zinc-800 hover:border-emerald-500/30 text-zinc-300 hover:text-emerald-400 font-semibold px-6 py-2.5 rounded-xl transition-all ml-3"
+          >
+            Scan Wallet Portfolio →
           </Link>
         </div>
       )}
