@@ -51,7 +51,7 @@ export function ScoreGauge({ score, riskLevel, animate, size = 160, id }: {
             <stop offset="100%" stopColor={`${color}99`} />
           </linearGradient>
           <filter id={`shadow-${id || 'main'}`}>
-            <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor={color} />
+            <feDropShadow dx="0" dy="0" stdDeviation={size < 120 ? 1.5 : 3} floodColor={color} />
           </filter>
         </defs>
         <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="rgba(39,39,42,0.3)" strokeWidth="12" />
@@ -66,7 +66,7 @@ export function ScoreGauge({ score, riskLevel, animate, size = 160, id }: {
       </svg>
       <div className="absolute flex flex-col items-center">
         <span className="font-black tracking-tight tabular-nums leading-none" style={{ color, fontSize: size * 0.28 }}>{displayScore}</span>
-        <span className="text-zinc-500 uppercase tracking-[0.2em]" style={{ fontSize: Math.max(8, size * 0.06), marginTop: size * 0.01 }}>out of 100</span>
+        {size >= 120 && <span className="text-zinc-500 uppercase tracking-[0.2em]" style={{ fontSize: Math.max(8, size * 0.06), marginTop: size * 0.01 }}>out of 100</span>}
       </div>
     </div>
   );
