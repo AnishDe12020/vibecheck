@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { TokenPicker } from './TokenPicker';
 
 export function StickySearchBar() {
   const [value, setValue] = useState('');
@@ -19,14 +20,14 @@ export function StickySearchBar() {
     <div className="sticky top-[53px] sm:top-[57px] z-30 backdrop-blur-xl bg-[#050507]/60 border-b border-zinc-800/20">
       <div className="max-w-5xl mx-auto px-3 sm:px-6 py-2 flex items-center gap-2">
         <span className="text-emerald-500 text-sm shrink-0">🔍</span>
-        <input
-          type="text"
-          value={value}
-          onChange={e => setValue(e.target.value)}
-          onKeyDown={e => e.key === 'Enter' && handleScan()}
-          placeholder="Scan another token..."
-          className="flex-1 bg-transparent text-sm text-zinc-300 placeholder-zinc-600 outline-none min-w-0"
-        />
+        <div className="flex-1 min-w-0">
+          <TokenPicker
+            value={value}
+            onChange={setValue}
+            placeholder="Scan another token..."
+            compact
+          />
+        </div>
         <button
           onClick={handleScan}
           disabled={!value.match(/^0x[a-fA-F0-9]{40}$/)}

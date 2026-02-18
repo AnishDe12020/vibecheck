@@ -40,11 +40,13 @@ export function TokenPicker({
   onChange,
   placeholder = '0x... paste address or search token',
   disabled = false,
+  compact = false,
 }: {
   value: string;
   onChange: (address: string) => void;
   placeholder?: string;
   disabled?: boolean;
+  compact?: boolean;
 }) {
   const [query, setQuery] = useState(value);
   const [tokens, setTokens] = useState<Token[]>([]);
@@ -161,7 +163,11 @@ export function TokenPicker({
           onFocus={() => query.length >= 2 && results.length > 0 && setOpen(true)}
           placeholder={placeholder}
           disabled={disabled}
-          className="w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl px-5 py-3.5 text-sm font-mono text-zinc-200 placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500/40 focus:ring-2 focus:ring-emerald-500/10 transition-all"
+          className={`w-full text-sm font-mono text-zinc-200 placeholder:text-zinc-600 focus:outline-none transition-all ${
+            compact
+              ? 'bg-transparent border-none px-0 py-0'
+              : 'bg-zinc-900/50 border border-zinc-800 rounded-2xl px-5 py-3.5 focus:border-emerald-500/40 focus:ring-2 focus:ring-emerald-500/10'
+          }`}
         />
       )}
 
