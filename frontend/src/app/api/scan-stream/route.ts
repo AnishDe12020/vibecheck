@@ -47,6 +47,21 @@ export async function GET(req: NextRequest) {
           send({ status: 'fetching_done', tokenName: (cached as any).token?.name || 'Unknown', tokenSymbol: (cached as any).token?.symbol || '???' });
           send({ status: 'analyzing' });
           send({ status: 'analyzing_done' });
+
+          // If cached result has no attestation, submit one now
+          const contractAddress = process.env.VIBECHECK_CONTRACT_ADDRESS;
+          if (!(cached as any).attestationTx && contractAddress && process.env.DEPLOYER_PRIVATE_KEY) {
+            send({ status: 'attesting' });
+            try {
+              const { submitAttestation } = await import('@/lib/attester');
+              const txHash = await submitAttestation(cached as any, contractAddress);
+              (cached as any).attestationTx = txHash;
+              await cacheSet(cacheKey, cached);
+            } catch (err: any) {
+              console.warn('Attestation for cached result failed (non-fatal):', err.message);
+            }
+          }
+
           send({ status: 'complete', data: cached });
           // closed in finally
           return;
