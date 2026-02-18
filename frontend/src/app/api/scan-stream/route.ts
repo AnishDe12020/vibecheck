@@ -101,7 +101,10 @@ export async function GET(req: NextRequest) {
             report.attestationTx = txHash;
           } catch (err: any) {
             console.warn('Attestation failed (non-fatal):', err.message);
+            send({ status: 'attestation_error', error: err.message?.slice(0, 200) });
           }
+        } else {
+          send({ status: 'attestation_skipped', reason: !contractAddress ? 'no_contract_address' : 'no_deployer_key' });
         }
 
         // Phase 4: Complete — cache and send

@@ -37,7 +37,7 @@ export async function submitAttestation(
     report.token.address,
     report.overallScore,
     report.riskLevel,
-    reportCID
+    reportCID  // contract expects string, passing hex hash string
   );
 
   const receipt = await tx.wait();
