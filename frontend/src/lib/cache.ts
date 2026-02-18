@@ -13,7 +13,7 @@ if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) 
 // In-memory fallback for local dev
 const memStore = new Map<string, { data: unknown; expiresAt: number }>();
 
-const DEFAULT_TTL_S = 3600; // 1 hour
+const DEFAULT_TTL_S = 21600; // 6 hours
 
 export async function cacheGet<T>(key: string): Promise<T | null> {
   if (redis) {

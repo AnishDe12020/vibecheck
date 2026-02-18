@@ -7,7 +7,7 @@ import { checkRateLimit, withSecurityHeaders, sanitizeError } from '@/lib/securi
 
 // Simple in-memory cache (1 hour TTL)
 const cache = new Map<string, { data: any; timestamp: number }>();
-const CACHE_TTL = 60 * 60 * 1000;
+const CACHE_TTL = 6 * 60 * 60 * 1000; // 6 hours
 
 export async function OPTIONS(req: NextRequest) {
   const res = new NextResponse(null, { status: 204 });
