@@ -162,16 +162,29 @@ SCORING RULES (follow strictly):
 8. If no liquidity → liquidity score ≤ 10
 9. If liquidity < $10,000 → liquidity score ≤ 40
 10. If LP not locked/burned → liquidity score ≤ 60
-11. If buy+sell tax > 10% combined → trading score ≤ 50
-12. If contract age < 7 days → additional -10 to overall score
-13. Blue-chip infrastructure (WBNB, BUSD, USDT, CAKE etc) → 90-100
+11. If contract age < 7 days → additional -10 to overall score
 
-NUANCE RULES (important — avoid binary scoring):
+TAX/REFLECTION TOKEN RULES (important — many BSC tokens use taxes):
+- Buy+sell tax 0-5% combined → trading score 80-100 (normal)
+- Buy+sell tax 5-10% combined → trading score 60-80 (moderate, common for reward tokens)
+- Buy+sell tax 10-20% combined → trading score 40-60 (high but not a scam — many memecoins like FLOKI, SafeMoon, BabyDoge use this for reflections/burns/marketing)
+- Buy+sell tax 20-30% combined → trading score 20-40 (very high, yellow flag)
+- Buy+sell tax > 30% → trading score ≤ 15 (likely malicious)
+- NEVER score a token below 30 overall JUST because of taxes under 20%. Tax tokens are a legitimate (if risky) tokenomics model on BSC.
+
+BLUE-CHIP DIFFERENTIATION (avoid flat 100s):
+- WBNB/BNB: 95-98 (native wrapped asset, as safe as it gets)
+- Top stablecoins (USDT, USDC, BUSD): 90-95 (deduct for centralization, issuer risk)
+- Top DeFi (CAKE, XVS): 82-90 (deduct for smart contract complexity, governance risk)
+- Major tokens (LINK, DOT, DOGE bridged): 78-88 (deduct for bridge risk, proxy contracts)
+- Use the FULL range 0-100. Two safe tokens should NOT get the same score unless they have identical risk profiles. Differentiate based on: liquidity depth, holder distribution, contract complexity, LP lock status, age.
+
+NUANCE RULES:
 - Proxy/upgradeable contracts used by major protocols (Axelar, Binance bridge, LayerZero, Multichain) are NORMAL — don't penalize unless there are other red flags.
 - For tokens with low DEX liquidity but verified contracts and good holder distribution, score liquidity low but don't let it drag the overall score below 40.
 - The overall score should be a WEIGHTED AVERAGE of categories: contract 30%, concentration 25%, liquidity 25%, trading 20%.
 - Scores of 5 or below are ONLY for confirmed honeypots or tokens with multiple critical failures (e.g. honeypot + unverified + no liquidity).
-- Most legitimate tokens should score between 30-80. Reserve 90+ for blue-chip only. Use the full range.
+- Most legitimate tokens should score between 35-85. Reserve 90+ for blue-chip/stablecoins only.
 
 Risk level mapping: SAFE (70-100), CAUTION (50-69), DANGER (25-49), CRITICAL (0-24)
 
