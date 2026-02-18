@@ -13,7 +13,7 @@ export async function submitAttestation(
   report: VibeCheckReport,
   contractAddress: string
 ): Promise<string> {
-  const privateKey = process.env.DEPLOYER_PRIVATE_KEY;
+  const privateKey = process.env.DEPLOYER_PRIVATE_KEY?.trim();
   if (!privateKey) throw new Error('DEPLOYER_PRIVATE_KEY not set');
   if (!contractAddress) throw new Error('VIBECHECK_CONTRACT_ADDRESS not set');
 

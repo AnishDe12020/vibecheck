@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
           send({ status: 'analyzing_done' });
 
           // If cached result has no attestation, submit one now
-          const contractAddress = process.env.VIBECHECK_CONTRACT_ADDRESS;
+          const contractAddress = process.env.VIBECHECK_CONTRACT_ADDRESS?.trim();
           if (!(cached as any).attestationTx && contractAddress && process.env.DEPLOYER_PRIVATE_KEY) {
             send({ status: 'attesting' });
             try {
@@ -93,7 +93,7 @@ export async function GET(req: NextRequest) {
         send({ status: 'analyzing_done' });
 
         // Phase 3: Attesting
-        const contractAddress = process.env.VIBECHECK_CONTRACT_ADDRESS;
+        const contractAddress = process.env.VIBECHECK_CONTRACT_ADDRESS?.trim();
         if (contractAddress && process.env.DEPLOYER_PRIVATE_KEY) {
           send({ status: 'attesting' });
           try {
