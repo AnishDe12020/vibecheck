@@ -34,12 +34,15 @@ export const metadata: Metadata = {
     title: "VibeCheck — AI Token Safety Scanner",
     description: "Paste any BSC token address and get an instant AI-powered safety analysis with on-chain attestation on opBNB.",
     siteName: "VibeCheck",
+    url: "https://opvibecheck.xyz",
     type: "website",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "VibeCheck — AI Token Safety Scanner" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "VibeCheck — AI Token Safety Scanner",
     description: "AI-powered token safety for BNB Smart Chain",
+    images: ["/opengraph-image"],
   },
 };
 

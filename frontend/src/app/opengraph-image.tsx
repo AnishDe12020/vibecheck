@@ -76,7 +76,7 @@ export default function OGImage() {
             gap: 10,
           }}
         >
-          <span>Powered by Kimi K2.5 + opBNB</span>
+          <span>Powered by Gemini 3 Flash + opBNB</span>
         </div>
       </div>
     ),
